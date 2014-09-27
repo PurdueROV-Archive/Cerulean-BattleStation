@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ROVButton.qml</file>
+        <file>ROVBox.qml</file>
+        <file>ROVSlider.qml</file>
+    </qresource>
+</RCC>
