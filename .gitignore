@@ -1,14 +1,14 @@
 # C++ objects and libs
 
-*.slo
-*.lo
+#*.slo
+#*.lo
 *.o
-*.a
-*.la
-*.lai
-*.so
-*.dll
-*.dylib
+#*.a
+#*.la
+#*.lai
+#.so
+#.dll
+#.dylib
 
 # Qt-es
 
