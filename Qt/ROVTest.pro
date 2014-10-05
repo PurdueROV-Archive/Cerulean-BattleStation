@@ -25,8 +25,5 @@ HEADERS += \
 
 unix:!macx|win32: LIBS += -L$$PWD/../../SDL/lib/x86/ -lSDL2
 
-INCLUDEPATH += $$PWD/../SDL/include
-DEPENDPATH += $$PWD/../SDL/include
-
-win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../SDL/lib/x86/SDL2.lib
-else:unix:!macx|win32-g++: PRE_TARGETDEPS += $$PWD/../SDL/lib/x86/libSDL2.a
+INCLUDEPATH += $$PWD/../../SDL/include
+DEPENDPATH += $$PWD/../../SDL/include
