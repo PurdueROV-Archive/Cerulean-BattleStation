@@ -6,6 +6,7 @@ import QtGraphicalEffects 1.0
 Window {
     property var rovName: "ROV PlaceholderName"
     property var startTime: 0
+    property var delta: 0;
     visible: true
     width: 1200
     height: 700
@@ -89,27 +90,38 @@ Window {
 
 
                 Item{
+                    id: item1
+                    anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: parent.top
                     anchors.topMargin: 32
-                    anchors.right: parent.right
-                    anchors.left: parent.left
-                    anchors.leftMargin: 20
                     Text {
                         id: timer
+                        text: "00:00"
+                        anchors.horizontalCenter: parent.horizontalCenter
                         color: "#6092dd"
                         font.family: "Courier"
                         font.bold: true
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: 56
                     }
+
                     Timer {
                         id: timerTrigger
                         interval:500; running:false; repeat: true;
                         onTriggered: {
                             var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
-                            timer.text = Math.floor(tempTime/60) + "M " + (tempTime % 60) + "S"
+                            var secs = (tempTime % 60);
+                            var mins = Math.floor(tempTime/60);
+                            if(secs < 10) {
+                                secs = "0" + secs;
+                            }
+                            if(mins < 10) {
+                                mins = "0" + mins;
+                            }
+                            timer.text =  mins + ":" + secs;
                         }
                     }
+
 
                 }
 
@@ -136,8 +148,19 @@ Window {
                             id: startButton
                             anchors.fill: parent
                             onClicked: {
-                                startTime = (new Date).getTime();
-                                timerTrigger.running = true
+                                if(timerTrigger.running) {
+                                    timerTrigger.stop();
+                                    delta = (new Date).getTime() - startTime;
+                                    startBtn.text = "RESUME";
+                                } else {
+                                    timerTrigger.running = true;
+                                    startBtn.text = "PAUSE";
+                                    if(startTime == 0) {
+                                        startTime = (new Date).getTime();
+                                    } else {
+                                        startTime = (new Date).getTime() - delta;
+                                    }
+                                }
                             }
 
                         }
@@ -147,7 +170,7 @@ Window {
                         id: stopResetBtn
                         x: 0
                         y: 0
-                        text: "STOP"
+                        text: "RESET"
                         anchors.right: parent.right
                         anchors.rightMargin: 30
                         anchors.verticalCenter: parent.verticalCenter
@@ -155,7 +178,12 @@ Window {
                             id:stopButton
                             anchors.fill: parent
                             onClicked: {
-                                timerTrigger.running = false
+                                if(!timerTrigger.running) {
+                                    timerTrigger.running = false;
+                                    startBtn.text = "START";
+                                    timer.text = "00:00";
+                                    startTime = 0;
+                                }
                             }
                         }
                     }
