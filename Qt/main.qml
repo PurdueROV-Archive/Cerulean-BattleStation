@@ -5,7 +5,7 @@ import QtGraphicalEffects 1.0
 
 Window {
     property var rovName: "ROV PlaceholderName"
-    property int timer: 0
+    property var startTime: 0
     visible: true
     width: 1200
     height: 700
@@ -86,17 +86,31 @@ Window {
                     font.pixelSize: 20
                 }
 
-                Text {
-                    id: timer
-                    color: "#6092dd"
+
+
+                Item{
                     anchors.top: parent.top
                     anchors.topMargin: 32
-                    font.family: "Courier"
                     anchors.right: parent.right
                     anchors.left: parent.left
-                    font.bold: true
-                    horizontalAlignment: Text.AlignHCenter
-                    font.pixelSize: 56
+                    anchors.leftMargin: 20
+                    Text {
+                        id: timer
+                        color: "#6092dd"
+                        font.family: "Courier"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        font.pixelSize: 56
+                    }
+                    Timer {
+                        id: timerTrigger
+                        interval:500; running:false; repeat: true;
+                        onTriggered: {
+                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
+                            timer.text = Math.floor(tempTime/60) + "M" + (tempTime % 60) + "S"
+                        }
+                    }
+
                 }
 
                 Rectangle {
@@ -118,6 +132,15 @@ Window {
                         anchors.left: parent.left
                         anchors.leftMargin: 30
                         anchors.verticalCenter: parent.verticalCenter
+                        MouseArea{
+                            id: startButton
+                            anchors.fill: parent
+                            onClicked: {
+                                startTime = (new Date).getTime();
+                                timerTrigger.running = true
+                            }
+
+                        }
                     }
 
                     ROVButton {
