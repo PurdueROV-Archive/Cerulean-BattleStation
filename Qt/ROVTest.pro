@@ -23,7 +23,7 @@ HEADERS += \
     threadcontroller.h \
     joystick.h
 
-unix:!macx|win32: LIBS += -L$$PWD/../../SDL/lib/x86/ -lSDL2
+unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x86/ -lSDL2
 
-INCLUDEPATH += $$PWD/../../SDL/include
-DEPENDPATH += $$PWD/../../SDL/include
+INCLUDEPATH += $$PWD/../SDL/include
+DEPENDPATH += $$PWD/../SDL/include
