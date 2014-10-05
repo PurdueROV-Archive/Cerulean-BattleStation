@@ -86,16 +86,6 @@ Window {
                     font.pixelSize: 20
                 }
 
-                function secToFormattedStr(secs) {
-                    var mins = Math.floor(secs / 60);
-                    return "TODO";
-                }
-
-                Timer {
-                    interval: 1000; running: true; repeat: true
-                    onTriggered: timer.text = secsToFormattedStr(timer++)
-                }
-
                 Text {
                     id: timer
                     color: "#6092dd"
