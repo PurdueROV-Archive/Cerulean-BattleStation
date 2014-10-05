@@ -5,7 +5,8 @@ QT += qml quick
 SOURCES += main.cpp \
     mainticker.cpp \
     battlestation.cpp \
-    threadcontroller.cpp
+    threadcontroller.cpp \
+    joystick.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,4 +20,13 @@ HEADERS += \
     tickclock.h \
     mainticker.h \
     battlestation.h \
-    threadcontroller.h
+    threadcontroller.h \
+    joystick.h
+
+unix:!macx|win32: LIBS += -L$$PWD/../../SDL/lib/x86/ -lSDL2
+
+INCLUDEPATH += $$PWD/../SDL/include
+DEPENDPATH += $$PWD/../SDL/include
+
+win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../SDL/lib/x86/SDL2.lib
+else:unix:!macx|win32-g++: PRE_TARGETDEPS += $$PWD/../SDL/lib/x86/libSDL2.a
