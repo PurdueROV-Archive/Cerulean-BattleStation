@@ -107,7 +107,7 @@ Window {
                         interval:500; running:false; repeat: true;
                         onTriggered: {
                             var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
-                            timer.text = Math.floor(tempTime/60) + "M" + (tempTime % 60) + "S"
+                            timer.text = Math.floor(tempTime/60) + "M " + (tempTime % 60) + "S"
                         }
                     }
 
@@ -151,6 +151,13 @@ Window {
                         anchors.right: parent.right
                         anchors.rightMargin: 30
                         anchors.verticalCenter: parent.verticalCenter
+                        MouseArea{
+                            id:stopButton
+                            anchors.fill: parent
+                            onClicked: {
+                                timerTrigger.running = false
+                            }
+                        }
                     }
                 }
             }
