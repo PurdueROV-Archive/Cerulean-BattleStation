@@ -5,26 +5,22 @@ import QtGraphicalEffects 1.0
 
 Window {
     property var rovName: "ROV PlaceholderName"
+    property int timer: 0
     visible: true
     width: 1200
-    height: 800
+    height: 700
     color: "#111111"
     title: "Purdue IEEE | ROV PlaceholderName"
-    objectName: "window"
-
-    function testFunction(msg) {
-        console.log("AAAAAA", msg)
-        return "blah"
-    }
+    objectName: "mainWindow"
 
     Item {
         objectName: "mainGrid"
         id: mainGrid
         transformOrigin: Item.TopLeft
-        anchors.rightMargin: 20
-        anchors.leftMargin: 20
-        anchors.bottomMargin: 120
-        anchors.topMargin: 20
+        anchors.rightMargin: 10
+        anchors.leftMargin: 10
+        anchors.bottomMargin: 30
+        anchors.topMargin: 10
         anchors.fill: parent
 
         Column {
@@ -93,7 +89,6 @@ Window {
                 Text {
                     id: timer
                     color: "#6092dd"
-                    text: "00:00"
                     anchors.top: parent.top
                     anchors.topMargin: 32
                     font.family: "Courier"
@@ -356,7 +351,8 @@ Window {
             id: column2
             x: column1.width + 20
             width: sysStatusArea.width
-            height: mainGrid.height - titleArea.height - 20
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 0
             anchors.topMargin: titleArea.height + 20
             anchors.top: parent.top
 
@@ -409,7 +405,7 @@ Window {
                              id: fireMissilesArea
                              anchors.fill: parent //anchor all sides of the mouse area to the rectangle's anchors
                                      //onClicked handles valid mouse button clicks
-                             onClicked: testFunction("BUTTON HATH BEEN PRESSED MISSILES AWAY")
+                             //onClicked: testFunction("BUTTON HATH BEEN PRESSED MISSILES AWAY")
                          }
                 }
             }
@@ -420,7 +416,7 @@ Window {
         Column {
             id: column3
             x: 0
-            width: 520
+            width: 540
             height: mainGrid.height - titleArea.height - 20
             anchors.right: parent.right
             anchors.rightMargin: 0
@@ -521,50 +517,5 @@ Window {
 
 
 
-    }
-
-    Item {
-        id: colorSwag
-        y: 0
-        height: 80
-        anchors.rightMargin: 20
-        anchors.leftMargin: 20
-        anchors.bottomMargin: 20
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-
-        Column {
-            id: sliders
-            y: 0
-            width: 200
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: 0
-
-            ROVSlider {
-                id: sliderR
-                tickmarksEnabled: false
-                stepSize: 1
-                maximumValue: 255
-                slidercolor: "#FF0000"
-            }
-
-            ROVSlider {
-                id: sliderG
-                tickmarksEnabled: false
-                stepSize: 1
-                maximumValue: 255
-                slidercolor: "#00FF00"
-            }
-
-            ROVSlider {
-                id: sliderB
-                tickmarksEnabled: false
-                stepSize: 1
-                maximumValue: 255
-                slidercolor: "#0000FF"
-            }
-        }
     }
 }

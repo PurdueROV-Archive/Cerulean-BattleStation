@@ -2,7 +2,10 @@ TEMPLATE = app
 
 QT += qml quick
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    mainticker.cpp \
+    battlestation.cpp \
+    threadcontroller.cpp
 
 RESOURCES += qml.qrc
 
@@ -11,3 +14,9 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
+
+HEADERS += \
+    tickclock.h \
+    mainticker.h \
+    battlestation.h \
+    threadcontroller.h
