@@ -8,8 +8,12 @@ int main(int argc, char *argv[])
     qDebug() << "Starting BattleStation...";
     QGuiApplication app(argc, argv);
     QQmlEngine engine;
-    BattleStation battlestation(&app, &engine);
-    battlestation.startMainThread();
-    return battlestation.exec();
+    BattleStation* battlestation = new BattleStation(&app, &engine);
+    int ret = -1;
+    if (battlestation->startUp()) {
+        ret = battlestation->exec();
+    }
+    delete battlestation;
+    return ret;
 }
 

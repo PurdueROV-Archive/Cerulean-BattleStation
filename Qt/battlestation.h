@@ -19,6 +19,7 @@ public:
 
     ~BattleStation();
 
+    bool startUp();
     int exec();
 
 public slots:

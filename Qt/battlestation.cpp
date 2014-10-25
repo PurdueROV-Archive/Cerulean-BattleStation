@@ -1,14 +1,24 @@
 #include "battlestation.h"
 #include "mainticker.h"
+#include "joystick.h"
 
 BattleStation::BattleStation(QGuiApplication* application, QQmlEngine* qmlEngine) {
     app = application;
     engine = qmlEngine;
+}
+
+bool BattleStation::startUp() {
     QQmlComponent component(engine, QUrl(QStringLiteral("qrc:/main.qml")));
     QObject* root = component.create();
-    qDebug() << root->objectName();
+    qDebug() << "Root scene name: " << root->objectName();
+    QString* initSDLResult = Joystick::initSDL();
+    if(initSDLResult != NULL) {
+        qWarning() << "SDL failed to initialize";
+        return false;
+    }
     mainTickerController = new ThreadController(new MainTicker(10));
     mainTickerController->startThread();
+    return true;
 }
 
 int BattleStation::exec()  {

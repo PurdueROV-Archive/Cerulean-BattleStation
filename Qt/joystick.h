@@ -8,11 +8,31 @@ class Joystick : public QObject {
     Q_OBJECT
 
 public:
-    Joystick();
+    Joystick(int id);
     ~Joystick();
 
+    QString* init();
+    int getCurrentJoystickId();
+    QString getJoystickName();
+    int getNumberOfAxes();
+    int getNumberOfButtons();
+    SDL_Joystick* getStick();
+
+    bool isOpen() {
+        return open;
+    }
+
+    Sint16 getAxis(int axis);
+    bool getButton(int button);
+
+    void update();
+
+
+    static QString* initSDL();
 private:
+    int joystickId;
     SDL_Joystick* stick;
+    bool open;
 
 };
 
