@@ -1,12 +1,13 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick serialport core widgets
 
 SOURCES += main.cpp \
     mainticker.cpp \
     battlestation.cpp \
     threadcontroller.cpp \
-    joystick.cpp
+    joystick.cpp \
+    serial.cpp
 
 RESOURCES += qml.qrc
 
@@ -21,7 +22,8 @@ HEADERS += \
     mainticker.h \
     battlestation.h \
     threadcontroller.h \
-    joystick.h
+    joystick.h \
+    serial.h
 
 unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x86/ -lSDL2
 

@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     if (battlestation->startUp()) {
         ret = battlestation->exec();
     }
+
     delete battlestation;
     return ret;
 }

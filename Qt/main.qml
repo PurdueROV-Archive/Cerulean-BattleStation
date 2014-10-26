@@ -105,6 +105,7 @@ Window {
                         font.pixelSize: 56
                     }
 
+                    /*
                     Timer {
                         id: timerTrigger
                         interval:500; running:false; repeat: true;
@@ -121,6 +122,7 @@ Window {
                             timer.text =  mins + ":" + secs;
                         }
                     }
+                    */
 
 
                 }
@@ -568,6 +570,17 @@ Window {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                ROVComboBox {
+                    id: comboBox
+                    x: 94
+                    y: 324
+                    width: parent.width - 40
+                    activeFocusOnPress: false
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: 20
                 }
             }
 

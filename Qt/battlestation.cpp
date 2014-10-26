@@ -1,6 +1,7 @@
 #include "battlestation.h"
 #include "mainticker.h"
 #include "joystick.h"
+#include "serial.h"
 
 BattleStation::BattleStation(QGuiApplication* application, QQmlEngine* qmlEngine) {
     app = application;
@@ -18,6 +19,7 @@ bool BattleStation::startUp() {
     }
     mainTickerController = new ThreadController(new MainTicker(10));
     mainTickerController->startThread();
+    serial::initSerial();
     return true;
 }
 

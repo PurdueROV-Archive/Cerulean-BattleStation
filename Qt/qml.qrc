@@ -4,5 +4,6 @@
         <file>ROVButton.qml</file>
         <file>ROVBox.qml</file>
         <file>ROVSlider.qml</file>
+        <file>ROVComboBox.qml</file>
     </qresource>
 </RCC>
