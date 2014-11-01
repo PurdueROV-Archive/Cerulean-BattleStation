@@ -105,7 +105,6 @@ Window {
                         font.pixelSize: 56
                     }
 
-                    /*
                     Timer {
                         id: timerTrigger
                         interval:500; running:false; repeat: true;
@@ -122,7 +121,6 @@ Window {
                             timer.text =  mins + ":" + secs;
                         }
                     }
-                    */
 
 
                 }
