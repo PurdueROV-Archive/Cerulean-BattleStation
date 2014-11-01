@@ -2,37 +2,47 @@
 #define JOYSTICK_H
 
 #include <QObject>
+#include <QList>
+#include <QDebug>
 #include "SDL.h"
+#undef main
 
-class Joystick : public QObject {
+struct ButtonState {
+    bool lastState;
+    bool currentState;
+};
+
+class Joystick : public QObject
+{
     Q_OBJECT
-
 public:
-    Joystick(int id);
+    Joystick(int joystickId);
     ~Joystick();
 
     QString* init();
-    int getCurrentJoystickId();
-    QString getJoystickName();
-    int getNumberOfAxes();
-    int getNumberOfButtons();
-    SDL_Joystick* getStick();
 
-    bool isOpen() {
-        return open;
-    }
-
-    Sint16 getAxis(int axis);
-    bool getButton(int button);
-
-    void update();
-
+    Uint16 getAxis(int axisId);
+    bool getButtonState(int buttonId);
+    bool getHasButtonJustBeenReleased(int buttonId);
+    bool getHasButtonJustBeenPressed(int buttonId);
+    int getNumAxes();
+    int getNumButtons();
+    bool isOpen();
+    void poll();
 
     static QString* initSDL();
+
 private:
-    int joystickId;
-    SDL_Joystick* stick;
+    QList<Uint16> m_axes;
+    QList<ButtonState> m_buttons;
+    QList<bool> m_rawButtons;
+    const int m_joystickId;
+    SDL_Joystick* m_joystick;
     bool open;
+
+signals:
+
+public slots:
 
 };
 

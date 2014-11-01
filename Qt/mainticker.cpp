@@ -6,7 +6,15 @@ void MainTicker::doTick() {
     if(!joystick->isOpen() && getTickCount() % 20 == 0) {
         initJoystick();
     }
-    joystick->update();
+    joystick->poll();
+    for (int i = 0; i < joystick->getNumButtons(); i++) {
+        if (joystick->getHasButtonJustBeenPressed(i)) {
+            qDebug() << "button" << i << "has been pressed";
+        }
+        if (joystick->getHasButtonJustBeenReleased(i)) {
+                qDebug() << "button" << i << "has been released";
+        }
+    }
 
 }
 
@@ -23,8 +31,6 @@ void MainTicker::initJoystick() {
         if (!firstJoyInitTry) {
             qWarning() << "Failed to initialize joystick! " << *result;
         }
-    } else {
-        qDebug() << "Joystick initialized";
     }
     firstJoyInitTry = true;
 }
