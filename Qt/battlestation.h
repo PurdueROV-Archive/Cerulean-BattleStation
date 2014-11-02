@@ -36,7 +36,7 @@ public slots:
     }
 signals:
     void startMain();
-    void rovNameChanged();
+    void rovNameChanged(QString name);
 
 };
 

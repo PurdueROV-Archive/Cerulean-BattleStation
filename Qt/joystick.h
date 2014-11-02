@@ -7,6 +7,11 @@
 #include "SDL.h"
 #undef main
 
+struct JoystickInfo {
+    int joystickId;
+    QString name;
+};
+
 struct ButtonState {
     bool lastState;
     bool currentState;

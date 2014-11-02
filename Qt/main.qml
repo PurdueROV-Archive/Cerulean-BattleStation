@@ -51,7 +51,7 @@ Window {
 
                 Text {
                     id: title
-                    color: "#6092dd"
+                    color: c_inputHandler.joystickActive ? "#6092dd" : "#FFFFFF"
                     text: rovName
                     font.italic: true
                     clip: false
@@ -463,7 +463,7 @@ Window {
                              id: fireMissilesArea
                              anchors.fill: parent //anchor all sides of the mouse area to the rectangle's anchors
                                      //onClicked handles valid mouse button clicks
-                             //onClicked: testFunction("BUTTON HATH BEEN PRESSED MISSILES AWAY")
+                             onClicked: c_inputHandler.setJoystick(1)
                          }
                 }
             }

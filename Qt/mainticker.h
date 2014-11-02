@@ -2,22 +2,27 @@
 #define MAINTICKER_H
 
 #include "tickclock.h"
-#include "SDL.h"
-#include "joystick.h"
+#include "inputhandler.h"
+#include <QQmlContext>
 
 class MainTicker : public TickClock {
 
     void doTick();
-    void initJoystick();
 
-    Joystick* joystick;
-    bool firstJoyInitTry;
-
+    InputHandler* m_inputHandler;
 
 public:
     MainTicker(quint64 targetTicksPerSec);
-
     ~MainTicker();
+
+    void registerInContext(QQmlContext* context);
+
+signals:
+
+
+public slots:
+
+
 };
 
 #endif // MAINTICKER_H

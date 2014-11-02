@@ -19,6 +19,7 @@ bool BattleStation::startUp() {
     m_mainTicker = new MainTicker(10);
     m_mainTickerController = new ThreadController(m_mainTicker);
     m_engine->rootContext()->setContextProperty("c_battlestation", this);
+    m_mainTicker->registerInContext(m_engine->rootContext());
 
     QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/main.qml")));
     QObject* root = component.create();
