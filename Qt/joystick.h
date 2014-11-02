@@ -43,6 +43,9 @@ private:
     bool open;
 
 signals:
+    void buttonPressed(int buttonId);
+    void buttonReleased(int buttonId);
+    void axisChanged(Sint16 newVal, Sint16 delta);
 
 public slots:
 

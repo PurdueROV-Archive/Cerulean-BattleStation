@@ -87,13 +87,24 @@ void Joystick::poll() {
         }
     }
     for (int i = 0; i < numAxes; i++) {
-        m_axes[i] = SDL_JoystickGetAxis(m_joystick, i);
+        Sint16 oldVal = m_axes[i];
+        Sint16 newVal = SDL_JoystickGetAxis(m_joystick, i);
+        m_axes[i] = newVal;
+        emit axisChanged(newVal, newVal - oldVal);
     }
     for (int i = 0; i < numButtons; i++) {
         ButtonState state;
         state.lastState = m_buttons.at(i).currentState;
         state.currentState = m_rawButtons.at(i);
         m_buttons[i] = state;
+        //  Pressed
+        if (state.currentState && !state.lastState) {
+            emit buttonPressed(i);
+        }
+        //  Released
+        if(!state.currentState && state.lastState) {
+            emit buttonReleased(i);
+        }
     }
 }
 
@@ -119,3 +130,4 @@ QString Joystick::getJoystickName(int index) {
     }
     return QString(SDL_JoystickNameForIndex(index));
 }
+

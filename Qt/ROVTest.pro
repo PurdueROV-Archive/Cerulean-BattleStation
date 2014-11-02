@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     battlestation.cpp \
     threadcontroller.cpp \
     joystick.cpp \
-    serial.cpp
+    serial.cpp \
+    inputhandler.cpp
 
 RESOURCES += qml.qrc
 
@@ -23,7 +24,8 @@ HEADERS += \
     battlestation.h \
     threadcontroller.h \
     joystick.h \
-    serial.h
+    serial.h \
+    inputhandler.h
 
 unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x86/ -lSDL2
 
