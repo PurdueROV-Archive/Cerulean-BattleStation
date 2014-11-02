@@ -20,15 +20,19 @@ void serial::initSerial() {
             serial.setPort(info);
             serial.setBaudRate(QSerialPort::Baud9600);
             if (serial.open(QIODevice::ReadWrite) && serial.isWritable()) {
-                serial.write("HELLO THERE");
-                serial.flush();
+                char bytes[4] = {0x12, 150, 50, 0x13 };
+                send(&serial, bytes);
                 qDebug() << "data has been sent";
                 serial.close();
             }
         }
+}
 
 
-
+bool serial::send(QSerialPort* serial, char bytes[])  {
+    QByteArray data = QByteArray::fromRawData(bytes, sizeof(bytes));
+    serial->write(data);
+    return serial->flush();
 }
 
 
