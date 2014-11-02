@@ -7,13 +7,17 @@
 #include <QQmlComponent>
 #include <QDebug>
 #include "threadcontroller.h"
+#include "mainticker.h"
 
 class BattleStation : public QObject {
     Q_OBJECT
+    Q_PROPERTY(QString rovName READ rovName NOTIFY rovNameChanged)
 
-    QGuiApplication* app;
-    QQmlEngine* engine;
-    ThreadController* mainTickerController;
+    QGuiApplication* m_app;
+    QQmlEngine* m_engine;
+    ThreadController* m_mainTickerController;
+    MainTicker* m_mainTicker;
+    QString m_rovName;
 public:
     BattleStation(QGuiApplication* application, QQmlEngine* qmlEngine);
 
@@ -22,12 +26,17 @@ public:
     bool startUp();
     int exec();
 
+    QString rovName() const {
+        return m_rovName;
+    }
+
 public slots:
     void startMainThread() {
         emit startMain();
     }
 signals:
     void startMain();
+    void rovNameChanged();
 
 };
 

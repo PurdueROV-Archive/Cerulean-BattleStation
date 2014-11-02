@@ -4,14 +4,14 @@ import QtQuick.Controls 1.2
 import QtGraphicalEffects 1.0
 
 Window {
-    property var rovName: "ROV PlaceholderName"
+    property var rovName: c_battlestation.rovName
     property var startTime: 0
     property var delta: 0;
     visible: true
     width: 1200
     height: 700
     color: "#111111"
-    title: "Purdue IEEE | ROV PlaceholderName"
+    title: "Purdue IEEE | " + c_battlestation.rovName
     objectName: "mainWindow"
 
     Item {

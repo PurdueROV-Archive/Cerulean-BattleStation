@@ -1,35 +1,40 @@
+#include <QQmlContext>
 #include "battlestation.h"
-#include "mainticker.h"
 #include "joystick.h"
 #include "serial.h"
 
 BattleStation::BattleStation(QGuiApplication* application, QQmlEngine* qmlEngine) {
-    app = application;
-    engine = qmlEngine;
+    m_app = application;
+    m_engine = qmlEngine;
+    m_rovName = QString("ROV Incompetence");
 }
 
 bool BattleStation::startUp() {
-    QQmlComponent component(engine, QUrl(QStringLiteral("qrc:/main.qml")));
-    QObject* root = component.create();
-    qDebug() << "Root scene name: " << root->objectName();
     QString* initSDLResult = Joystick::initSDL();
     if(initSDLResult != NULL) {
         qWarning() << "SDL failed to initialize";
         return false;
     }
-    mainTickerController = new ThreadController(new MainTicker(10));
-    mainTickerController->startThread();
     serial::initSerial();
+    m_mainTicker = new MainTicker(10);
+    m_mainTickerController = new ThreadController(m_mainTicker);
+    m_engine->rootContext()->setContextProperty("c_battlestation", this);
+
+    QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/main.qml")));
+    QObject* root = component.create();
+    qDebug() << "Root scene name: " << root->objectName();
+
+    m_mainTickerController->startThread();
     return true;
 }
 
 int BattleStation::exec()  {
-    int exec = app->exec();
+    int exec = m_app->exec();
     qDebug() << "App ended with exit code " << exec << endl;
-    mainTickerController->stopThread();
+    m_mainTickerController->stopThread();
     return exec;
 }
 
 BattleStation::~BattleStation() {
-    delete mainTickerController;
+    delete m_mainTickerController;
 }
