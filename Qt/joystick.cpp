@@ -29,12 +29,11 @@ QString* Joystick::init() {
         m_buttons.append(state);
         m_rawButtons.append(false);
     }
-//    qDebug() << "Joystick initialized successfully with" << m_axes.size() << "axes and" << m_buttons.size() << "buttons";
     open = true;
     return NULL;
 }
 
-Uint16 Joystick::getAxis(int axisId) {
+Sint16 Joystick::getAxis(int axisId) {
     if (axisId < m_axes.length() && axisId > 0) {
         return m_axes.at(axisId);
     }
@@ -63,7 +62,6 @@ bool Joystick::getHasButtonJustBeenPressed(int buttonId) {
     }
     return false;
 }
-
 
 int Joystick::getNumAxes() {
     return SDL_JoystickNumAxes(m_joystick);
@@ -96,12 +94,6 @@ void Joystick::poll() {
         state.lastState = m_buttons.at(i).currentState;
         state.currentState = m_rawButtons.at(i);
         m_buttons[i] = state;
-//        if (getHasButtonJustBeenReleased(i)) {
-//            qDebug() << i << "ireleased";
-//        }
-//        if (getHasButtonJustBeenPressed(i)) {
-//            qDebug() << i << "ipressed";
-//        }
     }
 }
 
@@ -109,11 +101,21 @@ bool Joystick::isOpen() {
     return open;
 }
 
-
 QString* Joystick::initSDL() {
     if (SDL_Init(SDL_INIT_JOYSTICK) != 0) {
         QString* error = new QString(SDL_GetError());
         return error;
     }
     return NULL;
+}
+
+int Joystick::numberOfJoysticks() {
+    return SDL_NumJoysticks();
+}
+
+QString Joystick::getJoystickName(int index) {
+    if (index < 0 || index >= numberOfJoysticks()) {
+        return QString("INVALID");
+    }
+    return QString(SDL_JoystickNameForIndex(index));
 }

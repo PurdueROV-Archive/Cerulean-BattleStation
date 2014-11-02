@@ -21,7 +21,7 @@ public:
 
     QString* init();
 
-    Uint16 getAxis(int axisId);
+    Sint16 getAxis(int axisId);
     bool getButtonState(int buttonId);
     bool getHasButtonJustBeenReleased(int buttonId);
     bool getHasButtonJustBeenPressed(int buttonId);
@@ -31,9 +31,11 @@ public:
     void poll();
 
     static QString* initSDL();
+    static int numberOfJoysticks();
+    static QString getJoystickName(int index);
 
 private:
-    QList<Uint16> m_axes;
+    QList<Sint16> m_axes;
     QList<ButtonState> m_buttons;
     QList<bool> m_rawButtons;
     const int m_joystickId;
