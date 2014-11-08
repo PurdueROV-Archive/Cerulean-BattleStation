@@ -48,7 +48,7 @@ bool Joystick::getButtonState(int buttonId) {
 }
 
 bool Joystick::getHasButtonJustBeenReleased(int buttonId) {
-    if (buttonId < m_buttons.length() && buttonId > 0) {
+    if (buttonId < m_buttons.length() && buttonId >= 0) {
         ButtonState state = m_buttons.at(buttonId);
         return !state.currentState && state.lastState;
     }
@@ -56,7 +56,7 @@ bool Joystick::getHasButtonJustBeenReleased(int buttonId) {
 }
 
 bool Joystick::getHasButtonJustBeenPressed(int buttonId) {
-    if (buttonId < m_buttons.length() && buttonId > 0) {
+    if (buttonId < m_buttons.length() && buttonId >= 0) {
         ButtonState state = m_buttons.at(buttonId);
         return state.currentState && !state.lastState;
     }
@@ -90,7 +90,9 @@ void Joystick::poll() {
         Sint16 oldVal = m_axes[i];
         Sint16 newVal = SDL_JoystickGetAxis(m_joystick, i);
         m_axes[i] = newVal;
-        emit axisChanged(newVal, newVal - oldVal);
+        if (oldVal != newVal) {
+            emit axisChanged(i, newVal, newVal - oldVal);
+        }
     }
     for (int i = 0; i < numButtons; i++) {
         ButtonState state;

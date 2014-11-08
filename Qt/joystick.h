@@ -7,6 +7,22 @@
 #include "SDL.h"
 #undef main
 
+#define XBOX_BUTTON_A_ID 10
+#define XBOX_BUTTON_B_ID 11
+#define XBOX_BUTTON_X_ID 12
+#define XBOX_BUTTON_Y_ID 13
+#define XBOX_BUTTON_LB_ID 8
+#define XBOX_BUTTON_RB_ID 9
+#define XBOX_BUTTON_BACK_ID 5
+#define XBOX_BUTTON_SELECT_ID 4
+#define XBOX_BUTTON_LJ_ID 6
+#define XBOX_BUTTON_RJ_ID 7
+#define XBOX_AXIS_LJ_X_ID 0
+#define XBOX_AXIS_LJ_Y_ID 1
+#define XBOX_AXIS_RJ_X_ID 2
+#define XBOX_AXIS_RJ_Y_ID 3
+#define XBOX_AXIS_TRIGGER_ID 5
+
 struct JoystickInfo {
     int joystickId;
     QString name;
@@ -50,7 +66,7 @@ private:
 signals:
     void buttonPressed(int buttonId);
     void buttonReleased(int buttonId);
-    void axisChanged(Sint16 newVal, Sint16 delta);
+    void axisChanged(int axisId, Sint16 newVal, Sint16 delta);
 
 public slots:
 
