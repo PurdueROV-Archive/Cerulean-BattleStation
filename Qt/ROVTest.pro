@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     threadcontroller.cpp \
     joystick.cpp \
     serial.cpp \
-    inputhandler.cpp
+    inputhandler.cpp \
+    interpolator.cpp
 
 RESOURCES += qml.qrc
 
@@ -25,7 +26,8 @@ HEADERS += \
     threadcontroller.h \
     joystick.h \
     serial.h \
-    inputhandler.h
+    inputhandler.h \
+    interpolator.h
 
 unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x86/ -lSDL2
 

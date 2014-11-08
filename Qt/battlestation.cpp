@@ -12,6 +12,8 @@ BattleStation::BattleStation(QGuiApplication* application, QQmlEngine* qmlEngine
 }
 
 bool BattleStation::startUp() {
+    //  Must register in Qt's type system for joystick use
+    qRegisterMetaType<Sint16>("Sint16");
     QString* initSDLResult = Joystick::initSDL();
     if(initSDLResult != NULL) {
         qWarning() << "SDL failed to initialize";
@@ -23,7 +25,7 @@ bool BattleStation::startUp() {
     serial::send(bytes);
 
 
-    m_mainTicker = new MainTicker(10);
+    m_mainTicker = new MainTicker(20);
     m_mainTickerController = new ThreadController(m_mainTicker);
     m_engine->rootContext()->setContextProperty("c_battlestation", this);
     m_mainTicker->registerInContext(m_engine->rootContext());
