@@ -21,7 +21,15 @@ public:
      * a new value.
      * @return The interpolated value capped by maxDelta
      */
-    Sint16 lerp();
+    Sint16 lerp(Sint16 newTarget);
+
+    /**
+     * Calls lerp() with no change in target
+     * @return
+     */
+    Sint16 lerp() {
+        return lerp(target);
+    }
 
     Sint16 getCurrent() {
         return current;
