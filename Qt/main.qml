@@ -105,6 +105,7 @@ Window {
                         font.pixelSize: 56
                     }
 
+
                     Timer {
                         id: timerTrigger
                         interval:500; running:false; repeat: true;
@@ -121,6 +122,7 @@ Window {
                             timer.text =  mins + ":" + secs;
                         }
                     }
+
 
 
                 }
@@ -473,6 +475,7 @@ Window {
 
         Column {
             id: column3
+            objectName: "column3"
             x: 0
             width: 540
             height: mainGrid.height - titleArea.height - 20
@@ -535,6 +538,7 @@ Window {
 
             ROVBox {
                 id: configArea
+                objectName: "configArea"
                 y: 0
                 width: parent.width
                 height: 190
@@ -570,16 +574,18 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
 
-                ROVComboBox {
-                    id: comboBox
+                ComboBox {
+                    id: combo
+                    objectName: "comboSerial"
                     x: 94
                     y: 324
                     width: parent.width - 40
-                    activeFocusOnPress: false
+                    //activeFocusOnPress: false
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 20
                 }
+
             }
 
         }

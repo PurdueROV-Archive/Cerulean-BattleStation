@@ -1,14 +1,24 @@
 #ifndef SERIAL_H
 #define SERIAL_H
 
+#include <QtCore/QDebug>
+#include <QByteArray>
+#include <QtWidgets/QComboBox>
+
+
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+
+
+static QSerialPort serialDevice;
 
 class serial
 {
 public:
-    static void initSerial();
-    static bool send(QSerialPort* serial, char bytes[]);
+
+
+    static void initSerial(QString device);
+    static bool send(char bytes[]);
 };
 
 #endif // SERIAL_H

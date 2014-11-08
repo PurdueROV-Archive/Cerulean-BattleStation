@@ -1,4 +1,6 @@
 #include <QQmlContext>
+#include <QObject>
+#include <QQuickItem>
 #include "battlestation.h"
 #include "joystick.h"
 #include "serial.h"
@@ -15,7 +17,12 @@ bool BattleStation::startUp() {
         qWarning() << "SDL failed to initialize";
         return false;
     }
-    serial::initSerial();
+
+    serial::initSerial("Arduino Uno");
+    char bytes[4] = {0x12, 150, 50, 0x13 };
+    serial::send(bytes);
+
+
     m_mainTicker = new MainTicker(10);
     m_mainTickerController = new ThreadController(m_mainTicker);
     m_engine->rootContext()->setContextProperty("c_battlestation", this);
