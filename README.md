@@ -11,7 +11,8 @@ Implemented Features:
 Todo Features:
 --------------
 - Compute thruster values based of joystick
-- Compute a checksum- Handle reading from serial
+- Compute a checksum
+- Handle reading from serial
 - More configuration on main window
 
 How to install and run:
