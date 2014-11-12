@@ -31,5 +31,10 @@ HEADERS += \
 
 unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x86/ -lSDL2
 
+macx {
+    QMAKE_LFLAGS += -F$$PWD/../SDL/lib/x64/
+    LIBS += -framework SDL2
+}
+
 INCLUDEPATH += $$PWD/../SDL/include
 DEPENDPATH += $$PWD/../SDL/include

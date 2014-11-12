@@ -11,8 +11,9 @@ void serial::initSerial(QString device) {
 
 
 bool serial::send(char bytes[]) {
+
     if (serialDevice.open(QIODevice::ReadWrite) && serialDevice.isWritable()) {
-        QByteArray data = QByteArray::fromRawData(bytes, sizeof(bytes));
+        QByteArray data = QByteArray::fromRawData(bytes, sizeof(*bytes));
         serialDevice.write(data);
         return serialDevice.flush();
     }

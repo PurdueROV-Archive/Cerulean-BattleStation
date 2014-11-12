@@ -2,14 +2,14 @@
 
 //#define FALL_FAST
 
-Interpolator::Interpolator(Sint32 maxDelta, int millSecsPerTick) :
+Interpolator::Interpolator(qint32 maxDelta, int millSecsPerTick) :
     msecsPerTick(millSecsPerTick) {
     this->maxDelta = maxDelta;
     current = 0;
     target = 0;
 }
 
-Sint16 Interpolator::lerp(Sint16 newTarget) {
+qint16 Interpolator::lerp(qint16 newTarget) {
     target = newTarget;
     //  Short circuit (don't actually) if we're where we want to be.
     if (current == target) {
@@ -25,9 +25,10 @@ Sint16 Interpolator::lerp(Sint16 newTarget) {
 #endif
     //  Otherwise start incrementing towards the target
     //  But cap at sign(delta) * maxDelta
-    Sint32 delta = target - current;
+    qint32 delta = target - current;
     if (abs(delta) > maxDelta) {
-        delta = sign(delta) * maxDelta;
+        qint32 sign = delta > 0 ? 1 : -1;
+        delta = sign * maxDelta;
     }
     current += delta;
     return current;
