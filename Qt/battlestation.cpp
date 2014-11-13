@@ -20,9 +20,9 @@ bool BattleStation::startUp() {
         return false;
     }
 
-    serial::initSerial("Arduino Uno");
-    char bytes[4] = {0x12, 150, 50, 0x13 };
-    serial::send(bytes);
+    serial::initSerial("USB Serial Port");
+    char bytes[6] = {0x12, 150, 50, 150, 50, 0x13};
+    qDebug() << serial::send(bytes, sizeof(bytes));
 
 
     m_mainTicker = new MainTicker(20);
