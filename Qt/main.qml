@@ -8,8 +8,8 @@ Window {
     property var startTime: 0
     property var delta: 0;
     visible: true
-    width: 1200
-    height: 700
+    width: 1900
+    height: 1000
     color: "#111111"
     title: "Purdue IEEE | " + c_battlestation.rovName
     objectName: "mainWindow"
@@ -20,14 +20,15 @@ Window {
         transformOrigin: Item.TopLeft
         anchors.rightMargin: 10
         anchors.leftMargin: 10
-        anchors.bottomMargin: 30
-        anchors.topMargin: 10
+        anchors.bottomMargin: 27
+        anchors.topMargin: 13
         anchors.fill: parent
 
         Column {
             id: column1
+            x: 0
             objectName: "column1"
-            width: timerArea.width
+            width: 630
             height: 400
             spacing: 20
 
@@ -106,22 +107,22 @@ Window {
                     }
 
 
-                    Timer {
-                        id: timerTrigger
-                        interval:500; running:false; repeat: true;
-                        onTriggered: {
-                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
-                            var secs = (tempTime % 60);
-                            var mins = Math.floor(tempTime/60);
-                            if(secs < 10) {
-                                secs = "0" + secs;
-                            }
-                            if(mins < 10) {
-                                mins = "0" + mins;
-                            }
-                            timer.text =  mins + ":" + secs;
-                        }
-                    }
+//                    Timer {
+//                        id: timerTrigger
+//                        interval:500; running:false; repeat: true;
+//                        onTriggered: {
+//                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
+//                            var secs = (tempTime % 60);
+//                            var mins = Math.floor(tempTime/60);
+//                            if(secs < 10) {
+//                                secs = "0" + secs;
+//                            }
+//                            if(mins < 10) {
+//                                mins = "0" + mins;
+//                            }
+//                            timer.text =  mins + ":" + secs;
+//                        }
+//                    }
 
 
 
@@ -409,7 +410,7 @@ Window {
 
         Column {
             id: column2
-            x: column1.width + 20
+            x: 630
             width: sysStatusArea.width
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 0
@@ -477,7 +478,7 @@ Window {
             id: column3
             objectName: "column3"
             x: 0
-            width: 540
+            width: 630
             height: mainGrid.height - titleArea.height - 20
             anchors.right: parent.right
             anchors.rightMargin: 0
