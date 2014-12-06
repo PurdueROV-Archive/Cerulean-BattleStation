@@ -42,7 +42,8 @@ public:
 
     QString* init();
 
-    Sint16 getAxis(int axisId);
+    qint16 getAxis(int axisId);
+    float getAxisF(int axisId);
     bool getButtonState(int buttonId);
     bool getHasButtonJustBeenReleased(int buttonId);
     bool getHasButtonJustBeenPressed(int buttonId);
@@ -56,7 +57,7 @@ public:
     static QString getJoystickName(int index);
 
 private:
-    QList<Sint16> m_axes;
+    QList<qint16> m_axes;
     QList<ButtonState> m_buttons;
     QList<bool> m_rawButtons;
     const int m_joystickId;
@@ -66,7 +67,8 @@ private:
 signals:
     void buttonPressed(int buttonId);
     void buttonReleased(int buttonId);
-    void axisChanged(int axisId, Sint16 newVal, Sint16 delta);
+    void axisChanged(int axisId, qint16 newVal, qint16 delta);
+    void axisChangedF(int axisId, float newVal, float delta);
 
 public slots:
 
