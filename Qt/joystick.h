@@ -17,11 +17,16 @@
 #define XBOX_BUTTON_SELECT_ID 4
 #define XBOX_BUTTON_LJ_ID 6
 #define XBOX_BUTTON_RJ_ID 7
+#define XBOX_BUTTON_LP_UP 0
+#define XBOX_BUTTON_LP_DOWN 1
+#define XBOX_BUTTON_LP_LEFT 2
+#define XBOX_BUTTON_LP_RIGHT 3
 #define XBOX_AXIS_LJ_X_ID 0
 #define XBOX_AXIS_LJ_Y_ID 1
 #define XBOX_AXIS_RJ_X_ID 2
 #define XBOX_AXIS_RJ_Y_ID 3
-#define XBOX_AXIS_TRIGGER_ID 5
+#define XBOX_AXIS_LTRIGG 4
+#define XBOX_AXIS_RTRIGG 5
 
 struct JoystickInfo {
     int joystickId;
