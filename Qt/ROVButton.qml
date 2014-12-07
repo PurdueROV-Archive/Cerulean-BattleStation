@@ -6,7 +6,7 @@ Button {
     style: ButtonStyle {
         background: Rectangle {
             border.width: control.activeFocus ? 2 : 1
-            color: control.hovered ? "#DDEEFF" : "#00000000"
+            color: control.hovered ? "#333333" : "#00000000"
             radius: 0
             border.color: "#e4ae23"
             implicitWidth: 70
@@ -17,7 +17,7 @@ Button {
             verticalAlignment: Text.AlignVCenter
             color: "#e4ae23"
             font.bold: true
-            font.pixelSize: 35
+            font.pixelSize: 30
             font.family: "Arial"
             horizontalAlignment: Text.AlignHCenter
             anchors.verticalCenter: parent.verticalCenter
