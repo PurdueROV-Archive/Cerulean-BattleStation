@@ -8,14 +8,14 @@ Button {
             border.width: control.activeFocus ? 2 : 1
             color: control.hovered ? "#DDEEFF" : "#00000000"
             radius: 0
-            border.color: "#b1946c"
+            border.color: "#e4ae23"
             implicitWidth: 70
             implicitHeight: 25
         }
         label: Label {
             text: control.text
             verticalAlignment: Text.AlignVCenter
-            color: "#b1946c"
+            color: "#e4ae23"
             font.bold: true
             font.pixelSize: 35
             horizontalAlignment: Text.AlignHCenter

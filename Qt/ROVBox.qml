@@ -7,7 +7,7 @@ Rectangle {
         id: rovRectangle
         color: "#00000000"
         radius: 0
-        border.color: "#b1946c"
+        border.color: "#e4ae23"
         border.width: 1
         width: parent.width
         height: parent.height
@@ -16,7 +16,7 @@ Rectangle {
         anchors.fill: rovRectangle
         radius: 12
         samples: 16
-        color: "#b1946c"
+        color: "#e4ae23"
         source: rovRectangle
     }
 }

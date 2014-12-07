@@ -37,7 +37,7 @@ Window {
             Text {
                 id: purdueTitle
                 width: parent.width/3
-                color: "#b1946c"
+                color: "#e4ae23"
                 text: "PURDUE ROV"
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignLeft
@@ -52,7 +52,7 @@ Window {
                 id: mainTitle
                 width: parent.width/3
                 height: titleArea.height
-                color: "#b1946c"
+                color: "#e4ae23"
                 text: "BATTLESTATION"
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
@@ -67,7 +67,7 @@ Window {
                 id: rovTitle
                 width: parent.width/3
                 height: titleArea.height
-                color: "#b1946c"
+                color: "#e4ae23"
                 text: "INCOMPETENCE"
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignRight
@@ -102,7 +102,7 @@ Window {
                 Text {
                     id: timerTitle
                     x: 117
-                    color: "#b1946c"
+                    color: "#e4ae23"
                     text: "TIMER"
                     font.family: "Arial"
                     style: Text.Normal
@@ -182,10 +182,12 @@ Window {
                                 onClicked: {
                                     if(timerTrigger.running) {
                                         timerTrigger.stop();
+                                        stopResetBtn.enabled = true;
                                         delta = (new Date).getTime() - startTime;
                                         startBtn.text = "RESUME";
                                     } else {
                                         timerTrigger.running = true;
+                                        stopResetBtn.enabled = false;
                                         startBtn.text = "PAUSE";
                                         if(startTime == 0) {
                                             startTime = (new Date).getTime();
@@ -206,7 +208,7 @@ Window {
                             text: "00:00"
                             anchors.horizontalCenterOffset: 0
                             anchors.horizontalCenter: parent.horizontalCenter
-                            color: "#b1946c"
+                            color: "#e4ae23"
                             font.family: "Courier"
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
@@ -230,8 +232,10 @@ Window {
                                 width: stopResetBtn.width
                                 anchors.fill: parent
                                 onClicked: {
+                                    console.log('Im clicked!');
                                     if(!timerTrigger.running) {
                                         timerTrigger.running = false;
+                                        stopResetBtn.enabled = false;
                                         startBtn.text = "START";
                                         timer.text = "00:00";
                                         startTime = 0;
@@ -252,7 +256,7 @@ Window {
                 Text {
                     id: missionTasksTitle
                     x: 117
-                    color: "#b1946c"
+                    color: "#e4ae23"
                     text: "MISSION TASKS"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -306,7 +310,7 @@ Window {
                     id: sysTitle
                     x: 117
                     width: parent.width
-                    color: "#b1946c"
+                    color: "#e4ae23"
                     text: "SYSTEM VIEW"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -344,7 +348,7 @@ Window {
                 Text {
                     id: statusTitle
                     x: 117
-                    color: "#b1946c"
+                    color: "#e4ae23"
                     text: "ORIENTATION"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -397,7 +401,7 @@ Window {
                 Text {
                     id: sysStatusTitle
                     x: 117
-                    color: "#b1946c"
+                    color: "#e4ae23"
                     text: "SYSTEM STATUS"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -436,7 +440,7 @@ Window {
                 Text {
                     id: orientationTitle
                     x: 117
-                    color: "#b1946c"
+                    color: "#e4ae23"
                     text: "CONFIGURATION"
                     anchors.topMargin: 6
                     anchors.top: parent.top

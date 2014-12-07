@@ -15,7 +15,7 @@ ComboBox {
         label: Label {
             text: control.text
             verticalAlignment: Text.AlignVCenter
-            color: "#b1946c"
+            color: "#e4ae23"
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             anchors.verticalCenter: parent.verticalCenter
