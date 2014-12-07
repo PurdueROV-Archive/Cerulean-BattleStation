@@ -8,8 +8,8 @@ Window {
     property var startTime: 0
     property var delta: 0;
     visible: true
-    width: 1900
-    height: 1000
+    width: 1910
+    height: 1010
     color: "#111111"
     title: "Purdue IEEE | " + c_battlestation.rovName
     objectName: "mainWindow"
@@ -17,6 +17,10 @@ Window {
     Item {
         objectName: "mainGrid"
         id: mainGrid
+        x: 5
+        y: 5
+        width: 1900
+        height: 1000
         transformOrigin: Item.TopLeft
         anchors.rightMargin: 10
         anchors.leftMargin: 10
@@ -24,50 +28,35 @@ Window {
         anchors.topMargin: 13
         anchors.fill: parent
 
+        Text {
+            id: mainTitle
+            width: parent.width
+            height: titleArea.height
+            color: "#805f92dd"
+            text: "PURDUE ROV: BATTLESTATION"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.italic: false
+            clip: false
+            font.bold: true
+            font.family: "Arial"
+            font.pixelSize: 46
+        }
+
         Column {
+
             id: column1
             x: 0
+            y: 54
             objectName: "column1"
-            width: 630
-            height: 400
+            width: mainGrid.width/3
+            height: mainGrid.height-mainTitle.height
             spacing: 20
 
-            Column {
-                id: titleArea
-                objectName: "titleArea"
-                width: title.width
-                height: 50
-
-                Text {
-                    id: purdueTag
-                    objectName: "purdueTag"
-                    color: "#24487f"
-                    text: qsTr("PURDUE IEEE")
-                    transformOrigin: Item.Center
-                    font.family: "Arial"
-                    font.bold: true
-                    font.italic: false
-                    font.pixelSize: 14
-                }
-
-                Text {
-                    id: title
-                    color: c_inputHandler.joystickActive ? "#6092dd" : "#FFFFFF"
-                    text: rovName
-                    font.italic: true
-                    clip: false
-                    font.bold: true
-                    font.family: "Arial"
-                    font.pixelSize: 28
-                }
-
-
-
-            }
 
             ROVBox {
                 id: timerArea
-                width: 300
+                width: column1.width-20
                 height: 140
 
 
@@ -194,14 +183,15 @@ Window {
             }
 
             ROVBox {
-                id: networkStatusArea
-                width: 300
-                height: 140
+                id: missionTasks
+                width: column1.width - 20
+                height: column1.height -20 - timerArea.height
+                y: (column1.height/2) - 5
                 Text {
-                    id: netStatTitle
+                    id: missionTasksTitle
                     x: 117
                     color: "#24487f"
-                    text: "NETWORK"
+                    text: "MISSION TASKS"
                     anchors.topMargin: 6
                     anchors.top: parent.top
                     style: Text.Normal
@@ -214,164 +204,89 @@ Window {
                     font.bold: true
                 }
 
-                Item {
-                    id: netStatContent
-                    anchors.rightMargin: 10
-                    anchors.leftMargin: 10
-                    anchors.topMargin: 32
-                    anchors.fill: parent
+                Text {
+                    id: missionTasksTitleInfo
+                    x: 0
+                    y: 0
+                    color: "#ffffff"
+                    text: qsTr("MISSION TASK DETAILS")
+                    wrapMode: Text.WordWrap
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 12
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
 
-                    Item {
-                        id: dROBox
-                        x: 81
-                        width: 96
-                        anchors.right: parent.right
-                        anchors.rightMargin: 0
-                        anchors.bottom: parent.bottom
-                        anchors.top: parent.top
 
-                        Label {
-                            id: dROTitle
-                            x: 38
-                            color: "#24487f"
-                            text: qsTr("OUT")
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.top: parent.top
-                            anchors.topMargin: 8
-                            font.bold: true
-                            font.pointSize: 12
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                        }
 
-                        Label {
-                            id: dROVal
-                            x: 0
-                            color: "#6092dd"
-                            text: "88"
-                            anchors.top: parent.top
-                            anchors.topMargin: 24
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
-                            font.pointSize: 42
-                            font.family: "Courier"
-                        }
 
-                        Label {
-                            id: dROUnit
-                            x: 0
-                            y: 0
-                            color: "#24487f"
-                            text: "kbps"
-                            anchors.bottom: parent.bottom
-                            anchors.bottomMargin: 12
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.pointSize: 10
-                            font.bold: true
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                        }
-                    }
 
-                    Item {
-                        id: dRIBox
-                        x: 87
-                        y: 0
-                        width: 96
-                        anchors.bottom: parent.bottom
-                        anchors.top: parent.top
-                        Label {
-                            id: dRITitle
-                            x: 38
-                            color: "#24487f"
-                            text: qsTr("IN")
-                            font.pointSize: 12
-                            anchors.topMargin: 8
-                            anchors.top: parent.top
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
-                        }
 
-                        Label {
-                            id: dRIVal
-                            x: 0
-                            color: "#6092dd"
-                            text: "88"
-                            font.pointSize: 42
-                            anchors.topMargin: 24
-                            anchors.top: parent.top
-                            font.family: "Courier"
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
-                        }
 
-                        Label {
-                            id: dRIUnit
-                            x: 0
-                            y: 0
-                            color: "#24487f"
-                            text: "kbps"
-                            anchors.bottom: parent.bottom
-                            anchors.bottomMargin: 12
-                            font.pointSize: 10
-                            horizontalAlignment: Text.AlignHCenter
-                            verticalAlignment: Text.AlignVCenter
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
-                        }
-                        anchors.right: parent.right
-                        anchors.rightMargin: 96
-                    }
 
-                    Item {
-                        id: netStatus
-                        y: 0
-                        width: 88
-                        anchors.left: parent.left
-                        anchors.leftMargin: 0
-                        anchors.bottom: parent.bottom
-                        anchors.top: parent.top
 
-                        Label {
-                            id: netStatusTitle
-                            x: 32
-                            color: "#24487f"
-                            text: qsTr("STATUS")
-                            anchors.top: parent.top
-                            anchors.topMargin: 8
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.pointSize: 12
-                            font.bold: true
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                        }
+        }
 
-                        Label {
-                            id: dRIVal1
-                            x: 0
-                            color: "#17b804"
-                            text: "OK"
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pointSize: 24
-                            font.family: "Arial"
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            font.bold: true
-                        }
-                    }
+        Column {
+            id: column2
+            x: column1.width
+            y:54
+            width: mainGrid.width/3
+            height: mainGrid.height-mainTitle.height
+            spacing: 20
+
+
+
+            ROVBox {
+                id: sysViewArea
+                y: 0
+                width: column2.width - 20
+                height: (column2.height/2) -10
+                Text {
+                    id: sysTitle
+                    x: 117
+                    width: parent.width
+                    color: "#24487f"
+                    text: "SYSTEM VIEW"
+                    anchors.topMargin: 6
+                    anchors.top: parent.top
+                    style: Text.Normal
+                    textFormat: Text.AutoText
+                    font.pixelSize: 20
+                    horizontalAlignment: Text.AlignHCenter
+                    font.family: "Arial"
+                    verticalAlignment: Text.AlignTop
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.bold: true
+                }
+
+                Text {
+                    id: sysPlaceholder
+                    x: 0
+                    y: 0
+                    color: "#ffffff"
+                    text: qsTr("BOT DIAGRAM AND OTHER VISUAL THINGS")
+                    wrapMode: Text.WordWrap
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: 12
                 }
             }
 
             ROVBox {
-                id: powerArea
-                width: 300
-                height: 270
+                id: sysConfig
+                width: column2.width - 20
+                height: (column2.height/2) -10
+                y: (column2.height/2) - 5
                 Text {
-                    id: powerTitle
+                    id: statusTitle
                     x: 117
                     color: "#24487f"
-                    text: "POWER"
+                    text: "ORIENTATION"
                     anchors.topMargin: 6
                     anchors.top: parent.top
                     style: Text.Normal
@@ -389,7 +304,7 @@ Window {
                     x: 0
                     y: 0
                     color: "#ffffff"
-                    text: qsTr("VOLTAGE, POWER DRAW, ETC")
+                    text: qsTr("3D Model Showing ROV Orientation")
                     wrapMode: Text.WordWrap
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
@@ -399,34 +314,31 @@ Window {
                 }
             }
 
-
-
-
-
-
-
-
         }
 
         Column {
-            id: column2
-            x: 630
-            width: sysStatusArea.width
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
-            anchors.topMargin: titleArea.height + 20
-            anchors.top: parent.top
+
+
+            id: column3
+            objectName: "column3"
+            x: column1.width + column2.width
+            y:54
+            width: mainGrid.width/3
+            height: mainGrid.height-mainTitle.height
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            spacing: 20
 
             ROVBox {
-                id: sysStatusArea
+                id: sysStatus
                 y: 0
-                width: 300
-                height: column2.height
+                width: column3.width - 20
+                height: (column3.height/2) -10
                 Text {
                     id: sysStatusTitle
                     x: 117
                     color: "#24487f"
-                    text: "SYSTEMS"
+                    text: "SYSTEM STATUS"
                     anchors.topMargin: 6
                     anchors.top: parent.top
                     font.pixelSize: 20
@@ -463,110 +375,46 @@ Window {
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 20
                     MouseArea{
-                             id: fireMissilesArea
+                        id: fireMissilesArea
+                        anchors.rightMargin: 8
+                        anchors.bottomMargin: 40
+                             anchors.leftMargin: -8
+                             anchors.topMargin: -39
                              anchors.fill: parent //anchor all sides of the mouse area to the rectangle's anchors
-                                     //onClicked handles valid mouse button clicks
+                             //onClicked handles valid mouse button clicks
                              onClicked: c_inputHandler.setJoystick(1)
                          }
                 }
             }
-
-
-        }
-
-        Column {
-            id: column3
-            objectName: "column3"
-            x: 0
-            width: 630
-            height: mainGrid.height - titleArea.height - 20
-            anchors.right: parent.right
-            anchors.rightMargin: 0
-            spacing: 20
-
-            Text {
-                id: title1
-                width: parent.width
-                height: titleArea.height
-                color: "#805f92dd"
-                text: "BATTLESTATION //"
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignRight
-                font.italic: false
-                clip: false
-                font.bold: true
-                font.family: "Arial"
-                font.pixelSize: 46
-            }
-
+            
             ROVBox {
-                id: sysViewArea
-                y: 0
-                width: parent.width
-                height: 380
+                id: orientation
+                width: column3.width - 20
+                height: (column3.height/2) -10
+                y: (column3.height/2) - 5
                 Text {
-                    id: sysTitle
+                    id: orientationTitle
                     x: 117
-                    width: parent.width
-                    color: "#24487f"
-                    text: "SYSTEM VIEW"
-                    anchors.topMargin: 6
-                    anchors.top: parent.top
-                    style: Text.Normal
-                    textFormat: Text.AutoText
-                    font.pixelSize: 20
-                    horizontalAlignment: Text.AlignHCenter
-                    font.family: "Arial"
-                    verticalAlignment: Text.AlignTop
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.bold: true
-                }
-
-                Text {
-                    id: sysPlaceholder
-                    x: 0
-                    y: 0
-                    color: "#ffffff"
-                    text: qsTr("BOT DIAGRAM AND OTHER VISUAL THINGS")
-                    wrapMode: Text.WordWrap
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                    font.pixelSize: 12
-                }
-            }
-
-            ROVBox {
-                id: configArea
-                objectName: "configArea"
-                y: 0
-                width: parent.width
-                height: 190
-                Text {
-                    id: configTitle
-                    x: 117
-                    width: parent.width
                     color: "#24487f"
                     text: "CONFIGURATION"
                     anchors.topMargin: 6
                     anchors.top: parent.top
-                    font.pixelSize: 20
-                    textFormat: Text.AutoText
                     style: Text.Normal
+                    textFormat: Text.AutoText
+                    font.pixelSize: 20
                     horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignTop
                     font.family: "Arial"
+                    verticalAlignment: Text.AlignTop
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: true
                 }
 
                 Text {
-                    id: configPlaceholder
+                    id: orienationDetail
                     x: 0
                     y: 0
                     color: "#ffffff"
-                    text: qsTr("CONFIGURATION DETAILS")
+                    text: qsTr("VOLTAGE, POWER DRAW, ETC")
                     wrapMode: Text.WordWrap
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 12
@@ -574,22 +422,11 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
-
-                ComboBox {
-                    id: combo
-                    objectName: "comboSerial"
-                    x: 94
-                    y: 324
-                    width: parent.width - 40
-                    //activeFocusOnPress: false
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 20
-                }
-
             }
 
+
         }
+
 
 
 
