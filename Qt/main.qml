@@ -8,7 +8,7 @@ Window {
     property var startTime: 0
     property var delta: 0;
     visible: true
-    width: 1910
+    width: 1920
     height: 1010
     color: "#111111"
     title: "Purdue IEEE | " + c_battlestation.rovName
@@ -17,7 +17,7 @@ Window {
     Item {
         objectName: "mainGrid"
         id: mainGrid
-        x: 5
+        x: 10
         y: 5
         width: 1900
         height: 1000
@@ -28,20 +28,58 @@ Window {
         anchors.topMargin: 13
         anchors.fill: parent
 
-        Text {
-            id: mainTitle
-            width: parent.width
-            height: titleArea.height
-            color: "#805f92dd"
-            text: "PURDUE ROV: BATTLESTATION"
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.italic: false
-            clip: false
-            font.bold: true
-            font.family: "Arial"
-            font.pixelSize: 46
+        Row{
+            id: titleRow
+            width: mainGrid.width - 20
+            height: 54
+            x: 10
+
+            Text {
+                id: purdueTitle
+                width: parent.width/3
+                color: "#b1946c"
+                text: "PURDUE ROV"
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+                font.italic: false
+                clip: false
+                font.bold: true
+                font.family: "Arial"
+                font.pixelSize: 28
+            }
+
+            Text {
+                id: mainTitle
+                width: parent.width/3
+                height: titleArea.height
+                color: "#b1946c"
+                text: "BATTLESTATION"
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                font.italic: false
+                clip: false
+                font.bold: true
+                font.family: "Arial"
+                font.pixelSize: 46
+            }
+
+            Text {
+                id: rovTitle
+                width: parent.width/3
+                height: titleArea.height
+                color: "#b1946c"
+                text: "INCOMPETENCE"
+                verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignRight
+                font.italic: false
+                clip: false
+                font.bold: true
+                font.family: "Arial"
+                font.pixelSize: 28
+            }
         }
+
+
 
         Column {
 
@@ -57,13 +95,14 @@ Window {
             ROVBox {
                 id: timerArea
                 width: column1.width-20
-                height: 140
+                height: 110
+                x: 10
 
 
                 Text {
                     id: timerTitle
                     x: 117
-                    color: "#24487f"
+                    color: "#b1946c"
                     text: "TIMER"
                     font.family: "Arial"
                     style: Text.Normal
@@ -84,101 +123,123 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: parent.top
                     anchors.topMargin: 32
-                    Text {
-                        id: timer
-                        text: "00:00"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        color: "#6092dd"
-                        font.family: "Courier"
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        font.pixelSize: 56
+
+
+
+                    Timer {
+                        id: timerTrigger
+                        interval:500; running:false; repeat: true;
+                        onTriggered: {
+                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
+                            var secs = (tempTime % 60);
+                            var mins = Math.floor(tempTime/60);
+                            if(secs < 10) {
+                                secs = "0" + secs;
+                            }
+                            if(mins < 10) {
+                                mins = "0" + mins;
+                            }
+                            timer.text =  mins + ":" + secs;
+                        }
                     }
-
-
-//                    Timer {
-//                        id: timerTrigger
-//                        interval:500; running:false; repeat: true;
-//                        onTriggered: {
-//                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
-//                            var secs = (tempTime % 60);
-//                            var mins = Math.floor(tempTime/60);
-//                            if(secs < 10) {
-//                                secs = "0" + secs;
-//                            }
-//                            if(mins < 10) {
-//                                mins = "0" + mins;
-//                            }
-//                            timer.text =  mins + ":" + secs;
-//                        }
-//                    }
 
 
 
                 }
 
                 Rectangle {
-                    id: timerButtonRow
-                    x: 143
-                    y: 97
-                    width: 250
-                    height: 36
+                    id: timerBox
+                    x: 0
+                    y: 0
+                    width: timerArea.width
+                    height: 70
                     color: "#00000000"
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 10
-
-                    ROVButton {
-                        id: startBtn
+                    Row{
+                        id: timerRow
+                        x: 0
                         y: 0
-                        text: qsTr("START")
-                        checkable: false
-                        anchors.left: parent.left
-                        anchors.leftMargin: 30
-                        anchors.verticalCenter: parent.verticalCenter
-                        MouseArea{
-                            id: startButton
-                            anchors.fill: parent
-                            onClicked: {
-                                if(timerTrigger.running) {
-                                    timerTrigger.stop();
-                                    delta = (new Date).getTime() - startTime;
-                                    startBtn.text = "RESUME";
-                                } else {
-                                    timerTrigger.running = true;
-                                    startBtn.text = "PAUSE";
-                                    if(startTime == 0) {
-                                        startTime = (new Date).getTime();
+                        width: timerBox.width
+                        height: timerBox.height
+
+                        ROVButton {
+                            id: startBtn
+                            y: 0
+                            height: 70
+                            width: 150
+                            text: qsTr("START")
+                            checkable: false
+                            anchors.left: parent.left
+                            anchors.leftMargin: 30
+                            anchors.verticalCenter: parent.verticalCenter
+                            MouseArea{
+                                id: startButton
+                                height: startBtn.height
+                                width: startBtn.width
+                                anchors.fill: parent
+                                onClicked: {
+                                    if(timerTrigger.running) {
+                                        timerTrigger.stop();
+                                        delta = (new Date).getTime() - startTime;
+                                        startBtn.text = "RESUME";
                                     } else {
-                                        startTime = (new Date).getTime() - delta;
+                                        timerTrigger.running = true;
+                                        startBtn.text = "PAUSE";
+                                        if(startTime == 0) {
+                                            startTime = (new Date).getTime();
+                                        } else {
+                                            startTime = (new Date).getTime() - delta;
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+
+                        Text {
+                            id: timer
+                            y: 0
+                            width: 171
+                            height: 70
+                            text: "00:00"
+                            anchors.horizontalCenterOffset: 0
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            color: "#b1946c"
+                            font.family: "Courier"
+                            font.bold: true
+                            horizontalAlignment: Text.AlignHCenter
+                            font.pixelSize: 56
+                        }
+
+                        ROVButton {
+                            id: stopResetBtn
+                            x: 0
+                            y: 0
+                            height: 70
+                            text: qsTr("RESET")
+                            enabled: false
+                            width: 150
+                            anchors.right: parent.right
+                            anchors.rightMargin: 30
+                            anchors.verticalCenter: parent.verticalCenter
+                            MouseArea{
+                                id:stopButton
+                                height: stopResetBtn.height
+                                width: stopResetBtn.width
+                                anchors.fill: parent
+                                onClicked: {
+                                    if(!timerTrigger.running) {
+                                        timerTrigger.running = false;
+                                        startBtn.text = "START";
+                                        timer.text = "00:00";
+                                        startTime = 0;
                                     }
                                 }
                             }
-
-                        }
-                    }
-
-                    ROVButton {
-                        id: stopResetBtn
-                        x: 0
-                        y: 0
-                        text: "RESET"
-                        anchors.right: parent.right
-                        anchors.rightMargin: 30
-                        anchors.verticalCenter: parent.verticalCenter
-                        MouseArea{
-                            id:stopButton
-                            anchors.fill: parent
-                            onClicked: {
-                                if(!timerTrigger.running) {
-                                    timerTrigger.running = false;
-                                    startBtn.text = "START";
-                                    timer.text = "00:00";
-                                    startTime = 0;
-                                }
-                            }
-                        }
-                    }
+                             }
+                     }
                 }
             }
 
@@ -187,10 +248,11 @@ Window {
                 width: column1.width - 20
                 height: column1.height -20 - timerArea.height
                 y: (column1.height/2) - 5
+                x: 10
                 Text {
                     id: missionTasksTitle
                     x: 117
-                    color: "#24487f"
+                    color: "#b1946c"
                     text: "MISSION TASKS"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -222,11 +284,6 @@ Window {
 
 
 
-
-
-
-
-
         }
 
         Column {
@@ -242,13 +299,14 @@ Window {
             ROVBox {
                 id: sysViewArea
                 y: 0
+                x: 10
                 width: column2.width - 20
                 height: (column2.height/2) -10
                 Text {
                     id: sysTitle
                     x: 117
                     width: parent.width
-                    color: "#24487f"
+                    color: "#b1946c"
                     text: "SYSTEM VIEW"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -282,10 +340,11 @@ Window {
                 width: column2.width - 20
                 height: (column2.height/2) -10
                 y: (column2.height/2) - 5
+                x: 10
                 Text {
                     id: statusTitle
                     x: 117
-                    color: "#24487f"
+                    color: "#b1946c"
                     text: "ORIENTATION"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -332,12 +391,13 @@ Window {
             ROVBox {
                 id: sysStatus
                 y: 0
+                x: 10
                 width: column3.width - 20
                 height: (column3.height/2) -10
                 Text {
                     id: sysStatusTitle
                     x: 117
-                    color: "#24487f"
+                    color: "#b1946c"
                     text: "SYSTEM STATUS"
                     anchors.topMargin: 6
                     anchors.top: parent.top
@@ -365,26 +425,6 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
-                ROVButton {
-                    id: fireMissiles
-                    x: 94
-                    y: 324
-                    width: parent.width - 40
-                    text: "FIRE MISSILES"
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 20
-                    MouseArea{
-                        id: fireMissilesArea
-                        anchors.rightMargin: 8
-                        anchors.bottomMargin: 40
-                             anchors.leftMargin: -8
-                             anchors.topMargin: -39
-                             anchors.fill: parent //anchor all sides of the mouse area to the rectangle's anchors
-                             //onClicked handles valid mouse button clicks
-                             onClicked: c_inputHandler.setJoystick(1)
-                         }
-                }
             }
             
             ROVBox {
@@ -392,10 +432,11 @@ Window {
                 width: column3.width - 20
                 height: (column3.height/2) -10
                 y: (column3.height/2) - 5
+                x: 10
                 Text {
                     id: orientationTitle
                     x: 117
-                    color: "#24487f"
+                    color: "#b1946c"
                     text: "CONFIGURATION"
                     anchors.topMargin: 6
                     anchors.top: parent.top
