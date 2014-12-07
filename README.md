@@ -12,6 +12,11 @@ Features:
 - [ ] Compute a checksum
 - [ ] Handle reading from serial
 - [ ] More configuration on main window
+- [ ] Mission tasks in tasks section in GUI
+- [ ] System Information Section in GUI
+- [ ] System Configuration in GUI
+- [ ] Orientation in GUI
+- [ ] Thruster view in GUI
 
 How to install and run:
 -----------------------

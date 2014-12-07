@@ -40,7 +40,7 @@ Window {
                 id: purdueTitle
                 width: parent.width/3
                 color: "#e4ae23"
-                text: "PURDUE ROV"
+                text: "PURDUE IEEE"
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignLeft
                 font.italic: false
@@ -70,10 +70,10 @@ Window {
                 width: parent.width/3
                 height: titleArea.height
                 color: "#e4ae23"
-                text: "INCOMPETENCE"
+                text: "ROV INCOMPETENCE"
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignRight
-                font.italic: false
+                font.italic: true
                 clip: false
                 font.bold: true
                 font.family: "Arial"
@@ -414,7 +414,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Twelth Task"
+                                    text: "Twelfth Task"
                                     font.pointSize: 14
                                 }
 
@@ -570,7 +570,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Twelth Task"
+                                    text: "Twelfth Task"
                                     font.pointSize: 14
                                 }
 
@@ -735,7 +735,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Twelth Task"
+                                    text: "Twelfth Task"
                                     font.pointSize: 14
                                 }
 
