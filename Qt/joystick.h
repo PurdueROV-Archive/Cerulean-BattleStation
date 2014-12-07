@@ -48,7 +48,6 @@ public:
     QString* init();
 
     qint16 getAxis(int axisId);
-    float getAxisF(int axisId);
     bool getButtonState(int buttonId);
     bool getHasButtonJustBeenReleased(int buttonId);
     bool getHasButtonJustBeenPressed(int buttonId);
@@ -73,7 +72,6 @@ signals:
     void buttonPressed(int buttonId);
     void buttonReleased(int buttonId);
     void axisChanged(int axisId, qint16 newVal, qint16 delta);
-    void axisChangedF(int axisId, float newVal, float delta);
 
 public slots:
 

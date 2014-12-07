@@ -92,7 +92,6 @@ void Joystick::poll() {
         m_axes[i] = newVal;
         if (oldVal != newVal) {
             emit axisChanged(i, newVal, newVal - oldVal);
-            emit axisChanged(i, axisRawToFloat(newVal), axisRawToFloat(newVal - oldVal));
         }
     }
     for (int i = 0; i < numButtons; i++) {
