@@ -7,7 +7,7 @@
 #define SINT16_MIN -32768
 #define UINT16_MAX 65535
 
-#define DEADZONE 400
+#define DEADZONE 500
 
 InputHandler::InputHandler() {
     interpolators = new Interpolator*[8];
@@ -163,6 +163,9 @@ void InputHandler::tick(TickClock* clock) {
             }
         }
 
+        qDebug("0x01: %+06d  0x02: %+06d  0x03: %+06d  0x04: %+06d  0x05: %+06d  0x06: %+06d  0x07: %+06d  0x08: %+06d",
+               thrusters[0], thrusters[1], thrusters[2], thrusters[3], thrusters[4], thrusters[5], thrusters[6], thrusters[7]);
+
         for (int i = 0; i < 8; i++) {
             thrusters[i] = interpolators[i]->lerp(thrusters[i]);
         }
@@ -173,8 +176,7 @@ void InputHandler::tick(TickClock* clock) {
         }
 
 
-        qDebug("0x01: %03d  0x02: %03d  0x03: %03d  0x04: %03d", thrusters[0], thrusters[1], thrusters[2], thrusters[3]);
-        qDebug("0x05: %03d  0x06: %03d  0x07: %03d  0x08: %03d", thrusters[4], thrusters[5], thrusters[6], thrusters[7]);
+
 
         serial::MotorSet((quint8*) thrusters);
 
