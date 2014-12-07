@@ -2,6 +2,7 @@ import QtQuick 2.2
 import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
 import QtGraphicalEffects 1.0
+import QtQuick.Controls.Styles 1.0
 
 Window {
     property var rovName: c_battlestation.rovName
@@ -17,15 +18,15 @@ Window {
     Item {
         objectName: "mainGrid"
         id: mainGrid
-        x: 10
+        x: 40
         y: 5
         width: 1900
         height: 1000
         transformOrigin: Item.TopLeft
         anchors.rightMargin: 10
         anchors.leftMargin: 10
-        anchors.bottomMargin: 27
-        anchors.topMargin: 13
+        anchors.bottomMargin: -19
+        anchors.topMargin: 59
         anchors.fill: parent
 
         Row{
@@ -126,22 +127,22 @@ Window {
 
 
 
-                    Timer {
-                        id: timerTrigger
-                        interval:500; running:false; repeat: true;
-                        onTriggered: {
-                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
-                            var secs = (tempTime % 60);
-                            var mins = Math.floor(tempTime/60);
-                            if(secs < 10) {
-                                secs = "0" + secs;
-                            }
-                            if(mins < 10) {
-                                mins = "0" + mins;
-                            }
-                            timer.text =  mins + ":" + secs;
-                        }
-                    }
+//                    Timer {
+//                        id: timerTrigger
+//                        interval:500; running:false; repeat: true;
+//                        onTriggered: {
+//                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
+//                            var secs = (tempTime % 60);
+//                            var mins = Math.floor(tempTime/60);
+//                            if(secs < 10) {
+//                                secs = "0" + secs;
+//                            }
+//                            if(mins < 10) {
+//                                mins = "0" + mins;
+//                            }
+//                            timer.text =  mins + ":" + secs;
+//                        }
+//                    }
 
 
 
@@ -268,6 +269,69 @@ Window {
                     verticalAlignment: Text.AlignTop
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: true
+                }
+                TabView
+                {
+                    Tab{
+                        x: 20
+                        y: 50
+                        height: 400
+                        title: "Mission 1"
+                    Column
+                    {
+                        x: 10
+                        y: 40
+
+                        CheckBox
+                        {
+                            Text
+                            {
+                                x: 20
+                                text: "First task will go here, blah, blah blah"
+                                color: "#ffffff"
+                            }
+                        }
+                        CheckBox
+                        {
+                            Text
+                            {
+                                x: 20
+                                text: "Second"
+                                color: "#ffffff"
+                            }
+                        }
+                    }
+                    }
+
+                        Tab{
+                            y: 30
+                            title: "Mission 2"
+                        Column
+                        {
+                            x: 10
+                            y: 40
+
+                            CheckBox
+                            {
+                                Text
+                                {
+                                    x: 20
+                                    text: "First task will go here, blah, blah blah"
+                                    color: "#ffffff"
+                                }
+                            }
+                            CheckBox
+                            {
+                                Text
+                                {
+                                    x: 20
+                                    text: "Second"
+                                    color: "#ffffff"
+                                }
+                            }
+                }
+
+                }
                 }
 
                 Text {
