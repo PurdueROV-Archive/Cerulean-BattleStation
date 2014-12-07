@@ -1,4 +1,5 @@
 #include "inputhandler.h"
+#include "serial.h"
 
 #define updateJoystickActive emit joystickActiveChanged(m_joystickActive);
 
@@ -9,6 +10,10 @@
 #define DEADZONE 400
 
 InputHandler::InputHandler() {
+    interpolators = new Interpolator*[8];
+    for (int i = 0; i < 8; i++) {
+        interpolators[i] = new Interpolator(6500, 50);
+    }
     m_joystickActive = false;
     m_joystick = NULL;
     setJoystick(0);
@@ -91,7 +96,7 @@ void InputHandler::tick(TickClock* clock) {
         //  X axis on this joystick is a bit sketchy, so adjust
         roll += 1300;
         applyDeadzone(roll);
-        qDebug() << velX << velY << velZ << pitch << roll << yaw;
+//        qDebug() << velX << velY << velZ << pitch << roll << yaw;
 
         qint32 thrusters [8] = {0, 0, 0, 0, 0, 0, 0, 0};
         //  Vertical Thrusters going CW from top left A B C D
@@ -143,10 +148,14 @@ void InputHandler::tick(TickClock* clock) {
                 thrusters[i] = (qint32) (n * thrusters[i]);
             }
         }
+        for (int i = 0; i < 8; i++) {
+            thrusters[i] = interpolators[i]->lerp(thrusters[i]);
+        }
 //        qDebug() << "A:" << thrusters[0] << "B:" << thrusters[1] << "C:" << thrusters[2] << "D:"
 //                     << thrusters[3] << "E:" << thrusters[4] << "F:" << thrusters[5] << "G:"
 //                     << thrusters[6] << "H:" << thrusters[7];
-        //  TODO Send off the values to serial system
+        serial::MotorSet(thrusters[0], thrusters[1], thrusters[2], thrusters[3],
+                thrusters[4], thrusters[5], thrusters[6], thrusters[7]);
 
     }
     //  Every ten seconds update the list of joysticks

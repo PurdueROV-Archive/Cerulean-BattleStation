@@ -1,8 +1,10 @@
 #include "mainticker.h"
 #include "tickclock.h"
+#include "serial.h"
 
 void MainTicker::doTick() {
     m_inputHandler->tick(this);
+    serial::send();
 }
 
 MainTicker::MainTicker(quint64 targetTicksPerSec) :

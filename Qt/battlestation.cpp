@@ -20,10 +20,8 @@ bool BattleStation::startUp() {
         return false;
     }
 
-    serial::initSerial("USB Serial Port");
-    quint8 bytes[11] = {0x12, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0xC5, 0x13};
-    qDebug() << serial::send(bytes, (quint8) sizeof(bytes));
-
+    serial::initSerial("FT231X USB UART");
+    serial::MotorSet(10, 20, 30, 40, 50, 60, 70, 80);
 
     m_mainTicker = new MainTicker(20);
     m_mainTickerController = new ThreadController(m_mainTicker);
