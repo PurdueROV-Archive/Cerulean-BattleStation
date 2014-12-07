@@ -9,6 +9,8 @@ void serial::initSerial(QString device) {
         }
     }
 
+    serialDevice.open(QIODevice::ReadWrite);
+
     //set up official data array
     data = QByteArray(size, 0x00);
     data[0] = 0x12; data[data.size()-2] = 0xC5; data[data.size()-1] = 0x13;
@@ -42,13 +44,14 @@ bool serial::send() {
     //do crc8 on checksum byte
     sendArray[sendArray.size()-2] = crc8(sendArray);
 
-    print(data);
-    qDebug() << "\nNew packet\n";
-    print(sendArray);
+    //print(data);
+    //qDebug() << "\nNew packet\n";
+    //print(sendArray);
 
-    if (serialDevice.open(QIODevice::ReadWrite) && serialDevice.isWritable()) {
+    if (serialDevice.isWritable()) {
         serialDevice.write(sendArray);
-        return serialDevice.flush();
+        bool worked = serialDevice.flush();
+        return worked;
     }
 
     return false;
