@@ -1,4 +1,5 @@
 #include "inputhandler.h"
+#include "serial.h"
 
 #define updateJoystickActive emit joystickActiveChanged(m_joystickActive);
 
@@ -153,7 +154,8 @@ void InputHandler::tick(TickClock* clock) {
 //        qDebug() << "A:" << thrusters[0] << "B:" << thrusters[1] << "C:" << thrusters[2] << "D:"
 //                     << thrusters[3] << "E:" << thrusters[4] << "F:" << thrusters[5] << "G:"
 //                     << thrusters[6] << "H:" << thrusters[7];
-        //  TODO Send off the values to serial system
+        serial::MotorSet(thrusters[0], thrusters[1], thrusters[2], thrusters[3],
+                thrusters[4], thrusters[5], thrusters[6], thrusters[7]);
 
     }
     //  Every ten seconds update the list of joysticks
