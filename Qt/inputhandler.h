@@ -4,6 +4,7 @@
 #include <QObject>
 #include "joystick.h"
 #include "tickclock.h"
+#include "interpolator.h"
 
 /**
  * The InputHandler class manages joystick input and converts it into
@@ -18,6 +19,8 @@ class InputHandler : public QObject
     Joystick* m_joystick;
     bool m_joystickActive;
     QList<JoystickInfo> m_joysticks;
+    Interpolator** interpolators;
+
 public:
     InputHandler();
     ~InputHandler();
