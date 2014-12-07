@@ -42,7 +42,7 @@ QList<JoystickInfo> InputHandler::listJoysticks() {
     return m_joysticks;
 }
 
-void applyDeadzone(qint16& val) {
+void applyDeadzone(qint32& val) {
     if (abs(val) < DEADZONE) {
         val = 0;
     }
@@ -71,30 +71,34 @@ void InputHandler::tick(TickClock* clock) {
         m_joystick->poll();        
         bool rb = m_joystick->getButtonState(XBOX_BUTTON_RB_ID);
         bool lb = m_joystick->getButtonState(XBOX_BUTTON_LB_ID);
-        qint16 velX = 0;
+        qint32 velX = 0;
         if (rb != lb) {
             velX = rb ? SINT16_MAX : SINT16_MIN;
         }
-        qint16 velZ = m_joystick->getAxis(XBOX_AXIS_LJ_Y_ID);
+        qint32 velZ = m_joystick->getAxis(XBOX_AXIS_LJ_Y_ID);
         applyDeadzone(velZ);
         //  Since the triggers return SINT16_MIN for neutral position and SINT16_MAX for max pull
         //  We need to remap each to [0, SINT16_MAX], so we do some promotion magic
-        qint16 partialYRight = (((qint32) m_joystick->getAxis(XBOX_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
-        qint16 partialYLeft = (((qint32) m_joystick->getAxis(XBOX_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
-        qint16 velY = partialYRight - partialYLeft;
+        qint32 partialYRight = (((qint32) m_joystick->getAxis(XBOX_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
+        qint32 partialYLeft = (((qint32) m_joystick->getAxis(XBOX_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
+        qint32 velY = partialYRight - partialYLeft;
         applyDeadzone(velY);
-        qint16 yaw = m_joystick->getAxis(XBOX_AXIS_LJ_X_ID);
+        qint32 yaw = m_joystick->getAxis(XBOX_AXIS_LJ_X_ID);
         applyDeadzone(yaw);
-        qint16 pitch = m_joystick->getAxis(XBOX_AXIS_RJ_Y_ID);
+        qint32 pitch = m_joystick->getAxis(XBOX_AXIS_RJ_Y_ID);
         applyDeadzone(pitch);
-        qint16 roll = m_joystick->getAxis(XBOX_AXIS_RJ_X_ID);
+        qint32 roll = m_joystick->getAxis(XBOX_AXIS_RJ_X_ID);
+        //  X axis on this joystick is a bit sketchy, so adjust
+        roll += 1300;
         applyDeadzone(roll);
         qDebug() << velX << velY << velZ << pitch << roll << yaw;
 
+        qint32 thrusters [8] = {0, 0, 0, 0, 0, 0, 0, 0};
         //  Vertical Thrusters going CW from top left A B C D
-        qint32 verticalThrusters [4] = {0, 0, 0, 0};
         //  Lateral Thrusters going CW from top left E F G H
-        qint32 lateralThrusters [4] = {0, 0, 0, 0};
+        //  Useful subarray views
+        qint32* verticalThrusters = thrusters;
+        qint32* lateralThrusters = thrusters + 4;
 
         lateralThrusters[0] += velX;
         lateralThrusters[1] -= velX;
@@ -116,17 +120,34 @@ void InputHandler::tick(TickClock* clock) {
         verticalThrusters[2] -= pitch;
         verticalThrusters[3] -= pitch;
 
-        lateralThrusters[0] -= yaw;
-        lateralThrusters[1] += yaw;
-        lateralThrusters[2] += yaw;
-        lateralThrusters[3] -= yaw;
+        lateralThrusters[0] += yaw;
+        lateralThrusters[1] -= yaw;
+        lateralThrusters[2] -= yaw;
+        lateralThrusters[3] += yaw;
 
-        verticalThrusters[0] -= roll;
-        verticalThrusters[1] += roll;
-        verticalThrusters[2] += roll;
-        verticalThrusters[3] -= roll;
+        verticalThrusters[0] += roll;
+        verticalThrusters[1] -= roll;
+        verticalThrusters[2] -= roll;
+        verticalThrusters[3] += roll;
 
+        qint32 maxAbsVal = 0;
+        for (int i = 0; i < 8; i++) {
+            if (abs(thrusters[i]) > maxAbsVal) {
+                maxAbsVal = abs(thrusters[i]);
+            }
+        }
+        if (maxAbsVal > SINT16_MAX) {
+            //  Normalize the values
+            float n = (float)SINT16_MAX / (float)maxAbsVal;
+            for (int i = 0; i < 8; i++) {
+                thrusters[i] = (qint32) (n * thrusters[i]);
+            }
+        }
+//        qDebug() << "A:" << thrusters[0] << "B:" << thrusters[1] << "C:" << thrusters[2] << "D:"
+//                     << thrusters[3] << "E:" << thrusters[4] << "F:" << thrusters[5] << "G:"
+//                     << thrusters[6] << "H:" << thrusters[7];
         //  TODO Send off the values to serial system
+
     }
     //  Every ten seconds update the list of joysticks
     if (clock->getTickCount() % clock->secondsToTicks(10.0) == 0) {
