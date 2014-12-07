@@ -11,7 +11,6 @@ void serial::initSerial(QString device) {
     }
 
     serialDevice.open(QIODevice::ReadWrite);
-//    serialDevice.set
 
     //set up official data array
     data = QByteArray(size, 0x00);
@@ -27,42 +26,36 @@ bool serial::set(quint8 i, quint8 d) {
 
     data[i] = d;
     quint8 b = data.at(i);
-    if ((quint8) data.at(i) == d) {
+    if (b == d) {
         return true;
     } else {
-        qDebug() << i << "INVALID GOT " << b << "EXPECTED" << d;
+        qDebug("Invalid set at %d: %d  Expected: %d", i, b, d);
         return false;
     }
 }
 
-bool serial::MotorSet(quint8 m1, quint8 m2, quint8 m3, quint8 m4, quint8 m5, quint8 m6, quint8 m7, quint8 m8) {
-    return set(1, m1) && set(2, m2) && set(3, m3) && set(4, m4) && set(5, m5) && set(6, m6) && set(7, m7) && set(8, m8);
+bool serial::MotorSet(quint8 thrusters[]) {
+    bool worked = true;
+    for (int i = 0; i < 8; ++i) {
+        set(i, thrusters[i]) && worked;
+    }
+    return worked;
 }
 
 bool serial::send() {
 
 
     //make a copy
-    QByteArray sendArray = data;
+    QByteArray sendArray = QByteArray(data);
 
     //do crc8 on checksum byte
     sendArray[sendArray.size()-2] = crc8(sendArray);
 
-    //print(data);
-    //qDebug() << "\nNew packet\n";
-    //print(sendArray);
 
     if (serialDevice.isWritable()) {
 
-//        qDebug() << "Moo";
-        QByteArray copy  = QByteArray(sendArray);
-        serialDevice.write(copy);
+        serialDevice.write(sendArray);
         serialDevice.flush();
-
-//        qint64 toWrite = serialDevice.bytesToWrite();
-//        if (toWrite > 0) {
-//            qDebug() << "out" << serialDevice.bytesToWrite();
-//        }
         bool worked = serialDevice.waitForBytesWritten(50);
         return worked;
     }

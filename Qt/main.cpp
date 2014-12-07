@@ -3,8 +3,7 @@
 #include <QDebug>
 #include "battlestation.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     qDebug() << "Starting BattleStation...";
     QGuiApplication app(argc, argv);
     QQmlEngine engine;
