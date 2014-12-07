@@ -53,6 +53,17 @@ void applyDeadzone(qint32& val) {
     }
 }
 
+inline quint8 fromQint16(qint16 val) {
+    quint8 ret = 0;
+    if (val < 0) {
+        ret = 0x80;
+        ret &= (quint8)((float)(-val) / 128.5);
+    } else {
+        ret = (quint8)((float)val / 128.5);
+    }
+    return ret;
+}
+
 void InputHandler::tick(TickClock* clock) {
 
     if (m_joystick != NULL) {
@@ -154,8 +165,9 @@ void InputHandler::tick(TickClock* clock) {
 //        qDebug() << "A:" << thrusters[0] << "B:" << thrusters[1] << "C:" << thrusters[2] << "D:"
 //                     << thrusters[3] << "E:" << thrusters[4] << "F:" << thrusters[5] << "G:"
 //                     << thrusters[6] << "H:" << thrusters[7];
-        serial::MotorSet(thrusters[0], thrusters[1], thrusters[2], thrusters[3],
-                thrusters[4], thrusters[5], thrusters[6], thrusters[7]);
+
+        serial::MotorSet(fromQint16(thrusters[0]), fromQint16(thrusters[1]), fromQint16(thrusters[2]), fromQint16(thrusters[3]),
+                fromQint16(thrusters[4]), fromQint16(thrusters[5]), fromQint16(thrusters[6]), fromQint16(thrusters[7]));
 
     }
     //  Every ten seconds update the list of joysticks

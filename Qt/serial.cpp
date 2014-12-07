@@ -6,10 +6,12 @@ void serial::initSerial(QString device) {
         qDebug() << info.description();
         if (info.description() == device) {
             serialDevice.setPort(info);
+            serialDevice.setBaudRate(115200);
         }
     }
 
     serialDevice.open(QIODevice::ReadWrite);
+//    serialDevice.set
 
     //set up official data array
     data = QByteArray(size, 0x00);
@@ -24,9 +26,11 @@ bool serial::set(quint8 i, quint8 d) {
     if (i >= size-2) return false;
 
     data[i] = d;
-    if (data.at(i) == d) {
+    quint8 b = data.at(i);
+    if ((quint8) data.at(i) == d) {
         return true;
     } else {
+        qDebug() << i << "INVALID GOT " << b << "EXPECTED" << d;
         return false;
     }
 }
@@ -49,8 +53,17 @@ bool serial::send() {
     //print(sendArray);
 
     if (serialDevice.isWritable()) {
-        serialDevice.write(sendArray);
-        bool worked = serialDevice.flush();
+
+//        qDebug() << "Moo";
+        QByteArray copy  = QByteArray(sendArray);
+        serialDevice.write(copy);
+        serialDevice.flush();
+
+//        qint64 toWrite = serialDevice.bytesToWrite();
+//        if (toWrite > 0) {
+//            qDebug() << "out" << serialDevice.bytesToWrite();
+//        }
+        bool worked = serialDevice.waitForBytesWritten(50);
         return worked;
     }
 
