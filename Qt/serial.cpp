@@ -8,22 +8,46 @@ void serial::initSerial(QString device) {
             serialDevice.setPort(info);
         }
     }
+
+    //set up official data array
+    data = QByteArray(size, 0x00);
+    data[0] = 0x12; data[data.size()-2] = 0xC5; data[data.size()-1] = 0x13;
 }
 
+bool serial::set(quint8 i, quint8 d) {
 
-bool serial::send(quint8 bytes[], quint8 size) {
+    //don't let us change header
+    if (i <= 0) return false;
+    //don't let us change checksum or tail
+    if (i >= size-2) return false;
 
-    //print(bytes, size);
-    //qDebug() << "\nNew packet\n";
-    //bytes[size-2] = crc8(bytes, size);
-    //print(bytes, size);
+    data[i] = d;
+    if (data.at(i) == d) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool serial::MotorSet(quint8 m1, quint8 m2, quint8 m3, quint8 m4, quint8 m5, quint8 m6, quint8 m7, quint8 m8) {
+    return set(1, m1) && set(2, m2) && set(3, m3) && set(4, m4) && set(5, m5) && set(6, m6) && set(7, m7) && set(8, m8);
+}
+
+bool serial::send() {
+
+
+    //make a copy
+    QByteArray sendArray = data;
 
     //do crc8 on checksum byte
-    bytes[size-2] = crc8(bytes, size);
+    sendArray[sendArray.size()-2] = crc8(sendArray);
+
+    print(data);
+    qDebug() << "\nNew packet\n";
+    print(sendArray);
 
     if (serialDevice.open(QIODevice::ReadWrite) && serialDevice.isWritable()) {
-        QByteArray data = QByteArray::fromRawData((char*) bytes, size);
-        serialDevice.write(data);
+        serialDevice.write(sendArray);
         return serialDevice.flush();
     }
 
@@ -31,13 +55,14 @@ bool serial::send(quint8 bytes[], quint8 size) {
 }
 
 
-quint8 serial::crc8(quint8 bytes[], quint8 size) {
+quint8 serial::crc8(QByteArray data) {
 
     quint8 crc = 0;
+    int size = data.size();
 
     for (int i = 0; i < size; ++i) {
 
-        quint8 inbyte = bytes[i];
+        quint8 inbyte = data.at(i);
 
         for (int i = 8; i; i--) {
           quint8 mix = (crc ^ inbyte) & 0x01;
@@ -51,11 +76,13 @@ quint8 serial::crc8(quint8 bytes[], quint8 size) {
     return crc;
 }
 
-void serial::print(quint8 bytes[], quint8 size) {
+void serial::print(QByteArray data) {
 
+    int size = data.size();
+    qDebug("Size: %d", size);
     for (int i = 0; i < size; ++i) {
-        bytes[i] = bytes[i] & 0xFF;
-        qDebug("[%x]: [%d]", bytes[i], bytes[i]);
+        qDebug("[%02x]: [%d]", (quint8) data.at(i), (quint8) data.at(i));
     }
+
 
 }
