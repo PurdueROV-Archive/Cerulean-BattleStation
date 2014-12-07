@@ -211,7 +211,7 @@ Window {
                             anchors.horizontalCenterOffset: 0
                             anchors.horizontalCenter: parent.horizontalCenter
                             color: "#e4ae23"
-                            font.family: "Courier"
+                            font.family: "Arial"
                             font.bold: true
                             horizontalAlignment: Text.AlignHCenter
                             font.pixelSize: 56
@@ -277,16 +277,39 @@ Window {
                     x:10
                     y:30
                     width: missionTasks.width-20
-                    height: missionTasks.height - 50
+                    height: 550
+                    id: missionsTasksTabs
+
+                    style: TabViewStyle {
+                          frameOverlap: 1
+                          tab: ROVTab {
+                              color: styleData.selected ? "#222222" :"#000000"
+                              implicitWidth: missionsTasksTabs.width / 3
+                              implicitHeight: 50
+                              Text {
+                                  id: text
+                                  anchors.centerIn: parent
+                                  text: styleData.title
+                                  color: "white"
+                                  font.bold: styleData.selected ? true : false
+                                  font.pixelSize: 12
+                              }
+                          }
+
+                          frame: Rectangle {color: "transparent" }
+                    }
+
 
 
                     Tab
                     {
                         title: "Science Under the Ice"
+
                         Column
                         {
                             y: 20
                             spacing: 20
+
                             CheckBox
                             {
                                 x: 10
@@ -294,6 +317,7 @@ Window {
                                 {
                                     x: 25
                                     text: "First Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -305,6 +329,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Second Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -316,6 +341,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Third Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -327,6 +353,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Fourth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -338,6 +365,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Fifth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -349,6 +377,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Sixth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -360,6 +389,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Seventh Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -371,6 +401,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Eighth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -382,6 +413,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Ninth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -393,6 +425,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Tenth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -404,6 +437,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Eleventh Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -415,6 +449,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Twelfth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -426,6 +461,7 @@ Window {
                                 {
                                     x: 25
                                     text: "Thirteenth Task"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
