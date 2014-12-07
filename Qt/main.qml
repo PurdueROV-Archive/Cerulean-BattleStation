@@ -19,14 +19,15 @@ Window {
         objectName: "mainGrid"
         id: mainGrid
         x: 40
-        y: 5
+        y: 0
         width: 1900
-        height: 1000
+        height: 900
+        clip: false
         transformOrigin: Item.TopLeft
         anchors.rightMargin: 10
         anchors.leftMargin: 10
         anchors.bottomMargin: -19
-        anchors.topMargin: 59
+        anchors.topMargin: 10
         anchors.fill: parent
 
         Row{
@@ -89,7 +90,7 @@ Window {
             y: 54
             objectName: "column1"
             width: mainGrid.width/3
-            height: mainGrid.height-mainTitle.height
+            height: mainGrid.height - mainTitle.height - 100
             spacing: 20
 
 
@@ -251,9 +252,9 @@ Window {
             ROVBox {
                 id: missionTasks
                 width: column1.width - 20
-                height: column1.height -20 - timerArea.height
-                y: (column1.height/2) - 5
+                height: 800
                 x: 10
+                y: 130
                 Text {
                     id: missionTasksTitle
                     x: 117
@@ -270,83 +271,487 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.bold: true
                 }
+
                 TabView
                 {
-                    Tab{
-                        x: 20
-                        y: 50
-                        height: 400
-                        title: "Mission 1"
-                    Column
+                    x:10
+                    y:30
+                    width: missionTasks.width-20
+                    height: missionTasks.height - 50
+
+
+                    Tab
                     {
-                        x: 10
-                        y: 40
-
-                        CheckBox
-                        {
-                            Text
-                            {
-                                x: 20
-                                text: "First task will go here, blah, blah blah"
-                                color: "#ffffff"
-                            }
-                        }
-                        CheckBox
-                        {
-                            Text
-                            {
-                                x: 20
-                                text: "Second"
-                                color: "#ffffff"
-                            }
-                        }
-                    }
-                    }
-
-                        Tab{
-                            y: 30
-                            title: "Mission 2"
+                        title: "Science Under the Ice"
                         Column
                         {
-                            x: 10
-                            y: 40
-
+                            y: 20
+                            spacing: 20
                             CheckBox
                             {
+                                x: 10
                                 Text
                                 {
-                                    x: 20
-                                    text: "First task will go here, blah, blah blah"
-                                    color: "#ffffff"
+                                    x: 25
+                                    text: "First Task"
+                                    font.pointSize: 14
                                 }
+
                             }
                             CheckBox
                             {
+                                x: 10
                                 Text
                                 {
-                                    x: 20
-                                    text: "Second"
-                                    color: "#ffffff"
+                                    x: 25
+                                    text: "Second Task"
+                                    font.pointSize: 14
                                 }
+
                             }
-                }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Third Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Fourth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Fifth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Sixth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Seventh Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Eighth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Ninth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Tenth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Eleventh Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Twelth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Thirteenth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+
+                        }
+
+
+                    }
+
+                    Tab
+                    {
+                        title: "Pipeline Inspection & Repair"
+                        Column
+                        {
+                            y: 20
+                            spacing: 20
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "First Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Second Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Third Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Fourth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Fifth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Sixth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Seventh Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Eighth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Ninth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Tenth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Eleventh Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Twelth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Thirteenth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Fourteenth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                        }
+
+                    }
+
+                    Tab
+                    {
+                        title: "Oilfield Product. & Maintenance"
+                        Column
+                        {
+                            y: 20
+                            spacing: 20
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "First Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Second Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Third Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Fourth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Fifth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Sixth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Seventh Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Eighth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Ninth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Tenth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Eleventh Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+                            CheckBox
+                            {
+                                x: 10
+                                Text
+                                {
+                                    x: 25
+                                    text: "Twelth Task"
+                                    font.pointSize: 14
+                                }
+
+                            }
+
+                            }
+                        }
+
 
                 }
-                }
 
-                Text {
-                    id: missionTasksTitleInfo
-                    x: 0
-                    y: 0
-                    color: "#ffffff"
-                    text: qsTr("MISSION TASK DETAILS")
-                    wrapMode: Text.WordWrap
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 12
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
+
+
+
+
+
             }
 
 
@@ -406,7 +811,7 @@ Window {
             ROVBox {
                 id: sysConfig
                 width: column2.width - 20
-                height: (column2.height/2) -10
+                height: 438
                 y: (column2.height/2) - 5
                 x: 10
                 Text {
@@ -498,7 +903,7 @@ Window {
             ROVBox {
                 id: orientation
                 width: column3.width - 20
-                height: (column3.height/2) -10
+                height: 438
                 y: (column3.height/2) - 5
                 x: 10
                 Text {

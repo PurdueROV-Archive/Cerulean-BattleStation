@@ -18,6 +18,7 @@ Button {
             color: "#e4ae23"
             font.bold: true
             font.pixelSize: 35
+            font.family: "Arial"
             horizontalAlignment: Text.AlignHCenter
             anchors.verticalCenter: parent.verticalCenter
         }
