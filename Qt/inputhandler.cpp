@@ -2,6 +2,12 @@
 
 #define updateJoystickActive emit joystickActiveChanged(m_joystickActive);
 
+#define SINT16_MAX 32767
+#define SINT16_MIN -32768
+#define UINT16_MAX 65535
+
+#define DEADZONE 400
+
 InputHandler::InputHandler() {
     m_joystickActive = false;
     m_joystick = NULL;
@@ -22,7 +28,8 @@ void InputHandler::setJoystick(int index) {
     QString* result = m_joystick->init();
     if (result == NULL) {
         m_joystickActive = true;
-        qDebug() << Joystick::getJoystickName(index) << "now the active joystick";
+        qDebug() << Joystick::getJoystickName(index) << "now the active joystick with" <<
+                    m_joystick->getNumAxes() << "axes and" << m_joystick->getNumButtons() << "buttons";
         updateJoystickActive
     } else {
         qWarning() << "Failed to initialize joystick! " << *result;
@@ -35,20 +42,91 @@ QList<JoystickInfo> InputHandler::listJoysticks() {
     return m_joysticks;
 }
 
+void applyDeadzone(qint16& val) {
+    if (abs(val) < DEADZONE) {
+        val = 0;
+    }
+}
+
 void InputHandler::tick(TickClock* clock) {
+
     if (m_joystick != NULL) {
-        m_joystick->poll();
-        //  TODO Handle input
+        /*
+         * Control Scheme
+         * LeftJoystick
+         *  Up      Forward (-Z)
+         *  Down    Reverse (+Z)
+         *  Left    Yaw CCW
+         *  Right   Yaw CW
+         * RightJoystick
+         *  Up      Pitch forward (nose down)
+         *  Down    Pitch back  (nose up)
+         *  Left    Roll CCW (right goes up)
+         *  Right   Roll CW (left goes up)
+         * RB   Strafe right (+X)
+         * LB   Strafe left  (-X)
+         * RT   Ascend  (+Y)
+         * LT   Descend (-Y)
+         */
+        m_joystick->poll();        
+        bool rb = m_joystick->getButtonState(XBOX_BUTTON_RB_ID);
+        bool lb = m_joystick->getButtonState(XBOX_BUTTON_LB_ID);
+        qint16 velX = 0;
+        if (rb != lb) {
+            velX = rb ? SINT16_MAX : SINT16_MIN;
+        }
+        qint16 velZ = m_joystick->getAxis(XBOX_AXIS_LJ_Y_ID);
+        applyDeadzone(velZ);
+        //  Since the triggers return SINT16_MIN for neutral position and SINT16_MAX for max pull
+        //  We need to remap each to [0, SINT16_MAX], so we do some promotion magic
+        qint16 partialYRight = (((qint32) m_joystick->getAxis(XBOX_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
+        qint16 partialYLeft = (((qint32) m_joystick->getAxis(XBOX_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
+        qint16 velY = partialYRight - partialYLeft;
+        applyDeadzone(velY);
+        qint16 yaw = m_joystick->getAxis(XBOX_AXIS_LJ_X_ID);
+        applyDeadzone(yaw);
+        qint16 pitch = m_joystick->getAxis(XBOX_AXIS_RJ_Y_ID);
+        applyDeadzone(pitch);
+        qint16 roll = m_joystick->getAxis(XBOX_AXIS_RJ_X_ID);
+        applyDeadzone(roll);
+        qDebug() << velX << velY << velZ << pitch << roll << yaw;
 
+        //  Vertical Thrusters going CW from top left A B C D
+        qint32 verticalThrusters [4] = {0, 0, 0, 0};
+        //  Lateral Thrusters going CW from top left E F G H
+        qint32 lateralThrusters [4] = {0, 0, 0, 0};
 
-//        for (int i = 0; i < m_joystick->getNumButtons(); i++) {
-//            if (m_joystick->getHasButtonJustBeenPressed(i)) {
-//                qDebug() << "button" << i << "has been pressed";
-//            }
-//            if (m_joystick->getHasButtonJustBeenReleased(i)) {
-//                    qDebug() << "button" << i << "has been released";
-//            }
-//        }
+        lateralThrusters[0] += velX;
+        lateralThrusters[1] -= velX;
+        lateralThrusters[2] -= velX;
+        lateralThrusters[3] += velX;
+
+        verticalThrusters[0] += velY;
+        verticalThrusters[1] += velY;
+        verticalThrusters[2] += velY;
+        verticalThrusters[3] += velY;
+
+        lateralThrusters[0] -= velZ;
+        lateralThrusters[1] -= velZ;
+        lateralThrusters[2] += velZ;
+        lateralThrusters[3] += velZ;
+
+        verticalThrusters[0] += pitch;
+        verticalThrusters[1] += pitch;
+        verticalThrusters[2] -= pitch;
+        verticalThrusters[3] -= pitch;
+
+        lateralThrusters[0] -= yaw;
+        lateralThrusters[1] += yaw;
+        lateralThrusters[2] += yaw;
+        lateralThrusters[3] -= yaw;
+
+        verticalThrusters[0] -= roll;
+        verticalThrusters[1] += roll;
+        verticalThrusters[2] += roll;
+        verticalThrusters[3] -= roll;
+
+        //  TODO Send off the values to serial system
     }
     //  Every ten seconds update the list of joysticks
     if (clock->getTickCount() % clock->secondsToTicks(10.0) == 0) {

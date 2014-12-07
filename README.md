@@ -1,19 +1,17 @@
 2015 BattleStation for X7
 =========================
 
-Implemented Features:
+Features:
 ---------------------
-- SDL joystick compatbility
-- QTSerial library for connection to top board (writing)
-- Basic interpretor to handle ramping up thrusters
-- Looks cool  
-
-Todo Features:
---------------
-- Compute thruster values based of joystick
-- Compute a checksum
-- Handle reading from serial
-- More configuration on main window
+- [x] SDL joystick compatbility
+- [x] QTSerial library for connection to top board (writing)
+- [x] Basic interpolator to handle ramping up thrusters
+- [x] Looks cool  
+- [x] Compute thruster values based off of joystick input
+- [ ] Use interpolator to filter thruster values
+- [ ] Compute a checksum
+- [ ] Handle reading from serial
+- [ ] More configuration on main window
 
 How to install and run:
 -----------------------
