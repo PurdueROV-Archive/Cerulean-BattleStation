@@ -127,22 +127,22 @@ Window {
 
 
 
-//                    Timer {
-//                        id: timerTrigger
-//                        interval:500; running:false; repeat: true;
-//                        onTriggered: {
-//                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
-//                            var secs = (tempTime % 60);
-//                            var mins = Math.floor(tempTime/60);
-//                            if(secs < 10) {
-//                                secs = "0" + secs;
-//                            }
-//                            if(mins < 10) {
-//                                mins = "0" + mins;
-//                            }
-//                            timer.text =  mins + ":" + secs;
-//                        }
-//                    }
+                    Timer {
+                        id: timerTrigger
+                        interval:500; running:false; repeat: true;
+                        onTriggered: {
+                            var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
+                            var secs = (tempTime % 60);
+                            var mins = Math.floor(tempTime/60);
+                            if(secs < 10) {
+                                secs = "0" + secs;
+                            }
+                            if(mins < 10) {
+                                mins = "0" + mins;
+                            }
+                            timer.text =  mins + ":" + secs;
+                        }
+                    }
 
 
 
