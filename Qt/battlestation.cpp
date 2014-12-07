@@ -20,7 +20,7 @@ bool BattleStation::startUp() {
         return false;
     }
 
-    serial::initSerial("FT231X USB UART");
+    serial::initSerial("USB Serial Port");//FT231X USB UART");
     serial::MotorSet(10, 20, 30, 40, 50, 60, 70, 80);
 
     m_mainTicker = new MainTicker(20);
