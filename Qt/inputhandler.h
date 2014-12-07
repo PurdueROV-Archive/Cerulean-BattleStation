@@ -38,6 +38,7 @@ public:
      */
     QList<JoystickInfo> listJoysticks();
 
+
     /**
      * Performs on-tick actions. CALL IT EVERY TICK. OR ELSE.
      */
