@@ -316,7 +316,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "First Task"
+                                    text: "Remove algae from ice underside - 5pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -328,7 +328,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Second Task"
+                                    text: "Return algae sample - 5pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -340,7 +340,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Third Task"
+                                    text: "Remove sea urchin - 5pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -352,7 +352,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Fourth Task"
+                                    text: "Return sea urchin - 5pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -364,7 +364,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Fifth Task"
+                                    text: "Count and identify star species - 10pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -376,7 +376,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Sixth Task"
+                                    text: "Deploy acoustic sensor - 10pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -388,7 +388,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Seventh Task"
+                                    text: "Survey iceberg at 4 points - 5pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -400,7 +400,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Eighth Task"
+                                    text: "Measure iceberg keel depth - 10pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -412,7 +412,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Ninth Task"
+                                    text: "Measure iceberg diameter - 10pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -424,7 +424,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Tenth Task"
+                                    text: "Calculate iceberg volume - 5pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -436,7 +436,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Eleventh Task"
+                                    text: "Map location of iceberg from coordinates - 10pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -448,7 +448,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Twelfth Task"
+                                    text: "Determine iceberg threat to surface platforms - 10pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -460,7 +460,7 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Thirteenth Task"
+                                    text: "Determine iceberg threat to subsea assets - 10pts"
                                     color: "white"
                                     font.pointSize: 14
                                 }
@@ -485,7 +485,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "First Task"
+                                    text: "Find corroded pipe section - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -496,7 +497,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Second Task"
+                                    text: "Turn valve to stop oil flow - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -507,7 +509,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Third Task"
+                                    text: "Verify gauge pressure is zero - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -518,7 +521,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Fourth Task"
+                                    text: "Measure corroded pipe section - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -529,7 +533,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Fifth Task"
+                                    text: "Attach lift line to corroded section - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -540,7 +545,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Sixth Task"
+                                    text: "Pull pins to cut corroded section (2 sections)- 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -551,7 +557,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Seventh Task"
+                                    text: "Remove corroded pipe to surface - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -562,7 +569,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Eighth Task"
+                                    text: "Install flange adapter (2 installations) - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -573,7 +581,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Ninth Task"
+                                    text: "Insert bolts to secure flanges (2 flanges) - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -584,7 +593,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Tenth Task"
+                                    text: "Remove wellhead cover - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -595,7 +605,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Eleventh Task"
+                                    text: "Install wellhead gasket - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -606,7 +617,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Twelfth Task"
+                                    text: "Replace wellhead cover -5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -617,7 +629,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Thirteenth Task"
+                                    text: "Insert hot stab into wellhead port -5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -628,7 +641,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Fourteenth Task"
+                                    text: "Remove hot stab and return to surface - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -650,7 +664,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "First Task"
+                                    text: "Test first anode - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -661,7 +676,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Second Task"
+                                    text: "Test second anode - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -672,7 +688,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Third Task"
+                                    text: "Test third anode - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -683,7 +700,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Fourth Task"
+                                    text: "Test fourth anode - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -694,7 +712,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Fifth Task"
+                                    text: "Measure wellhead height - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -705,7 +724,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Sixth Task"
+                                    text: "Measure wellhead length - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -716,7 +736,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Seventh Task"
+                                    text: "Calculate wellhead angle - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -727,7 +748,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Eighth Task"
+                                    text: "Evaluate pipeline system oil flow - 5pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -738,7 +760,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Ninth Task"
+                                    text: "Open/Close all 6 valves - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -749,7 +772,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Tenth Task"
+                                    text: "Move water through pipeway - 20pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
@@ -760,18 +784,8 @@ Window {
                                 Text
                                 {
                                     x: 25
-                                    text: "Eleventh Task"
-                                    font.pointSize: 14
-                                }
-
-                            }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Twelfth Task"
+                                    text: "Determine average flow rate - 10pts"
+                                    color: "white"
                                     font.pointSize: 14
                                 }
 
