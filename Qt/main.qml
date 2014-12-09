@@ -30,7 +30,7 @@ Window {
         anchors.topMargin: 10
         anchors.fill: parent
 
-        Row{
+        Row {
             id: titleRow
             width: mainGrid.width - 20
             height: 54
@@ -120,7 +120,7 @@ Window {
 
 
 
-                Item{
+                Item {
                     id: item1
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: parent.top
@@ -135,10 +135,10 @@ Window {
                             var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
                             var secs = (tempTime % 60);
                             var mins = Math.floor(tempTime/60);
-                            if(secs < 10) {
+                            if (secs < 10) {
                                 secs = "0" + secs;
                             }
-                            if(mins < 10) {
+                            if (mins < 10) {
                                 mins = "0" + mins;
                             }
                             timer.text =  mins + ":" + secs;
@@ -159,7 +159,7 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 10
-                    Row{
+                    Row {
                         id: timerRow
                         x: 0
                         y: 0
@@ -176,13 +176,13 @@ Window {
                             anchors.left: parent.left
                             anchors.leftMargin: 30
                             anchors.verticalCenter: parent.verticalCenter
-                            MouseArea{
+                            MouseArea {
                                 id: startButton
                                 height: startBtn.height
                                 width: startBtn.width
                                 anchors.fill: parent
                                 onClicked: {
-                                    if(timerTrigger.running) {
+                                    if (timerTrigger.running) {
                                         timerTrigger.stop();
                                         stopResetBtn.enabled = true;
                                         delta = (new Date).getTime() - startTime;
@@ -191,14 +191,13 @@ Window {
                                         timerTrigger.running = true;
                                         stopResetBtn.enabled = false;
                                         startBtn.text = "PAUSE";
-                                        if(startTime == 0) {
+                                        if (startTime == 0) {
                                             startTime = (new Date).getTime();
                                         } else {
                                             startTime = (new Date).getTime() - delta;
                                         }
                                     }
                                 }
-
                             }
                         }
 
@@ -228,14 +227,14 @@ Window {
                             anchors.right: parent.right
                             anchors.rightMargin: 30
                             anchors.verticalCenter: parent.verticalCenter
-                            MouseArea{
+                            MouseArea {
                                 id:stopButton
                                 height: stopResetBtn.height
                                 width: stopResetBtn.width
                                 anchors.fill: parent
                                 onClicked: {
                                     console.log('Im clicked!');
-                                    if(!timerTrigger.running) {
+                                    if (!timerTrigger.running) {
                                         timerTrigger.running = false;
                                         stopResetBtn.enabled = false;
                                         startBtn.text = "START";
@@ -244,8 +243,8 @@ Window {
                                     }
                                 }
                             }
-                             }
-                     }
+                        }
+                    }
                 }
             }
 
@@ -255,6 +254,7 @@ Window {
                 height: 800
                 x: 10
                 y: 130
+
                 Text {
                     id: missionTasksTitle
                     x: 117
@@ -272,8 +272,7 @@ Window {
                     font.bold: true
                 }
 
-                TabView
-                {
+                TabView {
                     x:10
                     y:30
                     width: missionTasks.width-20
@@ -281,538 +280,173 @@ Window {
                     id: missionsTasksTabs
 
                     style: TabViewStyle {
-                          frameOverlap: 1
-                          tab: ROVTab {
-                              color: styleData.selected ? "#222222" :"#000000"
-                              implicitWidth: missionsTasksTabs.width / 3
-                              implicitHeight: 50
-                              Text {
-                                  id: text
-                                  anchors.centerIn: parent
-                                  text: styleData.title
-                                  color: "white"
-                                  font.bold: styleData.selected ? true : false
-                                  font.pixelSize: 12
-                              }
-                          }
+                        frameOverlap: 1
+                        tab: ROVTab {
+                            color: styleData.selected ? "#222222" :"#000000"
+                            implicitWidth: missionsTasksTabs.width / 3
+                            implicitHeight: 50
+                        }
 
-                          frame: Rectangle {color: "transparent" }
+                        frame: Rectangle {color: "transparent" }
                     }
 
 
-
-                    Tab
-                    {
+                    Tab {
                         title: "Science Under the Ice"
 
-                        Column
-                        {
+
+                        Column {
                             y: 20
                             spacing: 20
 
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Remove algae from ice underside - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Return algae sample - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Return algae sample - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Remove sea urchin - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Remove sea urchin - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Return sea urchin - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Return sea urchin - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Count and identify star species - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Count and identify star species - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Deploy acoustic sensor - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Deploy acoustic sensor - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Survey iceberg at 4 points - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Survey iceberg at 4 points - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Measure iceberg keel depth - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Measure iceberg keel depth - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Measure iceberg diameter - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Measure iceberg diameter - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Calculate iceberg volume - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Calculate iceberg volume - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Map location of iceberg from coordinates - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Map location of iceberg from coordinates - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Determine iceberg threat to surface platforms - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Determine iceberg threat to surface platforms - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Determine iceberg threat to subsea assets - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Determine iceberg threat to subsea assets - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
 
-                            }
 
                         }
 
 
                     }
 
-                    Tab
-                    {
+                    Tab {
                         title: "Pipeline Inspection & Repair"
-                        Column
-                        {
+
+                        Column {
                             y: 20
                             spacing: 20
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Find corroded pipe section - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
 
+                            ROVMissionTask {
+                                text: "Find corroded pipe section - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Turn valve to stop oil flow - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Turn valve to stop oil flow - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Verify gauge pressure is zero - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Verify gauge pressure is zero - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Measure corroded pipe section - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Measure corroded pipe section - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Attach lift line to corroded section - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Attach lift line to corroded section - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Pull pins to cut corroded section (2 sections)- 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Pull pins to cut corroded section (2 sections)- 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Remove corroded pipe to surface - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Remove corroded pipe to surface - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Install flange adapter (2 installations) - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Install flange adapter (2 installations) - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Insert bolts to secure flanges (2 flanges) - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Insert bolts to secure flanges (2 flanges) - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Remove wellhead cover - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Remove wellhead cover - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Install wellhead gasket - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Install wellhead gasket - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Replace wellhead cover -5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Replace wellhead cover -5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Insert hot stab into wellhead port -5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Insert hot stab into wellhead port -5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Remove hot stab and return to surface - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Remove hot stab and return to surface - 5pts"
                             }
                         }
 
                     }
 
-                    Tab
-                    {
+                    Tab  {
                         title: "Oilfield Product. & Maintenance"
-                        Column
-                        {
+
+                        Column {
                             y: 20
                             spacing: 20
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Test first anode - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
 
+
+                            ROVMissionTask {
+                                text: "Test first anode - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Test second anode - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Test second anode - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Test third anode - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Test third anode - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Test fourth anode - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Test fourth anode - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Measure wellhead height - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Measure wellhead height - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Measure wellhead length - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Measure wellhead length - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Calculate wellhead angle - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Calculate wellhead angle - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Evaluate pipeline system oil flow - 5pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Evaluate pipeline system oil flow - 5pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Open/Close all 6 valves - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Open/Close all 6 valves - 10pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Move water through pipeway - 20pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
+                            ROVMissionTask {
+                                text: "Move water through pipeway - 20pts"
                             }
-                            CheckBox
-                            {
-                                x: 10
-                                Text
-                                {
-                                    x: 25
-                                    text: "Determine average flow rate - 10pts"
-                                    color: "white"
-                                    font.pointSize: 14
-                                }
-
-                            }
-
+                            ROVMissionTask {
+                                text: "Determine average flow rate - 10pts"
                             }
                         }
-
-
+                    }
                 }
-
-
-
-
-
-
             }
-
-
-
-
         }
+
 
         Column {
             id: column2
             x: column1.width
-            y:54
+            y: 54
             width: mainGrid.width/3
             height: mainGrid.height-mainTitle.height
             spacing: 20
@@ -895,16 +529,13 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
-
         }
 
         Column {
-
-
             id: column3
             objectName: "column3"
             x: column1.width + column2.width
-            y:54
+            y: 54
             width: mainGrid.width/3
             height: mainGrid.height-mainTitle.height
             anchors.right: parent.right
@@ -987,12 +618,6 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
-
-
         }
-
-
-
-
     }
 }
