@@ -13,9 +13,9 @@ SOURCES += main.cpp \
 
 RESOURCES += qml.qrc
 
-RC_FILE = ROVTest.rc
+RC_FILE = ROVBattlestation.rc
 
-ICON = ROVTest.icns
+ICON = ROVBattlestation.icns
 
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
