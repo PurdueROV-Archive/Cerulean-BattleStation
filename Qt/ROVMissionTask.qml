@@ -10,10 +10,9 @@ CheckBox {
     style: CheckBoxStyle {
         label: Text {
             id: taskLabel
-            color: "white"
+            color: checkTask.checked ? "#666666" : "#ffffff"
             text: checkTask.text
-            font.bold: true
+            font.bold: !checkTask.checked
         }
     }
-
 }

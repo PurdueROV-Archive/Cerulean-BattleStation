@@ -5,17 +5,17 @@ import QtQuick.Controls.Styles 1.2
 Button {
     style: ButtonStyle {
         background: Rectangle {
-            border.width: control.activeFocus ? 2 : 1
-            color: control.hovered ? "#333333" : "#00000000"
+            border.width: (control.hovered || control.pressed) ? 2 : 1
+            color: (control.hovered || control.pressed) ? "#333333" : "#00000000"
             radius: 0
-            border.color: "#e4ae23"
+            border.color: mainColor
             implicitWidth: 70
             implicitHeight: 25
         }
         label: Label {
             text: control.text
             verticalAlignment: Text.AlignVCenter
-            color: "#e4ae23"
+            color: mainColor
             font.bold: true
             font.pixelSize: 30
             font.family: "Arial"

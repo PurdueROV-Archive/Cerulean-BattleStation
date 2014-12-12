@@ -3,6 +3,9 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.2
 
 ComboBox {
+
+    id: box1
+
     style: ComboBoxStyle {
         background: Rectangle {
             border.width: control.activeFocus ? 2 : 1
@@ -12,10 +15,11 @@ ComboBox {
             implicitWidth: 70
             implicitHeight: 25
         }
+
         label: Label {
             text: control.text
             verticalAlignment: Text.AlignVCenter
-            color: "#e4ae23"
+            color: mainColor
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             anchors.verticalCenter: parent.verticalCenter

@@ -7,5 +7,6 @@
         <file>ROVComboBox.qml</file>
         <file>ROVTab.qml</file>
         <file>ROVMissionTask.qml</file>
+        <file>ROVTitle.qml</file>
     </qresource>
 </RCC>
