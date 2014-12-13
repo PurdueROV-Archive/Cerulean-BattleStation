@@ -12,7 +12,7 @@ ComboBox {
             color: control.hovered ? "#DDEEFF" : "#00000000"
             radius: 0
             border.color: "#b1964c"
-            implicitWidth: 70
+            implicitWidth: 25
             implicitHeight: 25
         }
 

@@ -12,6 +12,7 @@ Window {
     visible: true
     width: 1920
     height: 1010
+    visibility: "Maximized"
     color: "#111111"
     title: "Purdue IEEE | " + c_battlestation.rovName
     objectName: "mainWindow"
@@ -557,17 +558,32 @@ Window {
                     text: "CONFIGURATION"
                 }
 
-                Text {
-                    id: configDetail
-                    width: parent.width-10
-                    color: "white"
-                    text: qsTr("VOLTAGE, POWER DRAW, ETC")
-                    wrapMode: Text.WordWrap
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 12
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
+                Column {
+                    spacing: 10
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.margins: 20
+                    anchors.topMargin: 50
+                    anchors.top: configTitle.bottom
+
+                    ROVSlider {
+                        labeltext: "Horizontal Speed Control: "
+                    }
+
+                    ROVSlider {
+                        labeltext: "Vertical Speed Control:"
+                    }
+
+                    ROVSlider {
+                        labeltext: "Strafe Speed Control:"
+                    }
+
+                    ROVSlider {
+                        labeltext: "Pitch/Roll Speed Control:"
+                    }
+
+
+
                 }
             }
         }
