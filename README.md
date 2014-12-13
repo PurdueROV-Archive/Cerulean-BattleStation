@@ -8,7 +8,7 @@ Features:
 - [x] Basic interpolator to handle ramping up thrusters
 - [x] Looks cool  
 - [x] Compute thruster values based off of joystick input
-- [ ] Use interpolator to filter thruster values
+- [x] Use interpolator to filter thruster values
 - [ ] Compute a checksum
 - [ ] Handle reading from serial
 - [ ] More configuration on main window
