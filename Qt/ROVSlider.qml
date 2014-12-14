@@ -5,13 +5,13 @@ import QtQuick.Controls.Styles 1.2
 Item {
     id: holder
     property string labeltext
+    property alias value: slider.value
     width: parent.width
     height: 50
 
 
     Item {
         id: row
-        //spacing: 10
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottomMargin: 10
@@ -38,19 +38,35 @@ Item {
         value: 100
         minimumValue: 0
         maximumValue: 100
-        stepSize: 10
+        stepSize: 5
         tickmarksEnabled: true
-        onValueChanged: updatePos();
         width: parent.width
         anchors.top: row.bottom
         anchors.topMargin: 25
+        onValueChanged: valueText.text = slider.value + "%";
 
 
         style: SliderStyle {
-            groove: Rectangle {
-                implicitHeight: 4
-                color: mainColor
-                radius: 0
+            groove: Item {
+
+                Rectangle {
+                    implicitHeight: 4
+                    color: "#ccc"
+                    radius: 0
+                    width: slider.width
+                }
+
+                Rectangle {
+                    implicitHeight: 4
+                    color: mainColor
+                    opacity: slider.value
+                    radius: 0
+                    width: slider.value/100 * slider.width
+                }
+
+
+
+
             }
 
             handle: Rectangle {
@@ -62,11 +78,6 @@ Item {
             }
         }
 
-    }
-
-
-    function updatePos() {
-        valueText.text = slider.value + "%";
     }
 
 }

@@ -171,25 +171,6 @@ Window {
                         }
                     }
 
-                    //Timer text
-                    Text {
-                        id: timer
-                        y: 0
-                        width: 171
-                        height: 70
-                        text: "00:00"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        verticalAlignment: Text.AlignVCenter
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenterOffset: 0
-
-                        color: mainColor
-                        font.family: "Arial"
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        font.pixelSize: 56
-                    }
-
                     //Stop button
                     ROVButton {
                         id: stopResetBtn
@@ -215,6 +196,25 @@ Window {
                                 }
                             }
                         }
+                    }
+
+                    //Timer text
+                    Text {
+                        id: timer
+                        y: 0
+                        width: 171
+                        height: 70
+                        text: "00:00"
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenterOffset: 0
+
+                        color: mainColor
+                        font.family: "Arial"
+                        font.bold: true
+                        horizontalAlignment: Text.AlignHCenter
+                        font.pixelSize: 56
                     }
                 }
             }
@@ -261,12 +261,14 @@ Window {
                         Flickable {
                             width: parent.width
                             height: parent.height
+                            flickableDirection: Flickable.VerticalFlick
                             contentHeight: mission1tasks.height+80
                             contentWidth: mission1tasks.width
                             boundsBehavior: Flickable.StopAtBounds
 
                             Column {
                                 id: mission1tasks
+                                width: parent.width
                                 y: 20
                                 spacing: 20
 
@@ -318,6 +320,7 @@ Window {
                         Flickable {
                             width: parent.width
                             height: parent.height
+                            flickableDirection: Flickable.VerticalFlick
                             contentHeight: mission2tasks.height+80
                             contentWidth: mission2tasks.width
                             boundsBehavior: Flickable.StopAtBounds
@@ -343,7 +346,7 @@ Window {
                                 text: "Attach lift line to corroded section - 10pts"
                             }
                             ROVMissionTask {
-                                text: "Pull pins to cut corroded section (2 sections)- 10pts"
+                                text: "Pull pins to cut corroded section (2 sections) - 10pts"
                             }
                             ROVMissionTask {
                                 text: "Remove corroded pipe to surface - 5pts"
@@ -361,10 +364,10 @@ Window {
                                 text: "Install wellhead gasket - 5pts"
                             }
                             ROVMissionTask {
-                                text: "Replace wellhead cover -5pts"
+                                text: "Replace wellhead cover - 5pts"
                             }
                             ROVMissionTask {
-                                text: "Insert hot stab into wellhead port -5pts"
+                                text: "Insert hot stab into wellhead port - 5pts"
                             }
                             ROVMissionTask {
                                 text: "Remove hot stab and return to surface - 5pts"
@@ -380,6 +383,7 @@ Window {
                         Flickable {
                             width: parent.width
                             height: parent.height
+                            flickableDirection: Flickable.VerticalFlick
                             contentHeight: mission3tasks.height+80
                             contentWidth: mission3tasks.width
                             boundsBehavior: Flickable.StopAtBounds
@@ -459,19 +463,75 @@ Window {
                     text: "SYSTEM VIEW"
                 }
 
-                Text {
-                    id: sysDetails
-                    width: parent.width -10
-                    color: "white"
-                    text: qsTr("BOT DIAGRAM AND OTHER VISUAL THINGS")
-                    wrapMode: Text.WordWrap
+                Grid {
+                    id: grid1
+                    width: 275
+                    height: 275
                     anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 12
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+                    antialiasing: true
+                    columns: 2
+                    rows: 2
+                    spacing: 95
+                    ROVThruster {
+                        objectName: "t1";
+                        orientation: "horizontal";
+                        rotation: 23;
+                        value: qsTr("N/A")
+                    }
+                    ROVThruster {
+                        objectName: "t2";
+                        orientation: "horizontal";
+                        rotation: -23;
+                        value: qsTr("N/A")
+                    }
+                    ROVThruster {
+                        objectName: "t3";
+                        orientation: "horizontal";
+                        rotation: 157;
+                        value: qsTr("N/A")
+                    }
+                    ROVThruster {
+                        objectName: "t4";
+                        orientation: "horizontal";
+                        rotation: 203;
+                        value: qsTr("N/A")
+                    }
 
                 }
+
+                Grid {
+                    id: grid2
+                    width: 192
+                    height: 192
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    antialiasing: true
+                    columns: 2
+                    rows: 2
+                    spacing: 12
+                    ROVThruster {
+                        objectName: "t5";
+                        orientation: "vertical";
+                        value: qsTr("N/A")
+                    }
+                    ROVThruster {
+                        objectName: "t6";
+                        orientation: "vertical";
+                        value: qsTr("N/A")
+                    }
+                    ROVThruster {
+                        objectName: "t7";
+                        orientation: "vertical";
+                        value: qsTr("N/A")
+                    }
+                    ROVThruster {
+                        objectName: "t8";
+                        orientation: "vertical";
+                        value: qsTr("N/A")
+                    }
+                }
+
             }
 
             //Orientation Status
@@ -568,6 +628,7 @@ Window {
 
                     ROVSlider {
                         labeltext: "Horizontal Speed Control: "
+                        objectName: "horizontalControl"
                     }
 
                     ROVSlider {

@@ -1,11 +1,19 @@
 #include "serial.h"
 #include <QDateTime>
+#include <QQuickView>
+#include <QQuickItem>
 
 
 quint64 lastTime = 0;
 
+void serial::initSerial(QObject* root, QString device) {
 
-void serial::initSerial(QString device) {
+    for (int i = 1; i <= 8; i++) {
+        QString t = QString("t");
+        thrusterVals[i-1] = root->findChild<QObject*>(t.append(t.number(i)));
+        qDebug() << thrusterVals[i-1];
+    }
+
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
         qDebug() << info.description();
         if (info.description() == device) {
@@ -19,6 +27,7 @@ void serial::initSerial(QString device) {
     //set up official data array
     data = QByteArray(size, 0x00);
     data[0] = 0x12; data[data.size()-2] = 0xC5; data[data.size()-1] = 0x13;
+
 }
 
 bool serial::set(quint8 i, quint8 d) {
@@ -40,9 +49,18 @@ bool serial::set(quint8 i, quint8 d) {
 
 bool serial::MotorSet(quint8 thrusters[]) {
     bool worked = true;
+    QString text = QString();
     for (int i = 0; i < 8; ++i) {
         set(i, thrusters[i]) && worked;
+        if (worked) {
+            qint8 num = (thrusters[i] & 0x80) ? (-100*(0x7F & thrusters[i]))/128 : (100*(0x7F & thrusters[i]))/128;
+            text = text.number(num);
+            thrusterVals[i]->setProperty("value", text);
+        }
     }
+
+
+
     return worked;
 }
 

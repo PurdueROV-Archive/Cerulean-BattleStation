@@ -192,9 +192,9 @@ void InputHandler::tick(TickClock* clock) {
             Thrusters[i] = convert(thrusters[i]);
         }
 
-        qDebug("0x01: %+04d  0x02: %+04d  0x03: %+04d  0x04: %+04d  0x05: %+04d  0x06: %+04d  0x07: %+04d  0x08: %+04d",
-               (qint8) Thrusters[0], (qint8) Thrusters[1], (qint8) Thrusters[2], (qint8) Thrusters[3],
-               (qint8) Thrusters[4], (qint8) Thrusters[5], (qint8) Thrusters[6], (qint8) Thrusters[7]);
+        //qDebug("0x01: %+04d  0x02: %+04d  0x03: %+04d  0x04: %+04d  0x05: %+04d  0x06: %+04d  0x07: %+04d  0x08: %+04d",
+        //       (qint8) Thrusters[0], (qint8) Thrusters[1], (qint8) Thrusters[2], (qint8) Thrusters[3],
+        //       (qint8) Thrusters[4], (qint8) Thrusters[5], (qint8) Thrusters[6], (qint8) Thrusters[7]);
 
         //set values in serial buffer
         serial::MotorSet((quint8*) Thrusters);

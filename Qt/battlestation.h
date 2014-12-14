@@ -6,6 +6,7 @@
 #include <QQmlEngine>
 #include <QQmlComponent>
 #include <QDebug>
+#include <QQuickItem>
 #include "threadcontroller.h"
 #include "mainticker.h"
 
@@ -18,6 +19,9 @@ class BattleStation : public QObject {
     ThreadController* m_mainTickerController;
     MainTicker* m_mainTicker;
     QString m_rovName;
+
+
+
 public:
     BattleStation(QGuiApplication* application, QQmlEngine* qmlEngine);
 
@@ -25,6 +29,8 @@ public:
 
     bool startUp();
     int exec();
+
+    QObject* root;
 
     QString rovName() const {
         return m_rovName;
@@ -37,7 +43,6 @@ public slots:
 signals:
     void startMain();
     void rovNameChanged(QString name);
-
 };
 
 #endif // BATTLESTATION_H

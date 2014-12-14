@@ -8,5 +8,6 @@
         <file>ROVTab.qml</file>
         <file>ROVMissionTask.qml</file>
         <file>ROVTitle.qml</file>
+        <file>ROVThruster.qml</file>
     </qresource>
 </RCC>

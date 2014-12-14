@@ -6,12 +6,14 @@ import QtQuick.Controls.Styles 1.2
 CheckBox {
     x: 10
     id: checkTask
+    property int size: (missionTasksTab.width < 550) ? 16 : 20;
+
 
     style: CheckBoxStyle {
 
         indicator: Rectangle {
-            implicitWidth: 20
-            implicitHeight: 20
+            implicitWidth: size
+            implicitHeight: size
             radius: 1
             border.width: 1
             Rectangle {
@@ -27,7 +29,7 @@ CheckBox {
         label: Text {
             id: taskLabel
             color: checkTask.checked ? "#666666" : "#ffffff"
-            font.pixelSize: 20;
+            font.pixelSize: size
             text: checkTask.text
             font.bold: !checkTask.checked
         }

@@ -1,6 +1,7 @@
 #include <QQmlContext>
 #include <QObject>
 #include <QQuickItem>
+#include <QQuickView>
 #include "battlestation.h"
 #include "joystick.h"
 #include "serial.h"
@@ -20,17 +21,20 @@ bool BattleStation::startUp() {
         return false;
     }
 
-    //serial::initSerial("FT231X USB UART"); //OS X
-    serial::initSerial("USB Serial Port");  //Windows
-
     m_mainTicker = new MainTicker(100);
     m_mainTickerController = new ThreadController(m_mainTicker);
     m_engine->rootContext()->setContextProperty("c_battlestation", this);
     m_mainTicker->registerInContext(m_engine->rootContext());
 
     QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/main.qml")));
-    QObject* root = component.create();
+    root = component.create();
     qDebug() << "Root scene name: " << root->objectName();
+
+    //serial::initSerial("FT231X USB UART"); //OS X
+    serial::initSerial(root, "USB Serial Port");  //Windows
+
+    QObject* horizontalControl = root->findChild<QObject*>("horizontalControl");
+    qDebug() << horizontalControl->property("value");
 
     m_mainTickerController->startThread();
     return true;

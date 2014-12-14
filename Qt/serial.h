@@ -9,8 +9,11 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 
+#include "battlestation.h"
+
 
 static QSerialPort serialDevice;
+static QObject* thrusterVals[8];
 
 //packet size
 static int size = 11;
@@ -20,7 +23,7 @@ static QByteArray data;
 class serial
 {
 public:
-    static void initSerial(QString device);
+    static void initSerial(QObject* root, QString device);
     static bool set(quint8 i, quint8 d);
     static bool MotorSet(quint8 thrusters[]);
     static bool send();
