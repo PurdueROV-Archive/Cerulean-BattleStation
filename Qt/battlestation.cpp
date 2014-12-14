@@ -23,7 +23,7 @@ bool BattleStation::startUp() {
     //serial::initSerial("FT231X USB UART"); //OS X
     serial::initSerial("USB Serial Port");  //Windows
 
-    m_mainTicker = new MainTicker(20);
+    m_mainTicker = new MainTicker(100);
     m_mainTickerController = new ThreadController(m_mainTicker);
     m_engine->rootContext()->setContextProperty("c_battlestation", this);
     m_mainTicker->registerInContext(m_engine->rootContext());

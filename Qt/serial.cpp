@@ -1,4 +1,8 @@
 #include "serial.h"
+#include <QDateTime>
+
+
+quint64 lastTime = 0;
 
 
 void serial::initSerial(QString device) {
@@ -54,9 +58,16 @@ bool serial::send() {
 
     if (serialDevice.isWritable()) {
 
+        quint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+        if (currentTime-lastTime > 15) {
+            qDebug("Time off by: %d", currentTime-lastTime-10);
+        }
+
+        lastTime = currentTime;
+
         serialDevice.write(sendArray);
-        serialDevice.flush();
-        bool worked = serialDevice.waitForBytesWritten(50);
+        bool worked = serialDevice.flush();
+        //bool worked = serialDevice.waitForBytesWritten(50);
         return worked;
     }
 

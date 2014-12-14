@@ -197,7 +197,7 @@ void InputHandler::tick(TickClock* clock) {
                (qint8) Thrusters[4], (qint8) Thrusters[5], (qint8) Thrusters[6], (qint8) Thrusters[7]);
 
         //set values in serial buffer
-        serial::MotorSet((quint8*) thrusters);
+        serial::MotorSet((quint8*) Thrusters);
 
     }
     //  Every ten seconds update the list of joysticks
