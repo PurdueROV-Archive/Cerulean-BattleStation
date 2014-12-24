@@ -15,11 +15,9 @@ Features:
 - [ ] System View Section in GUI (update thurster look and functionality)
 - [ ] System Status in GUI
 - [ ] Orientation in GUI
-<<<<<<< HEAD
 - [ ] Thruster view in GUI (make bigger size, better color)
-=======
 - [ ] Configuration in GUI
->>>>>>> origin/master
+
 
 How to install and run:
 -----------------------
