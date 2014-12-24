@@ -11,12 +11,11 @@ Features:
 - [x] Use interpolator to filter thruster values
 - [ ] Compute a checksum
 - [ ] Handle reading from serial
-- [ ] More configuration on main window
-- [ ] Mission tasks in tasks section in GUI
-- [ ] System Information Section in GUI
-- [ ] System Configuration in GUI
+- [ ] Mission tasks in tasks section in GUI (highlight next desired task)
+- [ ] System View Section in GUI (update thurster look and functionality)
+- [ ] System Status in GUI
 - [ ] Orientation in GUI
-- [ ] Thruster view in GUI
+- [ ] Configuration in GUI
 
 How to install and run:
 -----------------------
@@ -42,6 +41,9 @@ Basic Structure Information:
  - **ROVButton**: Button with battlestation style  
  - **ROVComboBox**: ComboBox with battlestation style  
  - **ROVSlider**: Sliders with battlestation style  
+ - **ROVTab**: Tab interface with battlestation style
+ - **ROVThruster**: Top thruster view
+ - **ROVTitle**: Title text with battlestation style
 - **Others**:  
  - There are some others small ones, but they have to do with some Qt build things. Nothing that we will editing  
 
