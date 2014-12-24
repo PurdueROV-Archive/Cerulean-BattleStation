@@ -16,7 +16,7 @@ Features:
 - [ ] System Information Section in GUI
 - [ ] System Configuration in GUI
 - [ ] Orientation in GUI
-- [ ] Thruster view in GUI
+- [ ] Thruster view in GUI (make bigger size, better color)
 
 How to install and run:
 -----------------------
