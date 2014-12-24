@@ -59,8 +59,9 @@ quint8 convert(qint32 val) {
     bool negative = (val < 0) ? true : false;
     ret = (quint8) abs(val/256);
 
-    if (negative) ret |= 0b10000000;
-
+    if (negative){
+        ret |= 0x80; // 0b10000000
+    }
     return ret;
 }
 
