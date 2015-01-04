@@ -602,6 +602,13 @@ Window {
                     verticalAlignment: Text.AlignVCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
+
+                ComboBox {
+                    objectName: "serialSelection"
+                    width: 200
+                    model: [ "Banana", "Apple", "Coconut" ]
+                }
+
             }
             
             //Config Details
@@ -628,21 +635,23 @@ Window {
 
                     ROVSlider {
                         labeltext: "Horizontal Speed Control: "
-                        objectName: "horizontalControl"
+                        objectName: "horizontalSlider"
                     }
 
                     ROVSlider {
                         labeltext: "Vertical Speed Control:"
+                        objectName: "verticalSlider"
                     }
 
                     ROVSlider {
                         labeltext: "Strafe Speed Control:"
+                        objectName: "strafeSlider"
                     }
 
                     ROVSlider {
                         labeltext: "Pitch/Roll Speed Control:"
+                        objectName: "pitchRollSlider"
                     }
-
 
 
                 }

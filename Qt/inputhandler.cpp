@@ -43,6 +43,13 @@ void InputHandler::setJoystick(int index) {
     }
 }
 
+void InputHandler::setSliders(QObject *root) {
+    horizontalSlider = root->findChild<QObject*>("horizontalSlider");
+    verticalSlider = root->findChild<QObject*>("verticalSlider");
+    pitchRollSlider = root->findChild<QObject*>("pitchRollSlider");
+    strafeSlider = root->findChild<QObject*>("strafeSlider");
+}
+
 QList<JoystickInfo> InputHandler::listJoysticks() {
     return m_joysticks;
 }
@@ -84,20 +91,21 @@ void InputHandler::tick(TickClock* clock) {
          * RT   Ascend  (+Y)
          * LT   Descend (-Y)
          */
-        m_joystick->poll();        
+        m_joystick->poll();
+
+        qint32 horizontalLimit = horizontalSlider->property("value").toInt();
+        qint32 verticalLimit = (qint32) verticalSlider->property("value").toInt();
+        qint32 strafeLimit = (qint32) strafeSlider->property("value").toInt();
+        qint32 pitchRollLimit = (qint32) pitchRollSlider->property("value").toInt();
 
         //strafe computation - left and right buttons (set to 80%)
         bool rb = m_joystick->getButtonState(XBOX_BUTTON_RB_ID);
         bool lb = m_joystick->getButtonState(XBOX_BUTTON_LB_ID);
         qint32 velX = 0;
         if (rb != lb) {
-            velX = rb ? SINT16_MIN * 0.8 : SINT16_MAX * 0.8;
+            velX = rb ? SINT16_MIN : SINT16_MAX;
         }
-
-
-        //compute Z (forward and backward) - left joystick Y axis
-        qint32 velZ = m_joystick->getAxis(XBOX_AXIS_LJ_Y_ID);
-        applyDeadzone(velZ);
+        velX = (qint32) velX * (strafeLimit/100.0);
 
         //ascend and descend computation - left and right triggers
         //Since the triggers return SINT16_MIN for neutral position and SINT16_MAX for max pull
@@ -105,7 +113,13 @@ void InputHandler::tick(TickClock* clock) {
         qint32 partialYRight = (((qint32) m_joystick->getAxis(XBOX_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
         qint32 partialYLeft = (((qint32) m_joystick->getAxis(XBOX_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
         qint32 velY = partialYRight - partialYLeft;
+        velY = (qint32) velY * (pitchRollLimit/100.0);
         applyDeadzone(velY);
+
+
+        //compute Z (forward and backward) - left joystick Y axis
+        qint32 velZ = m_joystick->getAxis(XBOX_AXIS_LJ_Y_ID);
+        applyDeadzone(velZ);
 
         //compute yaw - left joystick X axis
         qint32 yaw = m_joystick->getAxis(XBOX_AXIS_LJ_X_ID);
@@ -122,6 +136,10 @@ void InputHandler::tick(TickClock* clock) {
         applyDeadzone(roll);
 
         //qDebug() << velX << velY << velZ << pitch << roll << yaw;
+
+        qDebug("H: %d, V: %d, S: %d, PR: %d", horizontalLimit, verticalLimit, strafeLimit, pitchRollLimit);
+
+
 
         qint32 thrusters [8] = {0, 0, 0, 0, 0, 0, 0, 0};
         //Lateral Thrusters going left to right, then down, from top left

@@ -51,6 +51,13 @@ public:
         return m_joystickActive;
     }
 
+    void setSliders(QObject* root);
+
+    QObject* horizontalSlider;
+    QObject* verticalSlider;
+    QObject* pitchRollSlider;
+    QObject* strafeSlider;
+
 public slots:
 
 signals:

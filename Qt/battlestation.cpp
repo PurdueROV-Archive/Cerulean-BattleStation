@@ -33,8 +33,11 @@ bool BattleStation::startUp() {
     //serial::initSerial("FT231X USB UART"); //OS X
     serial::initSerial(root, "USB Serial Port");  //Windows
 
-    QObject* horizontalControl = root->findChild<QObject*>("horizontalControl");
-    qDebug() << horizontalControl->property("value");
+    m_mainTicker->m_inputHandler->setSliders(root);
+
+
+    //QObject* horizontalControl = root->findChild<QObject*>("horizontalControl");
+    //qDebug() << horizontalControl->property("value");
 
     m_mainTickerController->startThread();
     return true;

@@ -9,13 +9,15 @@ class MainTicker : public TickClock {
 
     void doTick();
 
-    InputHandler* m_inputHandler;
+
 
 public:
     MainTicker(quint64 targetTicksPerSec);
     ~MainTicker();
 
     void registerInContext(QQmlContext* context);
+
+    InputHandler* m_inputHandler;
 
 signals:
 
