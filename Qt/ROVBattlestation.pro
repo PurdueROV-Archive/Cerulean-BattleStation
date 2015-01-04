@@ -34,7 +34,7 @@ HEADERS += \
     inputhandler.h \
     interpolator.h
 
-unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x86/ -lSDL2
+unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x64/ -lSDL2
 
 macx {
     QMAKE_LFLAGS += -F$$PWD/../SDL/lib/x64/
