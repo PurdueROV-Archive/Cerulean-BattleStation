@@ -7,14 +7,14 @@ Item {
     property string orientation
     property string value
     antialiasing: true
-    width: 90
-    height: 90
+    width: 120
+    height: 120
     property string thrusterColor: "#808080"
 
     Rectangle {
         id: propeller
-        width: 60
-        height: 30
+        width: 80
+        height: 40
         color: thrusterColor
         border.color: mainColor
         border.width: 3
@@ -25,11 +25,11 @@ Item {
     }
 
     Rectangle {
-        height: 60
+        height: 80
         anchors.top: propeller.bottom
         anchors.topMargin: 0
         anchors.horizontalCenter: parent.horizontalCenter
-        width: 30
+        width: 40
         color: thrusterColor
         border.color: mainColor
         border.width: 3
@@ -37,9 +37,9 @@ Item {
     }
 
     Rectangle {
-        height: 60
-        width: 60
-        radius: 50
+        height: 80
+        width: 80
+        radius: 75
         color: thrusterColor
         border.color: mainColor
         border.width: 3

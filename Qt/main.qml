@@ -455,6 +455,7 @@ Window {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.margins: 10
+                clip: true
 
                 height: (parent.height/2) - 10
 
@@ -465,14 +466,14 @@ Window {
 
                 Grid {
                     id: grid1
-                    width: 275
-                    height: 275
+                    width: 365
+                    height: 365
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     antialiasing: true
                     columns: 2
                     rows: 2
-                    spacing: 95
+                    spacing: 125
                     ROVThruster {
                         objectName: "t1";
                         orientation: "horizontal";
@@ -502,8 +503,8 @@ Window {
 
                 Grid {
                     id: grid2
-                    width: 192
-                    height: 192
+                    width: 252
+                    height: 252
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                     antialiasing: true
