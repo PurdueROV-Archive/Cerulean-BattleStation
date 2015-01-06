@@ -106,6 +106,8 @@ void InputHandler::tick(TickClock* clock) {
         if (rb != lb) {
             velX = rb ? SINT16_MIN : SINT16_MAX;
         }
+
+        //Scale to strafe limit
         velX = (qint32) velX * (strafeLimit/100.0);
 
         //ascend and descend computation - left and right triggers
@@ -114,26 +116,33 @@ void InputHandler::tick(TickClock* clock) {
         qint32 partialYRight = (((qint32) m_joystick->getAxis(XBOX_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
         qint32 partialYLeft = (((qint32) m_joystick->getAxis(XBOX_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
         qint32 velY = partialYRight - partialYLeft;
-        velY = (qint32) velY * (pitchRollLimit/100.0);
+
+        //scale to vertical limit
+        velY = (qint32) velY * (verticalLimit/100.0);
         applyDeadzone(velY);
 
 
         //compute Z (forward and backward) - left joystick Y axis
         qint32 velZ = m_joystick->getAxis(XBOX_AXIS_LJ_Y_ID);
+        velZ = (qint32) velZ * (velZ/100.0);
         applyDeadzone(velZ);
 
         //compute yaw - left joystick X axis
         qint32 yaw = m_joystick->getAxis(XBOX_AXIS_LJ_X_ID);
+        yaw = (qint32) yaw * (horizontalLimit/100.0);
         applyDeadzone(yaw);
 
         //compute pitch - right joystick Y axis
         qint32 pitch = m_joystick->getAxis(XBOX_AXIS_RJ_Y_ID);
+        pitch = (qint32) pitch * (pitchRollLimit/100.0);
         applyDeadzone(pitch);
 
         //compute roll - right joystick X axis
         qint32 roll = m_joystick->getAxis(XBOX_AXIS_RJ_X_ID);
         //X axis on this joystick is a bit sketchy, so adjust
         roll += 1300;
+
+        roll = (qint32) roll * (pitchRollLimit/100.0);
         applyDeadzone(roll);
 
 
