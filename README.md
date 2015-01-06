@@ -9,13 +9,13 @@ Features:
 - [x] Looks cool  
 - [x] Compute thruster values based off of joystick input
 - [x] Use interpolator to filter thruster values
-- [ ] Compute a checksum
+- [x] Compute a checksum
+- [x] System View Section in GUI (update thurster look and functionality)
+- [x] Thruster view in GUI (make bigger size, better color)
 - [ ] Handle reading from serial
 - [ ] Mission tasks in tasks section in GUI (highlight next desired task)
-- [ ] System View Section in GUI (update thurster look and functionality)
 - [ ] System Status in GUI
 - [ ] Orientation in GUI
-- [ ] Thruster view in GUI (make bigger size, better color)
 - [ ] Configuration in GUI
 
 
