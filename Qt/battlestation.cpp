@@ -21,24 +21,27 @@ bool BattleStation::startUp() {
         return false;
     }
 
+    //set the main tick to x times a second
     m_mainTicker = new MainTicker(100);
     m_mainTickerController = new ThreadController(m_mainTicker);
+
+    //set qml engine context
     m_engine->rootContext()->setContextProperty("c_battlestation", this);
     m_mainTicker->registerInContext(m_engine->rootContext());
-
     QQmlComponent component(m_engine, QUrl(QStringLiteral("qrc:/main.qml")));
     root = component.create();
     qDebug() << "Root scene name: " << root->objectName();
 
+    //Initialize serial (hard coded in at the moment)
     //serial::initSerial("FT231X USB UART"); //OS X
     serial::initSerial(root, "USB Serial Port");  //Windows
 
+    //TODO: use dropdown to list and select devices
+
+    //give pointers to the input handler for the QML thruster sliders
     m_mainTicker->m_inputHandler->setSliders(root);
 
-
-    //QObject* horizontalControl = root->findChild<QObject*>("horizontalControl");
-    //qDebug() << horizontalControl->property("value");
-
+    //start the main tick
     m_mainTickerController->startThread();
     return true;
 }

@@ -9,7 +9,7 @@ Item {
     antialiasing: true
     width: 90
     height: 90
-    property string thrusterColor: "#696969"
+    property string thrusterColor: "#808080"
 
     Rectangle {
         id: propeller
@@ -17,6 +17,7 @@ Item {
         height: 30
         color: thrusterColor
         border.color: mainColor
+        border.width: 3
         anchors.horizontalCenter: parent.horizontalCenter
         visible: (thruster.orientation == "horizontal")
 
@@ -31,6 +32,7 @@ Item {
         width: 30
         color: thrusterColor
         border.color: mainColor
+        border.width: 3
         visible: (thruster.orientation == "horizontal")
     }
 
@@ -40,6 +42,7 @@ Item {
         radius: 50
         color: thrusterColor
         border.color: mainColor
+        border.width: 3
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: thruster.horizontalCenter
         visible: (thruster.orientation == "vertical")

@@ -136,15 +136,10 @@ void InputHandler::tick(TickClock* clock) {
         roll += 1300;
         applyDeadzone(roll);
 
-        //qDebug() << velX << velY << velZ << pitch << roll << yaw;
-
-        qDebug("H: %d, V: %d, S: %d, PR: %d", horizontalLimit, verticalLimit, strafeLimit, pitchRollLimit);
-
-
 
         qint32 thrusters [8] = {0, 0, 0, 0, 0, 0, 0, 0};
-        //Lateral Thrusters going left to right, then down, from top left
-        //Vertical Thrusters going left to right, then down, from top left
+        //Lateral Thrusters go clockwise from top left
+        //Vertical Thrusters go clockwise from top left
         //Useful subarray views
         qint32* lateralThrusters = thrusters;
         qint32* verticalThrusters = thrusters + 4;
