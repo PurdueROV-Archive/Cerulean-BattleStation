@@ -9,6 +9,9 @@
 
 #define DEADZONE 500
 
+#define XBOX
+//#define LOGITECH
+
 InputHandler::InputHandler() {
     interpolators = new Interpolator*[8];
     for (int i = 0; i < 8; i++) {
@@ -100,8 +103,18 @@ void InputHandler::tick(TickClock* clock) {
         qint32 pitchRollLimit = (qint32) pitchRollSlider->property("value").toInt();
 
         //strafe computation - left and right buttons (set to 80%)
-        bool rb = m_joystick->getButtonState(XBOX_BUTTON_RB_ID);
-        bool lb = m_joystick->getButtonState(XBOX_BUTTON_LB_ID);
+        int rbButton;
+        int lbButton;
+#ifdef XBOX
+        rbButton = XBOX_BUTTON_RB_ID;
+        lbButton = XBOX_BUTTON_LB_ID;
+#endif
+#ifdef LOGITECH
+        rbButton = LOGI_BUTTON_RB_ID;
+        lbButton = LOGI_BUTTON_LB_ID;
+#endif
+        bool rb = m_joystick->getButtonState(rbButton);
+        bool lb = m_joystick->getButtonState(lbButton);
         qint32 velX = 0;
         if (rb != lb) {
             velX = rb ? SINT16_MIN : SINT16_MAX;
@@ -113,17 +126,29 @@ void InputHandler::tick(TickClock* clock) {
         //ascend and descend computation - left and right triggers
         //Since the triggers return SINT16_MIN for neutral position and SINT16_MAX for max pull
         //We need to remap each to [0, SINT16_MAX], so we do some promotion magic
+#ifdef XBOX
         qint32 partialYRight = (((qint32) m_joystick->getAxis(XBOX_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
         qint32 partialYLeft = (((qint32) m_joystick->getAxis(XBOX_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
         qint32 velY = partialYRight - partialYLeft;
+#endif
+#ifdef LOGITECH
+        //  TODO Logitech controller unifies the two triggers to one axis
 
+#endif
         //scale to vertical limit
         velY = (qint32) velY * (verticalLimit/100.0);
         applyDeadzone(velY);
 
 
         //compute Z (forward and backward) - left joystick Y axis
-        qint32 velZ = m_joystick->getAxis(XBOX_AXIS_LJ_Y_ID);
+        qint32 velZ = m_joystick->getAxis(
+#ifdef XBOX
+                    XBOX_AXIS_LJ_Y_ID
+#endif
+#ifdef LOGITECH
+                    LOGI_AXIS_LJ_Y_ID
+#endif
+                    );
         velZ = (qint32) velZ * (velZ/100.0);
         applyDeadzone(velZ);
 
