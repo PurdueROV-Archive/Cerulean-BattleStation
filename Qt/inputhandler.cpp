@@ -94,7 +94,7 @@ void InputHandler::tick(TickClock* clock) {
          */
         m_joystick->poll();
 
-        qint32 horizontalLimit = horizontalSlider->property("value").toInt();
+        qint32 horizontalLimit = (qint32) horizontalSlider->property("value").toInt();
         qint32 verticalLimit = (qint32) verticalSlider->property("value").toInt();
         qint32 strafeLimit = (qint32) strafeSlider->property("value").toInt();
         qint32 pitchRollLimit = (qint32) pitchRollSlider->property("value").toInt();
