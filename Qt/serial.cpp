@@ -93,8 +93,8 @@ bool serial::send() {
 
         //Check if time is weirdly off, mostly for debugging
         quint64 currentTime = QDateTime::currentMSecsSinceEpoch();
-        if (currentTime-lastTime > 15) {
-            qDebug("Time off by: %d", currentTime-lastTime-10);
+        if (currentTime-lastTime > 20) {
+            qDebug("Time off by: %d", currentTime-lastTime-20);
         }
 
         lastTime = currentTime;
@@ -119,7 +119,7 @@ quint8 serial::crc8(QByteArray data) {
     quint8 crc = 0;
     int size = data.size();
 
-    for (int i = 0; i < size; ++i) {
+    for (int i = 1; i < size-2; ++i) {
 
         quint8 inbyte = data.at(i);
 

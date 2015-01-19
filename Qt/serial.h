@@ -16,7 +16,7 @@ static QSerialPort serialDevice;
 static QObject* thrusterVals[8];
 
 //packet size
-static int size = 11;
+static int size = 16;
 static QByteArray data;
 
 
