@@ -34,12 +34,23 @@ HEADERS += \
     inputhandler.h \
     interpolator.h
 
-unix:!macx|win32: LIBS += -L$$PWD/../SDL/lib/x64/ -lSDL2
+win32 {
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        # x86 / 32-bit Windows define
+        LIBS += -L$$PWD/../SDL/lib/x86/ -lSDL2
+    } else {
+        # x86_64 / 64-bit Window define
+        LIBS += -L$$PWD/../SDL/lib/x64/ -lSDL2
+    }
+}
+
 
 macx {
     QMAKE_LFLAGS += -F$$PWD/../SDL/lib/x64/
     LIBS += -framework SDL2
 }
+
+unix: LIBS += -L$$PWD/../SDL/lib/x64/ -lSDL2
 
 INCLUDEPATH += $$PWD/../SDL/include
 DEPENDPATH += $$PWD/../SDL/include
