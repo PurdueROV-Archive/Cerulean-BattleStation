@@ -604,11 +604,11 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
 
-                ComboBox {
-                    objectName: "serialSelection"
-                    width: 200
-                    model: [ "Banana", "Apple", "Coconut" ]
-                }
+//                ComboBox {
+//                    objectName: "serialSelection"
+//                    width: 200
+//                    model: c_inputHandler.joysticks
+//                }
 
             }
             
