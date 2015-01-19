@@ -8,14 +8,17 @@
 #define UINT16_MAX 65535
 
 #define DEADZONE 500
+#define MAX_CHANGE 50
 
 #define XBOX
 //#define LOGITECH
 
 InputHandler::InputHandler() {
     interpolators = new Interpolator*[8];
+    quint32 delta = (quint32) UINT16_MAX / (100 / MAX_CHANGE);
+    qDebug("%d", delta);
     for (int i = 0; i < 8; i++) {
-        interpolators[i] = new Interpolator(3000, 50);
+        interpolators[i] = new Interpolator(delta, 100);
     }
     m_joystickActive = false;
     m_joystick = NULL;
@@ -149,7 +152,7 @@ void InputHandler::tick(TickClock* clock) {
                     LOGI_AXIS_LJ_Y_ID
 #endif
                     );
-        velZ = (qint32) velZ * (velZ/100.0);
+        velZ = (qint32) velZ * (horizontalLimit/100.0);
         applyDeadzone(velZ);
 
         //compute yaw - left joystick X axis
