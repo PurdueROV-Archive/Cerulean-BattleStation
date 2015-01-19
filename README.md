@@ -23,6 +23,15 @@ How to install and run:
 -----------------------
 Download and install [Qt](http://qt-project.org/). Open project file in Qt Creater and run qmake to set up build system. Try running it and hopefully everything works. Only dependcies should be Qt and SDL. SDL libraries for Windows and OS X are included in the repository and should be configured to compile with them.
 
+Dependencies
+----------------------------
+**Fedora
+- qt5-qtserialport
+- qt5-qtdeclarative
+- qt-qtbase
+- qt-creator
+- libXi-devel
+- libXmu-devel
 
 Basic Structure Information:
 ----------------------------
