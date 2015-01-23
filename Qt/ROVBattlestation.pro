@@ -34,6 +34,7 @@ HEADERS += \
     inputhandler.h \
     interpolator.h
 
+
 win32 {
     !contains(QMAKE_TARGET.arch, x86_64) {
         # x86 / 32-bit Windows define
@@ -46,11 +47,12 @@ win32 {
 
 
 macx {
-    QMAKE_LFLAGS += -F$$PWD/../SDL/lib/x64/
     LIBS += -framework SDL2
 }
 
-unix: LIBS += -L$$PWD/../SDL/lib/x64/ -lSDL2
+unix {
+    LIBS += -L$$PWD/../SDL/lib/x64/ -lSDL2
+}
 
 INCLUDEPATH += $$PWD/../SDL/include
 DEPENDPATH += $$PWD/../SDL/include
