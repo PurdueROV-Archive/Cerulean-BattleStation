@@ -626,36 +626,129 @@ Window {
                     text: "CONFIGURATION"
                 }
 
-                Column {
-                    spacing: 10
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.margins: 20
-                    anchors.topMargin: 50
-                    anchors.top: configTitle.bottom
+                ROVBox {
+                               id: configuration
+                               anchors.left: parent.left
+                               anchors.right: parent.right
+                               anchors.margins: 10
 
-                    ROVSlider {
-                        labeltext: "Horizontal Speed Control: "
-                        objectName: "horizontalSlider"
-                    }
+                               height: parent.height - timerArea.height-20
 
-                    ROVSlider {
-                        labeltext: "Vertical Speed Control:"
-                        objectName: "verticalSlider"
-                    }
+                               ROVTitle {
+                                   id: configurationTitle
+                                   text: "CONFIGURATION"
+                               }
 
-                    ROVSlider {
-                        labeltext: "Strafe Speed Control:"
-                        objectName: "strafeSlider"
-                    }
+                               TabView {
+                                   id: configurationTab
+                                   anchors.horizontalCenter: parent.horizontalCenter
+                                   width: parent.width-30
+                                   height: parent.height
+                                   clip: true
 
-                    ROVSlider {
-                        labeltext: "Pitch/Roll Speed Control:"
-                        objectName: "pitchRollSlider"
-                    }
+                                   style: TabViewStyle {
+                                       frameOverlap: 1
+                                       tab: ROVTab {
+                                           color: styleData.selected ? "#222222" :"#000000"
+                                           clip: true
+                                           implicitWidth: (missionTasksTab.width)/3
+                                           implicitHeight: 50
+                                       }
+
+                                       frame: Rectangle {color: "transparent" }
+                                   }
+
+                                   //Configuration 1
+                                   Tab {
+                                       title: "Speed Control"
+
+                                       Flickable {
+                                           width: parent.width
+                                           height: parent.height
+                                           flickableDirection: Flickable.VerticalFlick
+                                           contentHeight: mission1tasks.height+80
+                                           contentWidth: mission1tasks.width
+                                           boundsBehavior: Flickable.StopAtBounds
+
+                                   Column {
+                                   spacing: 10
+                                   anchors.left: parent.left
+                                   anchors.right: parent.right
+                                   anchors.margins: 20
+                                   anchors.topMargin: 50
+                                   anchors.top: configTitle.bottom
+
+                                   ROVSlider {
+                                       labeltext: "Horizontal Speed Control: "
+                                       objectName: "horizontalSlider"
+                                   }
+
+                                   ROVSlider {
+                                       labeltext: "Vertical Speed Control:"
+                                       objectName: "verticalSlider"
+                                   }
+
+                                   ROVSlider {
+                                       labeltext: "Strafe Speed Control:"
+                                       objectName: "strafeSlider"
+                                   }
+
+                                   ROVSlider {
+                                       labeltext: "Pitch/Roll Speed Control:"
+                                       objectName: "pitchRollSlider"
+                                   }
 
 
-                }
+                               }
+                                       }
+                                   }
+
+                                   //Mission 2 Tasks
+                                   Tab {
+                                       title: "Configuration Settings 2"
+
+                                       Flickable {
+                                           width: parent.width
+                                           height: parent.height
+                                           flickableDirection: Flickable.VerticalFlick
+                                           contentHeight: mission2tasks.height+80
+                                           contentWidth: mission2tasks.width
+                                           boundsBehavior: Flickable.StopAtBounds
+
+                                           Column {
+                                           id: mission2tasks
+                                           y: 20
+                                           spacing: 20
+
+                                       }
+                                       }
+                                   }
+
+                                   //Mission 3 Tasks
+                                   Tab {
+                                       title: "Configuration 3"
+
+                                       Flickable {
+                                           width: parent.width
+                                           height: parent.height
+                                           flickableDirection: Flickable.VerticalFlick
+                                           contentHeight: mission3tasks.height+80
+                                           contentWidth: mission3tasks.width
+                                           boundsBehavior: Flickable.StopAtBounds
+
+                                           Column {
+                                           id: mission3tasks
+                                           y: 20
+                                           spacing: 20
+
+
+
+                                       }
+
+                                       }
+                                   }
+                               }
+                           }
             }
         }
     }
