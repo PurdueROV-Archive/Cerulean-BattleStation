@@ -21,7 +21,7 @@ Features:
 
 How to install and run:
 -----------------------
-Download and install [Qt](http://qt-project.org/). Open project file in Qt Creator and run qmake to set up build system. Try running it and hopefully everything works. Only dependcies should be Qt and SDL. SDL libraries for Windows and OS X are included in the repository and should be configured to compile with them.
+Download and install [Qt](http://qt-project.org/). Open project file in Qt Creator and run qmake to set up build system. Try running it and hopefully everything works. Only dependencies should be Qt and SDL. SDL libraries for Windows and OS X are included in the repository and should be configured to compile with them.
 
 Dependencies
 ----------------------------
@@ -56,7 +56,7 @@ Basic Structure Information:
  - **ROVThruster**: Top thruster view
  - **ROVTitle**: Title text with battlestation style
 - **Others**:  
- - There are some others small ones, but they have to do with some Qt build things. Nothing that we will editing  
+ - There are some other small ones, but they have to do with some Qt build things (nothing that we will be editing).
 
 **SDL/**: Contains SDL libraries for Windows and OS X  
 
