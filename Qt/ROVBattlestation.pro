@@ -47,7 +47,8 @@ win32 {
 
 
 macx {
-    LIBS += -framework SDL2
+     QMAKE_LFLAGS += "-F$$PWD/../SDL/lib/x64/"
+     LIBS += -framework SDL2
 }
 
 unix {
