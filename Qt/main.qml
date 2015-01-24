@@ -679,6 +679,7 @@ Window {
                                    anchors.topMargin: 50
                                    anchors.top: configTitle.bottom
 
+
                                    ROVSlider {
                                        labeltext: "Horizontal Speed Control: "
                                        objectName: "horizontalSlider"
@@ -704,7 +705,7 @@ Window {
                                        }
                                    }
 
-                                   //Mission 2 Tasks
+                                   //Configuration 2
                                    Tab {
                                        title: "Configuration Settings 2"
 
@@ -712,12 +713,12 @@ Window {
                                            width: parent.width
                                            height: parent.height
                                            flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: mission2tasks.height+80
-                                           contentWidth: mission2tasks.width
+                                           contentHeight: configsettings2.height+80
+                                           contentWidth: configsettings2.width
                                            boundsBehavior: Flickable.StopAtBounds
 
                                            Column {
-                                           id: mission2tasks
+                                           id: configsettings2
                                            y: 20
                                            spacing: 20
 
@@ -725,7 +726,7 @@ Window {
                                        }
                                    }
 
-                                   //Mission 3 Tasks
+                                   //Configuration 3
                                    Tab {
                                        title: "Configuration 3"
 
@@ -733,12 +734,12 @@ Window {
                                            width: parent.width
                                            height: parent.height
                                            flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: mission3tasks.height+80
-                                           contentWidth: mission3tasks.width
+                                           contentHeight: configsettings3.height+80
+                                           contentWidth: configsettings3.width
                                            boundsBehavior: Flickable.StopAtBounds
 
                                            Column {
-                                           id: mission3tasks
+                                           id: configsettings3
                                            y: 20
                                            spacing: 20
 
