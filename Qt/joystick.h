@@ -11,46 +11,49 @@
 //#define LOGITECH
 
 #ifdef XBOX
-#define XBOX_BUTTON_A_ID 10
-#define XBOX_BUTTON_B_ID 11
-#define XBOX_BUTTON_X_ID 12
-#define XBOX_BUTTON_Y_ID 13
-#define XBOX_BUTTON_LB_ID 8
-#define XBOX_BUTTON_RB_ID 9
-#define XBOX_BUTTON_BACK_ID 5
-#define XBOX_BUTTON_SELECT_ID 4
-#define XBOX_BUTTON_LJ_ID 6
-#define XBOX_BUTTON_RJ_ID 7
-#define XBOX_BUTTON_LP_UP 0
-#define XBOX_BUTTON_LP_DOWN 1
-#define XBOX_BUTTON_LP_LEFT 2
-#define XBOX_BUTTON_LP_RIGHT 3
-#define XBOX_AXIS_LJ_X_ID 0
-#define XBOX_AXIS_LJ_Y_ID 1
-#define XBOX_AXIS_RJ_X_ID 2
-#define XBOX_AXIS_RJ_Y_ID 3
-#define XBOX_AXIS_LTRIGG 4
-#define XBOX_AXIS_RTRIGG 5
+#define CONT_BUTTON_A_ID 10
+#define CONT_BUTTON_B_ID 11
+#define CONT_BUTTON_X_ID 12
+#define CONT_BUTTON_Y_ID 13
+#define CONT_BUTTON_LB_ID 8
+#define CONT_BUTTON_RB_ID 9
+#define CONT_BUTTON_BACK_ID 5
+#define CONT_BUTTON_SELECT_ID 4
+#define CONT_BUTTON_LJ_ID 6
+#define CONT_BUTTON_RJ_ID 7
+#define CONT_BUTTON_LP_UP 0
+#define CONT_BUTTON_LP_DOWN 1
+#define CONT_BUTTON_LP_LEFT 2
+#define CONT_BUTTON_LP_RIGHT 3
+#define CONT_AXIS_LJ_X_ID 0
+#define CONT_AXIS_LJ_Y_ID 1
+#define CONT_AXIS_RJ_X_ID 2
+#define CONT_AXIS_RJ_Y_ID 3
+#define CONT_AXIS_LTRIGG 4
+#define CONT_AXIS_RTRIGG 5
 #undef XBOX
 #endif
+
 #ifdef LOGITECH
-#define LOGI_BUTTON_A_ID 0
-#define LOGI_BUTTON_B_ID 1
-#define LOGI_BUTTON_X_ID 2
-#define LOGI_BUTTON_Y_ID 3
-#define LOGI_BUTTON_LB_ID 4
-#define LOGI_BUTTON_RB_ID 5
-#define LOGI_BUTTON_BACK_ID 6
-#define LOGI_BUTTON_SELECT_ID 7
-#define LOGI_BUTTON_LJ_ID 8
-#define LOGI_BUTTON_RJ_ID 9
-#define LOGI_AXIS_LJ_X_ID 0
-#define LOGI_AXIS_LJ_Y_ID 1
-#define LOGI_AXIS_RJ_X_ID 3
-#define LOGI_AXIS_RJ_Y_ID 4
-#define LOGI_AXIS_TRIGG 2
+#define CONT_BUTTON_A_ID 0
+#define CONT_BUTTON_B_ID 1
+#define CONT_BUTTON_X_ID 2
+#define CONT_BUTTON_Y_ID 3
+#define CONT_BUTTON_LB_ID 4
+#define CONT_BUTTON_RB_ID 5
+#define CONT_BUTTON_BACK_ID 6
+#define CONT_BUTTON_SELECT_ID 7
+#define CONT_BUTTON_LJ_ID 8
+#define CONT_BUTTON_RJ_ID 9
+#define CONT_AXIS_LJ_X_ID 0
+#define CONT_AXIS_LJ_Y_ID 1
+#define CONT_AXIS_RJ_X_ID 3
+#define CONT_AXIS_RJ_Y_ID 4
+#define CONT_AXIS_TRIGG 2
 #undef LOGITECH
 #endif
+
+
 
 struct JoystickInfo {
     int joystickId;
@@ -62,9 +65,9 @@ struct ButtonState {
     bool currentState;
 };
 
-class Joystick : public QObject
-{
+class Joystick : public QObject {
     Q_OBJECT
+
 public:
     Joystick(int joystickId);
     ~Joystick();

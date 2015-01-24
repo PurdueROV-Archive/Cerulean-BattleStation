@@ -106,16 +106,9 @@ void InputHandler::tick(TickClock* clock) {
         qint32 pitchRollLimit = (qint32) pitchRollSlider->property("value").toInt();
 
         //strafe computation - left and right buttons (set to 80%)
-        int rbButton;
-        int lbButton;
-#ifdef XBOX
-        rbButton = XBOX_BUTTON_RB_ID;
-        lbButton = XBOX_BUTTON_LB_ID;
-#endif
-#ifdef LOGITECH
-        rbButton = LOGI_BUTTON_RB_ID;
-        lbButton = LOGI_BUTTON_LB_ID;
-#endif
+        int rbButton = CONT_BUTTON_RB_ID;
+        int lbButton = CONT_BUTTON_LB_ID;
+
         bool rb = m_joystick->getButtonState(rbButton);
         bool lb = m_joystick->getButtonState(lbButton);
         qint32 velX = 0;
@@ -130,8 +123,8 @@ void InputHandler::tick(TickClock* clock) {
         //Since the triggers return SINT16_MIN for neutral position and SINT16_MAX for max pull
         //We need to remap each to [0, SINT16_MAX], so we do some promotion magic
 #ifdef XBOX
-        qint32 partialYRight = (((qint32) m_joystick->getAxis(XBOX_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
-        qint32 partialYLeft = (((qint32) m_joystick->getAxis(XBOX_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
+        qint32 partialYRight = (((qint32) m_joystick->getAxis(CONT_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
+        qint32 partialYLeft = (((qint32) m_joystick->getAxis(CONT_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
         qint32 velY = partialYRight - partialYLeft;
 #endif
 #ifdef LOGITECH
@@ -144,29 +137,22 @@ void InputHandler::tick(TickClock* clock) {
 
 
         //compute Z (forward and backward) - left joystick Y axis
-        qint32 velZ = m_joystick->getAxis(
-#ifdef XBOX
-                    XBOX_AXIS_LJ_Y_ID
-#endif
-#ifdef LOGITECH
-                    LOGI_AXIS_LJ_Y_ID
-#endif
-                    );
+        qint32 velZ = m_joystick->getAxis(CONT_AXIS_LJ_Y_ID);
         velZ = (qint32) velZ * (horizontalLimit/100.0);
         applyDeadzone(velZ);
 
         //compute yaw - left joystick X axis
-        qint32 yaw = m_joystick->getAxis(XBOX_AXIS_LJ_X_ID);
+        qint32 yaw = m_joystick->getAxis(CONT_AXIS_LJ_X_ID);
         yaw = (qint32) yaw * (horizontalLimit/100.0);
         applyDeadzone(yaw);
 
         //compute pitch - right joystick Y axis
-        qint32 pitch = m_joystick->getAxis(XBOX_AXIS_RJ_Y_ID);
+        qint32 pitch = m_joystick->getAxis(CONT_AXIS_RJ_Y_ID);
         pitch = (qint32) pitch * (pitchRollLimit/100.0);
         applyDeadzone(pitch);
 
         //compute roll - right joystick X axis
-        qint32 roll = m_joystick->getAxis(XBOX_AXIS_RJ_X_ID);
+        qint32 roll = m_joystick->getAxis(CONT_AXIS_RJ_X_ID);
         //X axis on this joystick is a bit sketchy, so adjust
         roll += 1300;
 
@@ -223,7 +209,7 @@ void InputHandler::tick(TickClock* clock) {
 
         if (maxAbsVal > SINT16_MAX) {
             //Normalize the values
-            float n = (float)SINT16_MAX / (float)maxAbsVal;
+            float n = ((float) SINT16_MAX) / ((float) maxAbsVal);
             for (int i = 0; i < 8; i++) {
                 thrusters[i] = (qint32) (n * thrusters[i]);
             }
@@ -243,9 +229,6 @@ void InputHandler::tick(TickClock* clock) {
             Thrusters[i] = convert(thrusters[i]);
         }
 
-        //qDebug("0x01: %+04d  0x02: %+04d  0x03: %+04d  0x04: %+04d  0x05: %+04d  0x06: %+04d  0x07: %+04d  0x08: %+04d",
-        //       (qint8) Thrusters[0], (qint8) Thrusters[1], (qint8) Thrusters[2], (qint8) Thrusters[3],
-        //       (qint8) Thrusters[4], (qint8) Thrusters[5], (qint8) Thrusters[6], (qint8) Thrusters[7]);
 
         //set values in serial buffer
         serial::MotorSet((quint8*) Thrusters);
