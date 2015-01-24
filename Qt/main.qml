@@ -642,7 +642,7 @@ Window {
                                TabView {
                                    id: configurationTab
                                    anchors.horizontalCenter: parent.horizontalCenter
-                                   width: parent.width-30
+                                   width: parent.width-28
                                    height: parent.height
                                    clip: true
 
@@ -651,7 +651,7 @@ Window {
                                        tab: ROVTab {
                                            color: styleData.selected ? "#222222" :"#000000"
                                            clip: true
-                                           implicitWidth: (missionTasksTab.width)/3
+                                           implicitWidth: (configurationTab.width)/3
                                            implicitHeight: 50
                                        }
 
@@ -666,11 +666,12 @@ Window {
                                            width: parent.width
                                            height: parent.height
                                            flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: mission1tasks.height+80
-                                           contentWidth: mission1tasks.width
+                                           contentHeight: speedcontrol.height+80
+                                           contentWidth: speedcontrol.width
                                            boundsBehavior: Flickable.StopAtBounds
 
                                    Column {
+                                   id: speedcontrol
                                    spacing: 10
                                    anchors.left: parent.left
                                    anchors.right: parent.right
