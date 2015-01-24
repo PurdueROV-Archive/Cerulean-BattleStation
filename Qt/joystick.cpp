@@ -34,21 +34,21 @@ QString* Joystick::init() {
 }
 
 qint16 Joystick::getAxis(int axisId) {
-    if (axisId < m_axes.length() && axisId >= 0) {
+    if (axisId >= 0 && axisId < m_axes.length()) {
         return m_axes.at(axisId);
     }
     return 0;
 }
 
 bool Joystick::getButtonState(int buttonId) {
-    if (buttonId < m_buttons.length() && buttonId > 0) {
+    if (buttonId >= 0 && buttonId < m_buttons.length()) {
         return m_buttons.at(buttonId).currentState;
     }
     return false;
 }
 
 bool Joystick::getHasButtonJustBeenReleased(int buttonId) {
-    if (buttonId < m_buttons.length() && buttonId >= 0) {
+    if (buttonId >= 0 && buttonId < m_buttons.length()) {
         ButtonState state = m_buttons.at(buttonId);
         return !state.currentState && state.lastState;
     }
@@ -56,7 +56,7 @@ bool Joystick::getHasButtonJustBeenReleased(int buttonId) {
 }
 
 bool Joystick::getHasButtonJustBeenPressed(int buttonId) {
-    if (buttonId < m_buttons.length() && buttonId >= 0) {
+    if (buttonId >= 0 && buttonId < m_buttons.length()) {
         ButtonState state = m_buttons.at(buttonId);
         return state.currentState && !state.lastState;
     }
@@ -76,6 +76,7 @@ void Joystick::poll() {
     int numAxes = getNumAxes();
     int numButtons = getNumButtons();
     SDL_Event event;
+
     while (SDL_PollEvent(&event)) {
         switch(event.type) {
         case SDL_JOYBUTTONDOWN:
@@ -86,6 +87,7 @@ void Joystick::poll() {
             break;
         }
     }
+
     for (int i = 0; i < numAxes; i++) {
         qint16 oldVal = m_axes[i];
         qint16 newVal = SDL_JoystickGetAxis(m_joystick, i);
@@ -94,6 +96,7 @@ void Joystick::poll() {
             emit axisChanged(i, newVal, newVal - oldVal);
         }
     }
+
     for (int i = 0; i < numButtons; i++) {
         ButtonState state;
         state.lastState = m_buttons.at(i).currentState;
