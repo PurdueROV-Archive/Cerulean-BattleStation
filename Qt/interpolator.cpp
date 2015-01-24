@@ -15,16 +15,9 @@ qint16 Interpolator::lerp(qint16 newTarget) {
     if (current == target) {
         return current;
     }
-    //  If we're falling towards zero do it instantly
-#ifdef FALL_FAST
-    if ((target > 0 && current > target) ||
-            (target < 0 && current < target)) {
-        current = target;
-        return current;
-    }
-#endif
-    //  Otherwise start incrementing towards the target
-    //  But cap at sign(delta) * maxDelta
+
+    // Start incrementing towards the value we want
+    // But cap at sign(delta) * maxDelta
     qint32 delta = target - current;
     if (abs(delta) > maxDelta) {
         qint32 sign = delta > 0 ? 1 : -1;
