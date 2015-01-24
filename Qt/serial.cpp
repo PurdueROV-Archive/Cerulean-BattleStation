@@ -25,7 +25,7 @@ void serial::initSerial(QObject* root, QString device) {
         qDebug() << info.description();
         if (info.description() == device) {
             serialDevice.setPort(info);
-            serialDevice.setBaudRate(115200);
+            serialDevice.setBaudRate(19200);
         }
     }
 
