@@ -613,26 +613,13 @@ Window {
             }
             
             //Config Details
-            ROVBox {
-                id: config
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.margins: 10
-
-                height: (parent.height/2) - 10
-
-                ROVTitle {
-                    id: configTitle
-                    text: "CONFIGURATION"
-                }
-
                 ROVBox {
                                id: configuration
                                anchors.left: parent.left
                                anchors.right: parent.right
                                anchors.margins: 10
 
-                               height: parent.height - timerArea.height-20
+                               height: (parent.height/2) - 10
 
                                ROVTitle {
                                    id: configurationTitle
@@ -642,6 +629,10 @@ Window {
                                TabView {
                                    id: configurationTab
                                    anchors.horizontalCenter: parent.horizontalCenter
+                                   anchors.top: configurationTitle.bottom
+                                   anchors.left: parent.left
+                                   anchors.right: parent.right
+                                   anchors.margins: 10
                                    width: parent.width-28
                                    height: parent.height
                                    clip: true
@@ -677,7 +668,7 @@ Window {
                                    anchors.right: parent.right
                                    anchors.margins: 20
                                    anchors.topMargin: 50
-                                   anchors.top: configTitle.bottom
+                                   anchors.top: configTitle.bottom + 50
 
 
                                    ROVSlider {
@@ -707,7 +698,7 @@ Window {
 
                                    //Configuration 2
                                    Tab {
-                                       title: "Configuration Settings 2"
+                                       title: "Serial and Controller"
 
                                        Flickable {
                                            width: parent.width
@@ -751,7 +742,7 @@ Window {
                                    }
                                }
                            }
-            }
+
         }
     }
 }
