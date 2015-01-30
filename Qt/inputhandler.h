@@ -20,6 +20,7 @@ class InputHandler : public QObject
     bool m_joystickActive;
     QList<JoystickInfo> m_joysticks;
     Interpolator** interpolators;
+    //static bool open = true;
 
 public:
     InputHandler();

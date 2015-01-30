@@ -24,6 +24,7 @@ class serial
 {
 public:
     static void initSerial(QObject* root, QString device);
+    static bool open();
     static bool set(quint8 i, quint8 d);
     static bool MotorSet(quint8 thrusters[]);
     static bool send();

@@ -613,136 +613,130 @@ Window {
             }
             
             //Config Details
-                ROVBox {
-                               id: configuration
-                               anchors.left: parent.left
-                               anchors.right: parent.right
-                               anchors.margins: 10
+            ROVBox {
+                id: configuration
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: 10
 
-                               height: (parent.height/2) - 10
+                height: (parent.height/2) - 10
 
-                               ROVTitle {
-                                   id: configurationTitle
-                                   text: "CONFIGURATION"
-                               }
+                ROVTitle {
+                    id: configurationTitle
+                    text: "CONFIGURATION"
+                }
 
-                               TabView {
-                                   id: configurationTab
-                                   anchors.horizontalCenter: parent.horizontalCenter
-                                   anchors.top: configurationTitle.bottom
-                                   anchors.left: parent.left
-                                   anchors.right: parent.right
-                                   anchors.margins: 10
-                                   width: parent.width-28
-                                   height: parent.height
-                                   clip: true
+                TabView {
+                    id: configurationTab
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: configurationTitle.bottom
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.margins: 10
+                    width: parent.width-28
+                    height: parent.height
+                    clip: true
+                    style: TabViewStyle {
+                        frameOverlap: 1
+                        tab: ROVTab {
+                            color: styleData.selected ? "#222222" :"#000000"
+                            clip: true
+                            implicitWidth: (configurationTab.width)/3
+                            implicitHeight: 50
+                        }
 
-                                   style: TabViewStyle {
-                                       frameOverlap: 1
-                                       tab: ROVTab {
-                                           color: styleData.selected ? "#222222" :"#000000"
-                                           clip: true
-                                           implicitWidth: (configurationTab.width)/3
-                                           implicitHeight: 50
-                                       }
+                        frame: Rectangle {color: "transparent" }
+                    }
 
-                                       frame: Rectangle {color: "transparent" }
-                                   }
-
-                                   //Configuration 1
-                                   Tab {
-                                       title: "Speed Control"
-
-                                       Flickable {
-                                           width: parent.width
-                                           height: parent.height
-                                           flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: speedcontrol.height+80
-                                           contentWidth: speedcontrol.width
-                                           boundsBehavior: Flickable.StopAtBounds
-
-                                   Column {
-                                   id: speedcontrol
-                                   spacing: 10
-                                   anchors.left: parent.left
-                                   anchors.right: parent.right
-                                   anchors.margins: 20
-                                   anchors.topMargin: 50
-                                   anchors.top: configTitle.bottom + 50
+                    //Configuration 1
+                    Tab {
+                        title: "Speed Control"
 
 
-                                   ROVSlider {
-                                       labeltext: "Horizontal Speed Control: "
-                                       objectName: "horizontalSlider"
-                                   }
+                        Flickable {
+                        width: parent.width
+                        height: parent.height
+                        anchors.top: configurationTab.bottom - 50
+                        flickableDirection: Flickable.VerticalFlick
+                        contentHeight: speedcontrol.height+80
+                        contentWidth: speedcontrol.width
+                        boundsBehavior: Flickable.StopAtBounds
 
-                                   ROVSlider {
-                                       labeltext: "Vertical Speed Control:"
-                                       objectName: "verticalSlider"
-                                   }
-
-                                   ROVSlider {
-                                       labeltext: "Strafe Speed Control:"
-                                       objectName: "strafeSlider"
-                                   }
-
-                                   ROVSlider {
-                                       labeltext: "Pitch/Roll Speed Control:"
-                                       objectName: "pitchRollSlider"
-                                   }
+                            Column {
+                                id: speedcontrol
+                                spacing: 10
+                                anchors.left: parent.left
+                                anchors.right: parent.right
+                                anchors.margins: 20
+                                anchors.topMargin: parent.top + 50
+                                //anchors.top: configTitle.bottom + 50
 
 
-                               }
-                                       }
-                                   }
+                                ROVSlider {
+                                    labeltext: "Horizontal Speed Control: "
+                                    objectName: "horizontalSlider"
+                                }
 
-                                   //Configuration 2
-                                   Tab {
-                                       title: "Serial and Controller"
+                                ROVSlider {
+                                    labeltext: "Vertical Speed Control:"
+                                    objectName: "verticalSlider"
+                                }
 
-                                       Flickable {
-                                           width: parent.width
-                                           height: parent.height
-                                           flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: configsettings2.height+80
-                                           contentWidth: configsettings2.width
-                                           boundsBehavior: Flickable.StopAtBounds
+                                ROVSlider {
+                                    labeltext: "Strafe Speed Control:"
+                                    objectName: "strafeSlider"
+                                }
 
-                                           Column {
-                                           id: configsettings2
-                                           y: 20
-                                           spacing: 20
+                                ROVSlider {
+                                    labeltext: "Pitch/Roll Speed Control:"
+                                    objectName: "pitchRollSlider"
+                                }
 
-                                       }
-                                       }
-                                   }
+                            }
+                        }
+                    }
 
-                                   //Configuration 3
-                                   Tab {
-                                       title: "Configuration 3"
+                    //Configuration 2
+                    Tab {
+                    title: "Serial and Controller"
 
-                                       Flickable {
-                                           width: parent.width
-                                           height: parent.height
-                                           flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: configsettings3.height+80
-                                           contentWidth: configsettings3.width
-                                           boundsBehavior: Flickable.StopAtBounds
+                        Flickable {
+                            width: parent.width
+                            height: parent.height
+                            flickableDirection: Flickable.VerticalFlick
+                            contentHeight: configsettings2.height+80
+                            contentWidth: configsettings2.width
+                            boundsBehavior: Flickable.StopAtBounds
 
-                                           Column {
-                                           id: configsettings3
-                                           y: 20
-                                           spacing: 20
+                            Column {
+                                id: configsettings2
+                                y: 20
+                                spacing: 20
+                            }
+                        }
+                    }
 
+                    //Configuration 3
+                    Tab {
+                        title: "Configuration 3"
 
+                        Flickable {
+                            width: parent.width
+                            height: parent.height
+                            flickableDirection: Flickable.VerticalFlick
+                            contentHeight: configsettings3.height+80
+                            contentWidth: configsettings3.width
+                            boundsBehavior: Flickable.StopAtBounds
 
-                                       }
-
-                                       }
-                                   }
-                               }
-                           }
-
+                            Column {
+                                id: configsettings3
+                                y: 20
+                                spacing: 20
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

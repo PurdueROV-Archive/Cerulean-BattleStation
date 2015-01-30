@@ -231,7 +231,13 @@ void InputHandler::tick(TickClock* clock) {
 
 
         //set values in serial buffer
-        serial::MotorSet((quint8*) Thrusters);
+        bool success = serial::MotorSet((quint8*) Thrusters);
+
+        if (!success) {
+            //serial::open;
+            qDebug("disconnect");
+        }
+
 
     }
     //  Every ten seconds update the list of joysticks

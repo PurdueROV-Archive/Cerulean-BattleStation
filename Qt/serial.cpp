@@ -37,6 +37,10 @@ void serial::initSerial(QObject* root, QString device) {
 
 }
 
+bool serial::open() {
+    return serialDevice.open(QIODevice::ReadWrite);
+}
+
 
 //Setter for setting a byte at a position
 //Should only be used internally
