@@ -326,53 +326,53 @@ Window {
                             boundsBehavior: Flickable.StopAtBounds
 
                             Column {
-                            id: mission2tasks
-                            y: 20
-                            spacing: 20
+                                id: mission2tasks
+                                y: 20
+                                spacing: 20
 
-                            ROVMissionTask {
-                                text: "Find corroded pipe section - 5pts"
+                                ROVMissionTask {
+                                    text: "Find corroded pipe section - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Turn valve to stop oil flow - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Verify gauge pressure is zero - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Measure corroded pipe section - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Attach lift line to corroded section - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Pull pins to cut corroded section (2 sections) - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Remove corroded pipe to surface - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Install flange adapter (2 installations) - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Insert bolts to secure flanges (2 flanges) - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Remove wellhead cover - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Install wellhead gasket - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Replace wellhead cover - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Insert hot stab into wellhead port - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Remove hot stab and return to surface - 5pts"
+                                }
                             }
-                            ROVMissionTask {
-                                text: "Turn valve to stop oil flow - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Verify gauge pressure is zero - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Measure corroded pipe section - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Attach lift line to corroded section - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Pull pins to cut corroded section (2 sections) - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Remove corroded pipe to surface - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Install flange adapter (2 installations) - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Insert bolts to secure flanges (2 flanges) - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Remove wellhead cover - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Install wellhead gasket - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Replace wellhead cover - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Insert hot stab into wellhead port - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Remove hot stab and return to surface - 5pts"
-                            }
-                        }
                         }
                     }
 
@@ -389,45 +389,45 @@ Window {
                             boundsBehavior: Flickable.StopAtBounds
 
                             Column {
-                            id: mission3tasks
-                            y: 20
-                            spacing: 20
+                                id: mission3tasks
+                                y: 20
+                                spacing: 20
 
 
-                            ROVMissionTask {
-                                text: "Test first anode - 10pts"
+                                ROVMissionTask {
+                                    text: "Test first anode - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Test second anode - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Test third anode - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Test fourth anode - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Measure wellhead height - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Measure wellhead length - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Calculate wellhead angle - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Evaluate pipeline system oil flow - 5pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Open/Close all 6 valves - 10pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Move water through pipeway - 20pts"
+                                }
+                                ROVMissionTask {
+                                    text: "Determine average flow rate - 10pts"
+                                }
                             }
-                            ROVMissionTask {
-                                text: "Test second anode - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Test third anode - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Test fourth anode - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Measure wellhead height - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Measure wellhead length - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Calculate wellhead angle - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Evaluate pipeline system oil flow - 5pts"
-                            }
-                            ROVMissionTask {
-                                text: "Open/Close all 6 valves - 10pts"
-                            }
-                            ROVMissionTask {
-                                text: "Move water through pipeway - 20pts"
-                            }
-                            ROVMissionTask {
-                                text: "Determine average flow rate - 10pts"
-                            }
-                        }
 
                         }
                     }
@@ -604,145 +604,125 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
 
-//                ComboBox {
-//                    objectName: "serialSelection"
-//                    width: 200
-//                    model: c_inputHandler.joysticks
-//                }
+                //                ComboBox {
+                //                    objectName: "serialSelection"
+                //                    width: 200
+                //                    model: c_inputHandler.joysticks
+                //                }
 
             }
             
             //Config Details
-                ROVBox {
-                               id: configuration
-                               anchors.left: parent.left
-                               anchors.right: parent.right
-                               anchors.margins: 10
+            ROVBox {
+                id: configuration
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: 10
 
-                               height: (parent.height/2) - 10
+                height: (parent.height/2) - 10
 
-                               ROVTitle {
-                                   id: configurationTitle
-                                   text: "CONFIGURATION"
-                               }
+                ROVTitle {
+                    id: configurationTitle
+                    text: "CONFIGURATION"
+                }
 
-                               TabView {
-                                   id: configurationTab
-                                   anchors.horizontalCenter: parent.horizontalCenter
-                                   anchors.top: configurationTitle.bottom
-                                   anchors.left: parent.left
-                                   anchors.right: parent.right
-                                   anchors.margins: 10
-                                   width: parent.width-28
-                                   height: parent.height
-                                   clip: true
+                TabView {
+                    id: configurationTab
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top: configurationTitle.bottom
+                    width: parent.width-30
+                    height: parent.height
+                    clip: true
 
-                                   style: TabViewStyle {
-                                       frameOverlap: 1
-                                       tab: ROVTab {
-                                           color: styleData.selected ? "#222222" :"#000000"
-                                           clip: true
-                                           implicitWidth: (configurationTab.width)/3
-                                           implicitHeight: 50
-                                       }
+                    style: TabViewStyle {
+                        frameOverlap: 1
+                        tab: ROVTab {
+                            color: styleData.selected ? "#222222" :"#000000"
+                            clip: true
+                            implicitWidth: (configurationTab.width)/3
+                            implicitHeight: 50
+                        }
 
-                                       frame: Rectangle {color: "transparent" }
-                                   }
+                        frame: Rectangle {color: "transparent" }
+                    }
 
-                                   //Configuration 1
-                                   Tab {
-                                       title: "Speed Control"
+                    //Configuration 1
+                    Tab {
+                        id: tab1
+                        title: "Speed Control"
 
-                                       Flickable {
-                                           width: parent.width
-                                           height: parent.height
-                                           flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: speedcontrol.height+80
-                                           contentWidth: speedcontrol.width
-                                           boundsBehavior: Flickable.StopAtBounds
+                        Column {
+                            id: speedcontrol
+                            spacing: 10
+                            y: 20
 
-                                   Column {
-                                   id: speedcontrol
-                                   spacing: 10
-                                   anchors.left: parent.left
-                                   anchors.right: parent.right
-                                   anchors.margins: 20
-                                   anchors.topMargin: 50
-                                   anchors.top: configTitle.bottom + 50
+                            ROVSlider {
+                                labeltext: "Horizontal Speed Control: "
+                                objectName: "horizontalSlider"
+                            }
 
+                            ROVSlider {
+                                labeltext: "Vertical Speed Control:"
+                                objectName: "verticalSlider"
+                            }
 
-                                   ROVSlider {
-                                       labeltext: "Horizontal Speed Control: "
-                                       objectName: "horizontalSlider"
-                                   }
+                            ROVSlider {
+                                labeltext: "Strafe Speed Control:"
+                                objectName: "strafeSlider"
+                            }
 
-                                   ROVSlider {
-                                       labeltext: "Vertical Speed Control:"
-                                       objectName: "verticalSlider"
-                                   }
+                            ROVSlider {
+                                labeltext: "Pitch/Roll Speed Control:"
+                                objectName: "pitchRollSlider"
+                            }
+                        }
+                    }
 
-                                   ROVSlider {
-                                       labeltext: "Strafe Speed Control:"
-                                       objectName: "strafeSlider"
-                                   }
+                    //Configuration 2
+                    Tab {
+                        title: "Serial and Controller"
 
-                                   ROVSlider {
-                                       labeltext: "Pitch/Roll Speed Control:"
-                                       objectName: "pitchRollSlider"
-                                   }
+                        Flickable {
+                            width: parent.width
+                            height: parent.height
+                            flickableDirection: Flickable.VerticalFlick
+                            contentHeight: configsettings2.height+80
+                            contentWidth: configsettings2.width
+                            boundsBehavior: Flickable.StopAtBounds
 
+                            Column {
+                                id: configsettings2
+                                y: 20
+                                spacing: 20
 
-                               }
-                                       }
-                                   }
+                            }
+                        }
+                    }
 
-                                   //Configuration 2
-                                   Tab {
-                                       title: "Serial and Controller"
+                    //Configuration 3
+                    Tab {
+                        title: "Configuration 3"
 
-                                       Flickable {
-                                           width: parent.width
-                                           height: parent.height
-                                           flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: configsettings2.height+80
-                                           contentWidth: configsettings2.width
-                                           boundsBehavior: Flickable.StopAtBounds
+                        Flickable {
+                            width: parent.width
+                            height: parent.height
+                            flickableDirection: Flickable.VerticalFlick
+                            contentHeight: configsettings3.height+80
+                            contentWidth: configsettings3.width
+                            boundsBehavior: Flickable.StopAtBounds
 
-                                           Column {
-                                           id: configsettings2
-                                           y: 20
-                                           spacing: 20
-
-                                       }
-                                       }
-                                   }
-
-                                   //Configuration 3
-                                   Tab {
-                                       title: "Configuration 3"
-
-                                       Flickable {
-                                           width: parent.width
-                                           height: parent.height
-                                           flickableDirection: Flickable.VerticalFlick
-                                           contentHeight: configsettings3.height+80
-                                           contentWidth: configsettings3.width
-                                           boundsBehavior: Flickable.StopAtBounds
-
-                                           Column {
-                                           id: configsettings3
-                                           y: 20
-                                           spacing: 20
+                            Column {
+                                id: configsettings3
+                                y: 20
+                                spacing: 20
 
 
 
-                                       }
-
-                                       }
-                                   }
-                               }
-                           }
-
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
