@@ -15,7 +15,7 @@ void Serial::Init() {
 }
 
 void Serial::SetMotorValues(quint8 values[]) {
-    QMutexLocker locker(packet_mutex_);  //  Mutex auto releases when funct returns
+    QMutexLocker locker(&packet_mutex_);  //  Mutex auto releases when funct returns
     control_packet_.motorHTL = values[0];
     control_packet_.motorHTR = values[1];
     control_packet_.motorHBR = values[2];
@@ -27,16 +27,16 @@ void Serial::SetMotorValues(quint8 values[]) {
 }
 
 void Serial::EnqueueToolEvent(quint16 value, quint16 mask) {
-    QMutexLocker locker(tool_mutex_);   //  Mutex auto releases when funct returns
+    QMutexLocker locker(&tool_mutex_);   //  Mutex auto releases when funct returns
     tool_events_.enqueue((mask << 16) | value);
 }
 
-quint8 crc8(quint8 bytes[], int size) {
+quint8 crc8(char bytes[], int size) {
     quint8 crc = 0;
     quint8 val;
     quint8 mix;
     for (int i = 1; i < size - 2; ++i) {
-        val = packet[i];
+        val = bytes[i];
         for (int j = 8; j; --j) {
             mix = (crc ^ val) & 0x01;
             crc >>= 1;
@@ -55,8 +55,8 @@ void Serial::NetworkTick() {
 
     } else {
         if (serial_port_->isWritable()) {
-            QMutexLocker locker(packet_mutex_);
-            QMutexLocker tool_locker(tool_mutex_);
+            QMutexLocker locker(&packet_mutex_);
+            QMutexLocker tool_locker(&tool_mutex_);
             quint16 change_mask = 0;
             quint32 item;
             quint16 mask;
@@ -66,10 +66,10 @@ void Serial::NetworkTick() {
                 mask = (item >> 16) & 0xFFFF;
                 val = item & 0xFFFF;
                 //  If we have overlap then we're done for now
-                if (changeMask & mask) {
+                if (change_mask & mask) {
                     break;
                 }
-                tool_events.dequeue();
+                tool_events_.dequeue();
                 //  Mark those bits as changed
                 change_mask |= mask;
                 //  Apply change
@@ -77,7 +77,7 @@ void Serial::NetworkTick() {
             }
             tool_locker.unlock();
 
-            int size = size;
+            int size = control_packet_.size;
             quint8 motors[8];
             motors[0] = control_packet_.motorHTL;
             motors[1] = control_packet_.motorHTR;
@@ -88,7 +88,7 @@ void Serial::NetworkTick() {
             motors[6] = control_packet_.motorVBR;
             motors[7] = control_packet_.motorVBL;
             //  Remapping
-            quint8 bytes[control_packet_.size];
+            char bytes[control_packet_.size];
             bytes[0] = control_packet_.header;
             for (int i = 0; i < 8; ++i) {
                 int newId = motor_mapping_[i];
