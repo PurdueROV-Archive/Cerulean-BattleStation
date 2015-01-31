@@ -98,7 +98,7 @@ bool serial::send() {
         //Check if time is weirdly off, mostly for debugging
         quint64 currentTime = QDateTime::currentMSecsSinceEpoch();
         if (currentTime-lastTime > 20) {
-            qDebug("Time off by: %d", currentTime-lastTime-20);
+            qDebug("Time off by: %llu", currentTime-lastTime-20);
         }
 
         lastTime = currentTime;
