@@ -23,7 +23,7 @@ class InputHandler : public QObject
 
 public:
     InputHandler();
-    ~InputHandler();
+    //~InputHandler();
 
     /**
       * Sets the current/active joystick to the stick at the given index.

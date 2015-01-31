@@ -7,26 +7,22 @@
 #define SINT16_MIN -32768
 #define UINT16_MAX 65535
 
-#define DEADZONE 500
+#define DEADZONE 1500
 #define MAX_CHANGE 50
 
-#define XBOX
+//#define XBOX
 //#define LOGITECH
+#define MAC_XBOX
 
 InputHandler::InputHandler() {
     interpolators = new Interpolator*[8];
     quint32 delta = (quint32) UINT16_MAX / (100 / MAX_CHANGE);
-    qDebug("%d", delta);
     for (int i = 0; i < 8; i++) {
         interpolators[i] = new Interpolator(delta, 100);
     }
     m_joystickActive = false;
     m_joystick = NULL;
     setJoystick(0);
-}
-
-InputHandler::~InputHandler() {
-
 }
 
 void InputHandler::setJoystick(int index) {
@@ -81,6 +77,7 @@ quint8 convert(qint32 val) {
 void InputHandler::tick(TickClock* clock) {
 
     if (m_joystick != NULL) {
+
         /*
          * Control Scheme
          * LeftJoystick
@@ -122,15 +119,23 @@ void InputHandler::tick(TickClock* clock) {
         //ascend and descend computation - left and right triggers
         //Since the triggers return SINT16_MIN for neutral position and SINT16_MAX for max pull
         //We need to remap each to [0, SINT16_MAX], so we do some promotion magic
-#ifdef XBOX
-        qint32 partialYRight = (((qint32) m_joystick->getAxis(CONT_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
-        qint32 partialYLeft = (((qint32) m_joystick->getAxis(CONT_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
-        qint32 velY = partialYRight - partialYLeft;
-#endif
-#ifdef LOGITECH
-        //  TODO Logitech controller unifies the two triggers to one axis
 
-#endif
+        #ifdef XBOX
+            qint32 partialYRight = (((qint32) m_joystick->getAxis(CONT_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
+            qint32 partialYLeft = (((qint32) m_joystick->getAxis(CONT_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
+            qint32 velY = partialYRight - partialYLeft;
+        #endif
+
+        #ifdef MAC_XBOX
+            qint32 partialYRight = (((qint32) m_joystick->getAxis(CONT_AXIS_RTRIGG)) + -(SINT16_MIN)) / 2;
+            qint32 partialYLeft = (((qint32) m_joystick->getAxis(CONT_AXIS_LTRIGG)) + -(SINT16_MIN)) / 2;
+            qint32 velY = partialYRight - partialYLeft;
+        #endif
+        #ifdef LOGITECH
+            //  TODO Logitech controller unifies the two triggers to one axis
+
+        #endif
+
         //scale to vertical limit
         velY = (qint32) velY * (verticalLimit/100.0);
         applyDeadzone(velY);
@@ -201,17 +206,32 @@ void InputHandler::tick(TickClock* clock) {
         //scale down values to SINT16_MAX if greater than SINT16_MAX (somehow magically happened)
         qint32 maxAbsVal = 0;
 
-        for (int i = 0; i < 8; i++) {
-            if (abs(thrusters[i]) > maxAbsVal) {
-                maxAbsVal = abs(thrusters[i]);
+        for (int i = 0; i < 4; i++) {
+            if (abs(lateralThrusters[i]) > maxAbsVal) {
+                maxAbsVal = abs(lateralThrusters[i]);
             }
         }
 
         if (maxAbsVal > SINT16_MAX) {
             //Normalize the values
             float n = ((float) SINT16_MAX) / ((float) maxAbsVal);
-            for (int i = 0; i < 8; i++) {
-                thrusters[i] = (qint32) (n * thrusters[i]);
+            for (int i = 0; i < 4; i++) {
+                lateralThrusters[i] = (qint32) (n * lateralThrusters[i]);
+            }
+        }
+
+        maxAbsVal = 0;
+        for (int i = 0; i < 4; i++) {
+            if (abs(verticalThrusters[i]) > maxAbsVal) {
+                maxAbsVal = abs(verticalThrusters[i]);
+            }
+        }
+
+        if (maxAbsVal > SINT16_MAX) {
+            //Normalize the values
+            float n = ((float) SINT16_MAX) / ((float) maxAbsVal);
+            for (int i = 0; i < 4; i++) {
+                verticalThrusters[i] = (qint32) (n * verticalThrusters[i]);
             }
         }
 
@@ -232,6 +252,9 @@ void InputHandler::tick(TickClock* clock) {
 
         //set values in serial buffer
         serial::MotorSet((quint8*) Thrusters);
+
+        qDebug("%d, %d, %d, %d, %d, %d", m_joystick->getAxis(0), m_joystick->getAxis(1), m_joystick->getAxis(2), m_joystick->getAxis(3),
+               m_joystick->getAxis(4), m_joystick->getAxis(5));
 
     }
     //  Every ten seconds update the list of joysticks
