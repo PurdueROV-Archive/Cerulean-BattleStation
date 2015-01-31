@@ -11,6 +11,7 @@
 #.dylib
 
 # Qt-es
+.DS_Store
 
 /.qmake.cache
 /.qmake.stash
