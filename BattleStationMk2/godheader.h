@@ -4,7 +4,8 @@
 #include <QObject>
 
 struct SerialControlPacket {
-    quint8 header;
+    const int size = 16;
+    const quint8 header = 0x12;
     quint8 motorHTL;
     quint8 motorHTR;
     quint8 motorHBR;
@@ -18,7 +19,7 @@ struct SerialControlPacket {
     quint8 blue;
     quint8 green;
     quint8 crc8;
-    quint8 footer;
+    const quint8 footer = 0x13;
 };
 
 

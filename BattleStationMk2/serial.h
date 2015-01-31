@@ -5,6 +5,8 @@
 #include <QQueue>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QtSerialPort/QSerialPort>
+#include <QtSerialPort/QSerialPortInfo>
 #include "godheader.h"
 
 /**
@@ -21,6 +23,10 @@ class Serial : public QObject
     QQueue<quint32> tool_events_;
     /** The singleton control packet we use. Make a copy to send values */
     SerialControlPacket control_packet_;
+
+    /** The serial port over which we communicate */
+    QSerialPort* serial_port_;
+
 
 public:
     explicit Serial(QObject *parent = 0);
