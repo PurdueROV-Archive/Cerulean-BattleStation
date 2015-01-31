@@ -95,7 +95,7 @@ Window {
             anchors.leftMargin: 0
 
             //Timer Container
-            ROVBox {
+            GUITimer{
                 id: timerArea
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -103,120 +103,6 @@ Window {
 
                 height: 110
 
-
-                //Timer Title
-                ROVTitle {
-                    id: timerTitle
-                    text: "TIMER"
-                }
-
-                //Timer
-                Timer {
-                    id: timerTrigger
-                    interval:500; running:false; repeat: true;
-                    onTriggered: {
-                        var tempTime = Math.floor(((new Date).getTime() - startTime)/1000);
-                        var secs = (tempTime % 60);
-                        var mins = Math.floor(tempTime/60);
-
-                        secs = secs < 10 ? secs = "0" + secs : secs;
-                        mins = mins < 10 ? mins = "0" + mins : mins;
-
-                        timer.text =  mins + ":" + secs;
-                    }
-                }
-
-                //Holder for buttons and text
-                Item {
-                    id: timerRow
-                    anchors.top: timerTitle.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: 10
-
-
-                    //Start button
-                    ROVButton {
-                        id: startBtn
-                        height: 70
-                        width: 150
-                        text: qsTr("START")
-                        anchors.left: parent.left
-                        anchors.leftMargin: 30
-                        anchors.verticalCenter: parent.verticalCenter
-                        enabled: true
-                        MouseArea {
-                            id: startButton
-                            height: startBtn.height
-                            width: startBtn.width
-                            anchors.fill: parent
-                            onClicked: {
-                                if (timerTrigger.running) {
-                                    timerTrigger.stop();
-                                    stopResetBtn.enabled = true;
-                                    delta = (new Date).getTime() - startTime;
-                                    startBtn.text = "RESUME";
-                                } else {
-                                    timerTrigger.running = true;
-                                    stopResetBtn.enabled = false;
-                                    startBtn.text = "PAUSE";
-                                    if (startTime == 0) {
-                                        startTime = (new Date).getTime();
-                                    } else {
-                                        startTime = (new Date).getTime() - delta;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    //Stop button
-                    ROVButton {
-                        id: stopResetBtn
-                        height: 70
-                        width: 150
-                        text: qsTr("RESET")
-                        anchors.right: parent.right
-                        anchors.rightMargin: 30
-                        anchors.verticalCenter: parent.verticalCenter
-                        enabled: false
-                        MouseArea {
-                            id:stopButton
-                            height: stopResetBtn.height
-                            width: stopResetBtn.width
-                            anchors.fill: parent
-                            onClicked: {
-                                if (!timerTrigger.running) {
-                                    timerTrigger.running = false;
-                                    stopResetBtn.enabled = false;
-                                    startBtn.text = "START";
-                                    timer.text = "00:00";
-                                    startTime = 0;
-                                }
-                            }
-                        }
-                    }
-
-                    //Timer text
-                    Text {
-                        id: timer
-                        y: 0
-                        width: 171
-                        height: 70
-                        text: "00:00"
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        verticalAlignment: Text.AlignVCenter
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.horizontalCenterOffset: 0
-
-                        color: mainColor
-                        font.family: "Arial"
-                        font.bold: true
-                        horizontalAlignment: Text.AlignHCenter
-                        font.pixelSize: 56
-                    }
-                }
             }
 
 
@@ -257,60 +143,7 @@ Window {
                     //Mission 1 Tasks
                     Tab {
                         title: "Science Under the Ice"
-
-                        Flickable {
-                            width: parent.width
-                            height: parent.height
-                            flickableDirection: Flickable.VerticalFlick
-                            contentHeight: mission1tasks.height+80
-                            contentWidth: mission1tasks.width
-                            boundsBehavior: Flickable.StopAtBounds
-
-                            Column {
-                                id: mission1tasks
-                                width: parent.width
-                                y: 20
-                                spacing: 20
-
-                                ROVMissionTask {
-                                    text: "Return algae sample - 5pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Remove sea urchin - 5pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Return sea urchin - 5pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Count and identify star species - 10pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Deploy acoustic sensor - 10pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Survey iceberg at 4 points - 5pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Measure iceberg keel depth - 10pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Measure iceberg diameter - 10pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Calculate iceberg volume - 5pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Map location of iceberg from coordinates - 10pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Determine iceberg threat to surface platforms - 10pts"
-                                }
-                                ROVMissionTask {
-                                    text: "Determine iceberg threat to subsea assets - 10pts"
-                                }
-
-                            }
-                        }
+                        MissionOneTasks{}
                     }
 
                     //Mission 2 Tasks

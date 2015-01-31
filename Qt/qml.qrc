@@ -9,5 +9,7 @@
         <file>ROVMissionTask.qml</file>
         <file>ROVTitle.qml</file>
         <file>ROVThruster.qml</file>
+        <file>GUITimer.qml</file>
+        <file>MissionOneTasks.qml</file>
     </qresource>
 </RCC>
