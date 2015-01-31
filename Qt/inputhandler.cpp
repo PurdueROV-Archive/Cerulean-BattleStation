@@ -251,7 +251,13 @@ void InputHandler::tick(TickClock* clock) {
 
 
         //set values in serial buffer
-        serial::MotorSet((quint8*) Thrusters);
+        bool success = serial::MotorSet((quint8*) Thrusters);
+
+        if (!success) {
+            //serial::open;
+            qDebug("disconnect");
+        }
+
 
         qDebug("%d, %d, %d, %d, %d, %d", m_joystick->getAxis(0), m_joystick->getAxis(1), m_joystick->getAxis(2), m_joystick->getAxis(3),
                m_joystick->getAxis(4), m_joystick->getAxis(5));

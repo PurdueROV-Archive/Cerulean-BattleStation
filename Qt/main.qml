@@ -680,6 +680,7 @@ Window {
 
                     //Configuration 2
                     Tab {
+
                         title: "Serial and Controller"
 
                         Flickable {
@@ -694,7 +695,6 @@ Window {
                                 id: configsettings2
                                 y: 20
                                 spacing: 20
-
                             }
                         }
                     }
@@ -715,8 +715,6 @@ Window {
                                 id: configsettings3
                                 y: 20
                                 spacing: 20
-
-
 
                             }
                         }
