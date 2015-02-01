@@ -13,9 +13,10 @@
         <file>MissionOneTasks.qml</file>
         <file>MissionTwoTasks.qml</file>
         <file>MissionThreeTasks.qml</file>
-        <file>GUIMissionTasks.qml</file>
         <file>LeftColumn.qml</file>
         <file>CenterColumn.qml</file>
         <file>RightColumn.qml</file>
+        <file>SystemView.qml</file>
+        <file>Orientation.qml</file>
     </qresource>
 </RCC>
