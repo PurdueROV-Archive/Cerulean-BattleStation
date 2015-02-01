@@ -18,5 +18,7 @@
         <file>RightColumn.qml</file>
         <file>SystemView.qml</file>
         <file>Orientation.qml</file>
+        <file>SystemDetails.qml</file>
+        <file>ConfigDetails.qml</file>
     </qresource>
 </RCC>
