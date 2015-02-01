@@ -1,24 +1,24 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>ROVButton.qml</file>
-        <file>ROVBox.qml</file>
-        <file>ROVSlider.qml</file>
-        <file>ROVComboBox.qml</file>
-        <file>ROVTab.qml</file>
-        <file>ROVMissionTask.qml</file>
-        <file>ROVTitle.qml</file>
-        <file>ROVThruster.qml</file>
-        <file>GUITimer.qml</file>
-        <file>MissionOneTasks.qml</file>
-        <file>MissionTwoTasks.qml</file>
-        <file>MissionThreeTasks.qml</file>
-        <file>LeftColumn.qml</file>
         <file>CenterColumn.qml</file>
-        <file>RightColumn.qml</file>
-        <file>SystemView.qml</file>
-        <file>Orientation.qml</file>
-        <file>SystemDetails.qml</file>
         <file>ConfigDetails.qml</file>
+        <file>GUITimer.qml</file>
+        <file>LeftColumn.qml</file>
+        <file>MissionOneTasks.qml</file>
+        <file>MissionThreeTasks.qml</file>
+        <file>MissionTwoTasks.qml</file>
+        <file>Orientation.qml</file>
+        <file>RightColumn.qml</file>
+        <file>ROVBox.qml</file>
+        <file>ROVButton.qml</file>
+        <file>ROVComboBox.qml</file>
+        <file>ROVMissionTask.qml</file>
+        <file>ROVSlider.qml</file>
+        <file>ROVTab.qml</file>
+        <file>ROVThruster.qml</file>
+        <file>ROVTitle.qml</file>
+        <file>SystemDetails.qml</file>
+        <file>SystemView.qml</file>
     </qresource>
 </RCC>
