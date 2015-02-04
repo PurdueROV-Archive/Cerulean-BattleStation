@@ -7,6 +7,7 @@
 #include <QMutexLocker>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include <QIODevice>
 #include "godheader.h"
 
 /**
@@ -39,9 +40,15 @@ public:
     ~Serial();
 
     /**
-     * Initializes the serial system
+     * Opens the serial port with the given name.
+     * Returns true if successful, false otherwise. Call GetError() for details.
      */
-    void Init();
+    bool Open(QString deviceName, int newParameter = 19200);
+
+    /**
+     * Gets the last error, or QSerialPort::NoError if no error.
+     */
+    SerialPortError GetError();
 
     /**
      * Set the current motor values. Value changes are not guaranteed to be sent immediately

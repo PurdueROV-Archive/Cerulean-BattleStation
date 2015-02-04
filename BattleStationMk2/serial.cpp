@@ -1,5 +1,7 @@
 #include "serial.h"
 
+#define BAUD_RATE 19200
+
 Serial::Serial(QObject *parent) : QObject(parent)
 {
 
@@ -10,8 +12,21 @@ Serial::~Serial()
 
 }
 
-void Serial::Init() {
+bool Serial::Open(QString deviceName) {
+    bool found = false;
+    foreach(const QSerialPortInfo &info, QSerialPortInfo::availablePorts()) {
+        if (info.description() == deviceName) {
+            serial_port_->setPort(info);
+            serial_port_->setBaudRate(BAUD_RATE);
+            found = true;
+            break;
+        }
+    }
+    return serial_port_->open(QIODevice::ReadWrite);
+}
 
+SerialPortError Serial::GetError() {
+    return QSerialPort::NoError;
 }
 
 void Serial::SetMotorValues(quint8 values[]) {
