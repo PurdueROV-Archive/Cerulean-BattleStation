@@ -88,7 +88,8 @@ void Serial::NetworkTick() {
             motors[6] = control_packet_.motorVBR;
             motors[7] = control_packet_.motorVBL;
             //  Remapping
-            char bytes[control_packet_.size];
+            //  Some compilers don't realize that size is a const and makes a fuss
+            char bytes[/*control_packet_.size*/ 16];
             bytes[0] = control_packet_.header;
             for (int i = 0; i < 8; ++i) {
                 int newId = motor_mapping_[i];
