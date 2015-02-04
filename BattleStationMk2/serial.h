@@ -18,21 +18,21 @@ class Serial : public QObject
     Q_OBJECT
 
     /** Mutex lock to ensure singular access to control_packet_ */
-    QMutex packet_mutex_;
+    QMutex m_packet_mutex;
 
     /** Mutex lock to ensure singular access to the tool queue */
-    QMutex tool_mutex_;
+    QMutex m_tool_mutex;
 
     /** A queue containing transformations to SerialControlPacket::toolBits */
-    QQueue<quint32> tool_events_;
+    QQueue<quint32> m_tool_events;
     /** The singleton control packet we use. Make a copy to send values */
-    SerialControlPacket control_packet_;
+    SerialControlPacket m_control_packet;
 
     /** The serial port over which we communicate */
-    QSerialPort* serial_port_;
+    QSerialPort* m_serial_port;
 
     /** An array to remap internal motor IDs to wire IDs */
-    quint8 motor_mapping_[8];
+    quint8 m_motor_mapping[8];
 
 
 public:
