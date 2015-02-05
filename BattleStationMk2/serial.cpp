@@ -28,7 +28,7 @@ bool Serial::Open(QString deviceName) {
     return m_serial_port->open(QIODevice::ReadWrite);
 }
 
-SerialPortError Serial::GetError() {
+QSerialPort::SerialPortError Serial::GetError() {
     return QSerialPort::NoError;
 }
 
@@ -108,7 +108,7 @@ void Serial::NetworkTick() {
             //  Remapping
             //  Some compilers don't realize that size is a const and makes a fuss
             char bytes[/*control_packet_.size*/ 16];
-            bytes[0] = control_packet_.header;
+            bytes[0] = m_control_packet.header;
             for (int i = 0; i < 8; ++i) {
                 int newId = m_motor_mapping[i];
                 bytes[1 + newId] = motors[i];
