@@ -10,6 +10,7 @@
 #include <QIODevice>
 #include "godheader.h"
 
+
 /**
  * Establishes and maintains the serial connection to the robot.
  */
@@ -25,8 +26,26 @@ class Serial : public QObject
 
     /** A queue containing transformations to SerialControlPacket::toolBits */
     QQueue<quint32> m_tool_events;
+
     /** The singleton control packet we use. Make a copy to send values */
-    SerialControlPacket m_control_packet;
+    struct SerialControlPacket {
+        const int size = 16;
+        const quint8 header = 0x12;
+        quint8 motorHTL;
+        quint8 motorHTR;
+        quint8 motorHBR;
+        quint8 motorHBL;
+        quint8 motorVTL;
+        quint8 motorVTR;
+        quint8 motorVBR;
+        quint8 motorVBL;
+        quint16 toolBits;
+        quint8 red;
+        quint8 blue;
+        quint8 green;
+        quint8 crc8;
+        const quint8 footer = 0x13;
+    } m_control_packet;
 
     /** The serial port over which we communicate */
     QSerialPort* m_serial_port;
