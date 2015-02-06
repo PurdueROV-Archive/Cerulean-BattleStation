@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick serialport core widgets
 
 SOURCES += main.cpp \
     serial.cpp \

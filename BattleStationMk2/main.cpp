@@ -11,8 +11,6 @@ int main(int argc, char *argv[])
 
     QQmlEngine engine;
     QMLBattleStationContext context;
-    Serial serial;
-    context.SetObject("serial", &serial);
     engine.rootContext()->setContextProperty(QString("context"), &context);
     QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
     component.create();
