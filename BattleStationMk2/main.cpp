@@ -2,13 +2,11 @@
 #include <QQmlEngine>
 #include <QQmlComponent>
 #include <QQmlContext>
-#include "qmlbattlestationcontext.h"
-#include "serial.h"
+#include "godheader.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
     QQmlEngine engine;
     QMLBattleStationContext context;
     engine.rootContext()->setContextProperty(QString("context"), &context);

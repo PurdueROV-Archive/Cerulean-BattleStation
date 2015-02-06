@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "SDL.h"
+#undef main
 
 /**
  * An enumeration of all standard buttons. Implementations should remap raw button IDs to
