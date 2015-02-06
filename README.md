@@ -1,6 +1,8 @@
 2015 BattleStation for X7
 =========================
 
+[![Build status](https://ci.appveyor.com/api/projects/status/xu3vg99k99cliubr?svg=true)](https://ci.appveyor.com/project/vincentzhang96/battlestation)
+
 Features:
 ---------------------
 - [x] SDL joystick compatbility
