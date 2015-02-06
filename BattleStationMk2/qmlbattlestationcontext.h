@@ -12,29 +12,12 @@
 class QMLBattleStationContext : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QMap<QString, void *> objects READ Objects NOTIFY ObjectsChanged)
 
-    /**
-     * This is scary. Register things to this, fetch them from QML by name.
-     * I don't know if this will work.
-     */
-    QMap<QString, void *> m_objects;
-
+    //  I have come to a conclusion that using a map won't work. ~Vince
 
 public:
     explicit QMLBattleStationContext(QObject *parent = 0);
     ~QMLBattleStationContext();
-
-    void SetObject(QString name, void * object) {
-        m_objects.insert(name, &object);
-    }
-
-    /**
-     * Objects property getter
-     */
-    QMap<QString, void*> Objects() const {
-        return m_objects;
-    }
 
 signals:
     void ObjectsChanged();
