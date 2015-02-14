@@ -259,8 +259,8 @@ void InputHandler::tick(TickClock* clock) {
         }
 
 
-        qDebug("%d, %d, %d, %d, %d, %d", m_joystick->getAxis(0), m_joystick->getAxis(1), m_joystick->getAxis(2), m_joystick->getAxis(3),
-               m_joystick->getAxis(4), m_joystick->getAxis(5));
+        //qDebug("%d, %d, %d, %d, %d, %d", m_joystick->getAxis(0), m_joystick->getAxis(1), m_joystick->getAxis(2), m_joystick->getAxis(3),
+        //       m_joystick->getAxis(4), m_joystick->getAxis(5));
 
     }
     //  Every ten seconds update the list of joysticks
