@@ -37,7 +37,9 @@ enum Axis {
     LEFT_JOY_Y,
     /** The composite of the two triggers. Positive is more RIGHT pull, negative LEFT */
     TRIGGER_TOTAL,
+    /** Trigger values are 0.0-1.0 **/
     RIGHT_TRIGGER,
+    /** Trigger values are 0.0-1.0 **/
     LEFT_TRIGGER
 };
 

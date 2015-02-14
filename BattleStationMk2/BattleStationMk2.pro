@@ -5,7 +5,8 @@ QT += qml quick serialport core widgets
 SOURCES += main.cpp \
     serial.cpp \
     qmlbattlestationcontext.cpp \
-    genericjoystick.cpp
+    genericjoystick.cpp \
+    xboxjoystick.cpp
 
 RESOURCES += qml.qrc
 
@@ -19,7 +20,8 @@ HEADERS += \
     serial.h \
     godheader.h \
     qmlbattlestationcontext.h \
-    genericjoystick.h
+    genericjoystick.h \
+    xboxjoystick.h
 
 win32 {
 
