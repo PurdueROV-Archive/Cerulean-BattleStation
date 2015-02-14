@@ -70,7 +70,7 @@ bool serial::MotorSet(quint8 thrusters[]) {
     for (int i = 0; i < 8; ++i) {
         set(i, thrusters[i]) && worked;
         if (worked) {
-            qint8 num = (thrusters[i] & 0x80) ? (-100*(0x7F & thrusters[i]))/128 : (100*(0x7F & thrusters[i]))/128;
+            qint8 num = (thrusters[i] & 0x80) ? (-101*(0x7F & thrusters[i]))/128 : (101*(0x7F & thrusters[i]))/128;
             text = text.number(num);
             thrusterVals[i]->setProperty("value", text);
         }
