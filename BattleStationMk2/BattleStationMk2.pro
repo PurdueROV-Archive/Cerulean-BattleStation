@@ -4,7 +4,8 @@ QT += qml quick serialport core widgets
 
 SOURCES += main.cpp \
     serial.cpp \
-    qmlbattlestationcontext.cpp
+    qmlbattlestationcontext.cpp \
+    genericjoystick.cpp
 
 RESOURCES += qml.qrc
 

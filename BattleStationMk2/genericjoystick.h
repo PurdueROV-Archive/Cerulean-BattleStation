@@ -83,6 +83,12 @@ public:
     ~GenericJoystick();
 
     /**
+     * Initializes the joystick after creation (opens the device, assigns values, etc).
+     * Call GetSDLError() to check for failure afterwords.
+     */
+    virtual void InitJoystick() = 0;
+
+    /**
      * Gets the last updated value for the given Axis
      */
     virtual float GetAxis(Axis axis) = 0;
@@ -95,6 +101,11 @@ public:
      * Performs polling/event handling. Call from the primary ticking thread.
      */
     virtual void Tick() = 0;
+
+    /**
+     * Gets the last error SDL had.
+     */
+    QString GetSDLError();
 
 signals:
     /** Signalled when a button has been pressed down */
