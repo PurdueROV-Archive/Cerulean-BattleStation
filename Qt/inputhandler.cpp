@@ -62,6 +62,28 @@ void applyDeadzone(qint32 &val) {
     }
 }
 
+void normalize(qint32 values[], int size) {
+    qint32 valuesMax = 0;
+    qint32 max = SINT16_MAX;
+
+    //get Max value
+    for (int i = 0; i < size; i++) {
+        if (abs(values[i]) > max) {
+            valuesMax = abs(values[i]);
+        }
+    }
+
+    if (valuesMax > max) {
+        //Normalize the values based off max
+        float n = ((float) max) / ((float) valuesMax);
+        for (int i = 0; i < size; i++) {
+            values[i] = (qint32) (n * values[i]);
+        }
+    }
+
+
+}
+
 //convert from raw value to packet version
 quint8 convert(qint32 val) {
     quint8 ret = 0;
@@ -203,38 +225,9 @@ void InputHandler::tick(TickClock* clock) {
         verticalThrusters[2] += roll;
         verticalThrusters[3] -= roll;
 
-        //scale down values to SINT16_MAX if greater than SINT16_MAX (somehow magically happened)
-        qint32 maxAbsVal = 0;
 
-        for (int i = 0; i < 4; i++) {
-            if (abs(lateralThrusters[i]) > maxAbsVal) {
-                maxAbsVal = abs(lateralThrusters[i]);
-            }
-        }
-
-        if (maxAbsVal > SINT16_MAX) {
-            //Normalize the values
-            float n = ((float) SINT16_MAX) / ((float) maxAbsVal);
-            for (int i = 0; i < 4; i++) {
-                lateralThrusters[i] = (qint32) (n * lateralThrusters[i]);
-            }
-        }
-
-        maxAbsVal = 0;
-        for (int i = 0; i < 4; i++) {
-            if (abs(verticalThrusters[i]) > maxAbsVal) {
-                maxAbsVal = abs(verticalThrusters[i]);
-            }
-        }
-
-        if (maxAbsVal > SINT16_MAX) {
-            //Normalize the values
-            float n = ((float) SINT16_MAX) / ((float) maxAbsVal);
-            for (int i = 0; i < 4; i++) {
-                verticalThrusters[i] = (qint32) (n * verticalThrusters[i]);
-            }
-        }
-
+        normalize(lateralThrusters, 4);
+        normalize(verticalThrusters, 4);
 
         //do linear interpolation (so we don't ramp up/down too fast)
         for (int i = 0; i < 8; i++) {
@@ -249,16 +242,13 @@ void InputHandler::tick(TickClock* clock) {
             Thrusters[i] = convert(thrusters[i]);
         }
 
-
-        //set values in serial buffer
-        bool success = serial::MotorSet((quint8*) Thrusters);
-
-        if (!success) {
-            //serial::open;
+        if (!serial::MotorSet((quint8*) Thrusters)) {
+            serial::open();
             qDebug("disconnect");
         }
 
 
+        //Debug statement
         //qDebug("%d, %d, %d, %d, %d, %d", m_joystick->getAxis(0), m_joystick->getAxis(1), m_joystick->getAxis(2), m_joystick->getAxis(3),
         //       m_joystick->getAxis(4), m_joystick->getAxis(5));
 
