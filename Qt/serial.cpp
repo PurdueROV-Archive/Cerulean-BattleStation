@@ -68,7 +68,7 @@ bool serial::MotorSet(quint8 thrusters[]) {
     QString text = QString();
 
     for (int i = 0; i < 8; ++i) {
-        set(i, thrusters[i]) && worked;
+        set(i+1, thrusters[i]) && worked;
         if (worked) {
             qint8 num = (thrusters[i] & 0x80) ? (-101*(0x7F & thrusters[i]))/128 : (101*(0x7F & thrusters[i]))/128;
             text = text.number(num);
@@ -91,6 +91,7 @@ bool serial::send() {
     //Set the checksum byte to a crc8 of the array
     //this includes C5 is the checksum byte going in and why we make a copy
     sendArray[sendArray.size()-2] = crc8(sendArray);
+    serial::print(sendArray);
 
 
     if (serialDevice.isWritable()) {
@@ -145,7 +146,8 @@ void serial::print(QByteArray data) {
     int size = data.size();
     qDebug("Size: %d", size);
     for (int i = 0; i < size; ++i) {
-        qDebug("[%02x]: [%d]", (quint8) data.at(i), (quint8) data.at(i));
+        qint8 num = (data[i] & 0x80) ? (-101*(0x7F & data[i]))/128 : (101*(0x7F & data[i]))/128;
+        qDebug("[%d]: [%d]", (quint8) data.at(i), num);
     }
 
 
