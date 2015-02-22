@@ -7,8 +7,8 @@
 #include "SDL.h"
 #undef main
 
-#define XBOX
-//#define MAC_XBOX
+//#define XBOX
+#define MAC_XBOX
 //#define LOGITECH
 
 #ifdef XBOX

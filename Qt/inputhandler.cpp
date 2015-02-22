@@ -84,6 +84,21 @@ void normalize(qint32 values[], int size) {
 
 }
 
+void swap(quint8* array, int i1, int i2) {
+    i1--; i2--;
+    quint8 temp = *(array+i1);
+    *(array+i1) = *(array+i2);
+    *(array+i2) = temp;
+}
+
+
+void remap(quint8* Thrusters) {
+    //Swap values for thrusters
+    //Currently 4 & 8 to since
+    //4 and 5 do not work correctly
+    swap(Thrusters, 4, 8);
+}
+
 //convert from raw value to packet version
 quint8 convert(qint32 val) {
     quint8 ret = 0;
@@ -181,7 +196,7 @@ void InputHandler::tick(TickClock* clock) {
         //compute roll - right joystick X axis
         qint32 roll = m_joystick->getAxis(CONT_AXIS_RJ_X_ID);
         //X axis on this joystick is a bit sketchy, so adjust
-        roll += 1300;
+        //roll += 1300;
 
         roll = (qint32) roll * (pitchRollLimit/100.0);
         applyDeadzone(roll);
@@ -241,6 +256,8 @@ void InputHandler::tick(TickClock* clock) {
         for (int i = 0; i < 8; ++i) {
             Thrusters[i] = convert(thrusters[i]);
         }
+
+        remap((quint8*) Thrusters);
 
         if (!serial::MotorSet((quint8*) Thrusters)) {
             serial::open();

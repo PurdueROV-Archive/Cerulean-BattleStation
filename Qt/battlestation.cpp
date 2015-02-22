@@ -33,8 +33,8 @@ bool BattleStation::startUp() {
     qDebug() << "Root scene name: " << root->objectName();
 
     //Initialize serial (hard coded in at the moment)
-    //serial::initSerial("FT231X USB UART"); //OS X
-    serial::initSerial(root, "USB Serial Port");  //Windows
+    serial::initSerial(root, "ROV Hybris"); //OS X
+    //serial::initSerial(root, "USB Serial Port");  //Windows
 
     //TODO: use dropdown to list and select devices
 

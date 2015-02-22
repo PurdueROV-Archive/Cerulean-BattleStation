@@ -46,7 +46,7 @@ ROVBox {
             value: qsTr("N/A")
         }
         ROVThruster {
-            objectName: "t4";
+            objectName: "t8"; //renamed to 8 for fix
             orientation: "horizontal";
             rotation: 203;
             value: qsTr("N/A")
@@ -65,7 +65,7 @@ ROVBox {
         rows: 2
         spacing: 12
         ROVThruster {
-            objectName: "t5";
+            objectName: "t9"; //renamed because not used
             orientation: "vertical";
             value: qsTr("N/A")
         }
@@ -80,7 +80,7 @@ ROVBox {
             value: qsTr("N/A")
         }
         ROVThruster {
-            objectName: "t8";
+            objectName: "t9"; //renamed because not used
             orientation: "vertical";
             value: qsTr("N/A")
         }
