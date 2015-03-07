@@ -1,23 +1,26 @@
 Packet Spec
 
-0x12 = Header byte  
-Motor 1 = Signed int (1 byte)   
-Motor 2 = Signed int (1 byte)  
-Motor 3 = Signed int (1 byte)  
-Motor 4 = Signed int (1 byte)  
-Motor 5 = Signed int (1 byte)  
-Motor 6 = Signed int (1 byte)  
-Motor 7 = Signed int (1 byte)  
-Motor 8 = Signed int (1 byte)  
-Tools 1 = 1 bit more each state of tool (maybe more if tool is complex)  
-Foot Turning Motor = Signed int (1 byte) 
-LED1 = 1 byte  
-LED2 = 1 byte  
-LED3 = 1 byte  
-LED4 = 1 byte  
-LED5 = 1 byte  
-CRC 8 checksum (use 0xD5 as polynomial)  
-0x13 = Tail Byte  
+
+Byte # | Description | Type
+-------|-------------|------
+  00   |    Header   | 0x12 - 18 decimal
+  01   |   Motor 1   | Signed int (1 byte)   
+  02   |   Motor 2   | Signed int (1 byte)   
+  03   |   Motor 3   | Signed int (1 byte)   
+  04   |   Motor 4   | Signed int (1 byte)   
+  05   |   Motor 5   | Signed int (1 byte)   
+  06   |   Motor 6   | Signed int (1 byte)   
+  07   |   Motor 7   | Signed int (1 byte)   
+  08   |   Motor 8   | Signed int (1 byte)   
+  09   | Foot Turner | Signed int (1 byte) 
+  10   |   Tools 1   | 1 bit more each state of tool (check below)
+  11   |    LED1     | 1 byte (0 to 255 PWM Val)
+  12   |    LED2     | 1 byte (0 to 255 PWM Val)
+  13   |    LED3     | 1 byte (0 to 255 PWM Val)
+  14   |    LED4     | 1 byte (0 to 255 PWM Val)
+  15   |    LED5     | 1 byte (0 to 255 PWM Val)
+  16   | CRC8 Check  | (use 0xD5 as polynomial)  
+  17   | Tail Byte   | 0x13 - 19 decimal
 
 
 Motor signed bit representation (and foot turner)
@@ -64,8 +67,7 @@ Claw States
    111 | Do nothing  
    
 
-Laser Tool: 1 bit for controller whether the horizontal or
-vertical stepper move l/r and 3 bits for 0 to 7 steps to move
+Laser Tool: 1 bit for controller whether the horizontal or vertical stepper move l/r and 3 bits for 0 to 7 steps to move
 
 Bit # | State (0)  | State (1)  
 ------|------------|----------
@@ -77,3 +79,24 @@ Bit # | State (0)  | State (1)
   6   | Step Amnt  | Step Amnt
   7   | Step Amnt  | Step Amnt
   8   | Step Amnt  | Step Amnt
+
+
+CRC8 Code: this code ignores the first byte (header), and the last byte (Tail). Make sure that the CS values is set to "0xC5" before running the code through.
+
+char crc8(char bytes[], int size) {
+  char crc = 0;
+  char val;
+  char mix;
+  for (int i = 1; i < size - 2; ++i) {
+    val = bytes[i];
+    for (int j = 8; j; --j) {
+      mix = (crc ^ val) & 0x01;
+      crc >>= 1;
+      if (mix) {
+        crc ^= 0xD5;
+      }
+      val >>= 1;
+    }
+  }
+  return crc;
+}
