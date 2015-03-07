@@ -26,21 +26,21 @@ void XboxJoystick::InitJoystick() {
 
 float XboxJoystick::GetAxis(Axis axis) {
     switch (axis) {
-    case Axis::LEFT_JOY_X:
+    case LEFT_JOY_X:
         return m_axes[XBOX_AXIS_LJ_X];
-    case Axis::LEFT_JOY_Y:
+    case LEFT_JOY_Y:
         return m_axes[XBOX_AXIS_LJ_Y];
-    case Axis::RIGHT_JOY_X:
+    case RIGHT_JOY_X:
         return m_axes[XBOX_AXIS_RJ_X];
-    case Axis::RIGHT_JOY_Y:
+    case RIGHT_JOY_Y:
         return m_axes[XBOX_AXIS_RJ_Y];
-    case Axis::LEFT_TRIGGER:
+    case LEFT_TRIGGER:
         return m_axes[XBOX_AXIS_LTRIGG];
-    case Axis::RIGHT_TRIGGER:
+    case RIGHT_TRIGGER:
         return m_axes[XBOX_AXIS_RTRIGG];
-    case Axis::TRIGGER_TOTAL:
-        return GetAxis(Axis::RIGHT_TRIGGER) -
-                GetAxis(Axis::LEFT_TRIGGER);
+    case TRIGGER_TOTAL:
+        return GetAxis(RIGHT_TRIGGER) -
+                GetAxis(LEFT_TRIGGER);
     default:
         return 0.0;
     }
@@ -48,33 +48,33 @@ float XboxJoystick::GetAxis(Axis axis) {
 
 ButtonState XboxJoystick::GetButtonState(Button button) {
     switch (button) {
-    case Button::A:
+    case A:
         return m_buttons[XBOX_BUTTON_A];
-    case Button::B:
+    case B:
         return m_buttons[XBOX_BUTTON_B];
-    case Button::X:
+    case X:
         return m_buttons[XBOX_BUTTON_X];
-    case Button::Y:
+    case Y:
         return m_buttons[XBOX_BUTTON_Y];
-    case Button::BACK:
+    case BACK:
         return m_buttons[XBOX_BUTTON_BACK];
-    case Button::SELECT:
+    case SELECT:
         return m_buttons[XBOX_BUTTON_SELECT];
-    case Button::RIGHT_BUMPER:
+    case RIGHT_BUMPER:
         return m_buttons[XBOX_BUTTON_RB];
-    case Button::LEFT_BUMPER:
+    case LEFT_BUMPER:
         return m_buttons[XBOX_BUTTON_LB];
-    case Button::DPAD_UP:
+    case DPAD_UP:
         return m_buttons[XBOX_BUTTON_LP_UP];
-    case Button::DPAD_DOWN:
+    case DPAD_DOWN:
         return m_buttons[XBOX_BUTTON_LP_DOWN];
-    case Button::DPAD_LEFT:
+    case DPAD_LEFT:
         return m_buttons[XBOX_BUTTON_LP_LEFT];
-    case Button::DPAD_RIGHT:
+    case DPAD_RIGHT:
         return m_buttons[XBOX_BUTTON_LP_RIGHT];
-    case Button::RIGHT_JOY_PRESS:
+    case RIGHT_JOY_PRESS:
         return m_buttons[XBOX_BUTTON_LJ];
-    case Button::LEFT_JOY_PRESS:
+    case LEFT_JOY_PRESS:
         return m_buttons[XBOX_BUTTON_RJ];
     default:
         return ButtonState();
