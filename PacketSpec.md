@@ -23,8 +23,8 @@ Byte # | Description | Type
   17   | Tail Byte   | 0x13 - 19 decimal
 
 
-Motor signed bit representation (and foot turner)
-Use bit masking to get the sign bit, and then the motor value  
+Motor signed bit representation (and foot turner)  
+Use bit masking to get the sign bit, and then the motor value 
 Scale the percentage from 0 to 127 to 0% to 100%  
 
 Bit Values | Dec Value | Motor Percent 
@@ -67,7 +67,8 @@ Claw States
    111 | Do nothing  
    
 
-Laser Tool: 1 bit for controller whether the horizontal or vertical stepper move l/r and 3 bits for 0 to 7 steps to move
+Laser Tool: 1 bit for controller whether the horizontal or vertical  
+stepper move l/r and 3 bits for 0 to 7 steps to move
 
 Bit # | State (0)  | State (1)  
 ------|------------|----------
@@ -81,8 +82,10 @@ Bit # | State (0)  | State (1)
   8   | Step Amnt  | Step Amnt
 
 
-CRC8 Code: this code ignores the first byte (header), and the last byte (Tail). Make sure that the CS values is set to "0xC5" before running the code through.
+CRC8 Code: this code ignores the first byte (header), and the last byte (Tail).  
+Make sure that the CS values is set to "0xC5" before running the code through.
 
+```c
 char crc8(char bytes[], int size) {
   char crc = 0;
   char val;
@@ -100,3 +103,4 @@ char crc8(char bytes[], int size) {
   }
   return crc;
 }
+```
