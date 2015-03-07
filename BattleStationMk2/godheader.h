@@ -7,6 +7,9 @@
 
 #include <QObject>
 
+#define MAX_DELTA 25
+
+
 struct Interpolator {
     float current;
     float target;
@@ -18,7 +21,7 @@ struct Interpolator {
             return current;
         }
         float delta = target - current;
-        if (abs(delta) > maxDelta) {
+        if (abs(delta) > MAX_DELTA) {
             delta = (delta < 0 ? -1.0 : 1.0) * max_delta_per_tick;
         }
         current += delta;
