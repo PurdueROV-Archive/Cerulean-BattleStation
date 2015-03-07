@@ -51,7 +51,7 @@ Bit # |   Tool   | State (0)  | State (1)
 
 
 Claw States
- Value | State
+ Value | State  
 -------|--------------------------------
    000 | Do Nothing  
    001 | Open  
@@ -65,7 +65,7 @@ Claw States
 
 Laser Tool: 1 bit for controller whether the horizontal or
 vertical stepper move l/r and 3 bits for 0 to 7 steps to move
-Bit # | State (0)  | State (1)
+Bit # | State (0)  | State (1)  
 ------|------------|----------
   1   | H - Left   | H - Right
   2   | Step Amnt  | Step Amnt
