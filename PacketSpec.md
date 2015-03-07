@@ -37,20 +37,21 @@ Bit Values | Dec Value | Motor Percent
 Tool Representation (Subject to change depending on tools)  
 Use bit masking to get off the values you need (magic!)  
 
-Tool Byte 1
-Bit # |   Tool   | State (0)  | State (1)  
-------|----------|------------|----------  
-  1   |Cam Mux 1 |      Front | Back  
-  2   |Cam Mux 2 |     Side 1 | Side 2  
-  3   |  Bilge   |        Off | On  
-  4   |   Volt   |        Off | On 
-  5   |  Laser   |        Off | On
-  6   |  Claw 1  |        Off | Open  
-  7   |  Claw 2  |        Off | Close  
-  8   |  Claw 3  |    No Par. | Parallel  
+Tool Byte 1  
 
+Bit # |    Tool   | State (0)  | State (1)  
+------|-----------|------------|----------  
+  1   | Cam Mux 1 |      Front | Back  
+  2   | Cam Mux 2 |     Side 1 | Side 2  
+  3   |  Bilge    |        Off | On  
+  4   |   Volt    |        Off | On 
+  5   |  Laser    |        Off | On  
+  6   |  Claw 1   |        Off | Open  
+  7   |  Claw 2   |        Off | Close  
+  8   |  Claw 3   |    No Par. | Parallel  
 
 Claw States
+
  Value | State  
 -------|--------------------------------
    000 | Do Nothing  
@@ -65,6 +66,7 @@ Claw States
 
 Laser Tool: 1 bit for controller whether the horizontal or
 vertical stepper move l/r and 3 bits for 0 to 7 steps to move
+
 Bit # | State (0)  | State (1)  
 ------|------------|----------
   1   | H - Left   | H - Right
