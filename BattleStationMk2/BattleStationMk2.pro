@@ -37,15 +37,16 @@ win32 {
     }
 }
 
+macx {
+    INCLUDEPATH += $$PWD/../SDL/include
+    INCLUDEPATH += -F/Library/Frameworks
+    QMAKE_LFLAGS += -F/Library/Frameworks/ -framework SDL2
+
+    CCFLAG += -std=c++11
+}
+
 #linux-g++ {
 #    LIBS += -L$$PWD/../SDL/lib/x64/ -lSDL2
 #    INCLUDEPATH += $$PWD/../SDL/include
 #    DEPENDPATH += $$PWD/../SDL/include
 #}
-
-
-macx {
-    INCLUDEPATH += $$PWD/../SDL/include
-    INCLUDEPATH += -F/Library/Frameworks
-    QMAKE_LFLAGS += -F/Library/Frameworks/ -framework SDL2
-}
