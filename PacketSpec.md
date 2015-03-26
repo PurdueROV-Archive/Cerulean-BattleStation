@@ -12,15 +12,17 @@ Byte # | Description | Type
   06   |   Motor 6   | Signed int (1 byte)   
   07   |   Motor 7   | Signed int (1 byte)   
   08   |   Motor 8   | Signed int (1 byte)   
-  09   | Foot Turner | Signed int (1 byte) 
-  10   |   Tools 1   | 1 bit more each state of tool (check below)
-  11   |    LED1     | 1 byte (0 to 255 PWM Val)
-  12   |    LED2     | 1 byte (0 to 255 PWM Val)
-  13   |    LED3     | 1 byte (0 to 255 PWM Val)
-  14   |    LED4     | 1 byte (0 to 255 PWM Val)
-  15   |    LED5     | 1 byte (0 to 255 PWM Val)
-  16   | CRC8 Check  | (use 0xD5 as polynomial)  
-  17   | Tail Byte   | 0x13 - 19 decimal
+  09   | Foot Turner | Signed int (1 byte)  
+  10   |   Tools 1   | 1 bit more each state of tool (check below)  
+  11   |   Stepper   | 1 byte (check below) for laser tool  
+  12   |    LED1     | 1 byte (0 to 255 PWM Val)  
+  13   |    LED2     | 1 byte (0 to 255 PWM Val)  
+  14   |    LED3     | 1 byte (0 to 255 PWM Val)  
+  15   |    LED4     | 1 byte (0 to 255 PWM Val)  
+  16   |    LED5     | 1 byte (0 to 255 PWM Val)  
+  17   |  RGB LED    | 8-bit color representation (RRR GGG BB)  
+  18   | CRC8 Check  | (use 0xD5 as polynomial) 
+  19   | Tail Byte   | 0x13 - 19 decimal  
 
 
 Motor signed bit representation (and foot turner)  
