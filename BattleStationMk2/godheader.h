@@ -13,7 +13,6 @@
 struct Interpolator {
     float current;
     float target;
-    float max_delta_per_tick;
 
     float lerp(float new_target) {
         target = new_target;
@@ -22,7 +21,7 @@ struct Interpolator {
         }
         float delta = target - current;
         if (abs(delta) > MAX_DELTA) {
-            delta = (delta < 0 ? -1.0 : 1.0) * max_delta_per_tick;
+            delta = (delta < 0 ? -1.0 : 1.0) * MAX_DELTA;
         }
         current += delta;
         return current;
