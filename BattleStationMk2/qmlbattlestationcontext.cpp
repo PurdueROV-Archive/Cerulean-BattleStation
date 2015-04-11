@@ -17,7 +17,7 @@ void QMLBattleStationContext::SignalSerialDeviceListChanged() {
 }
 
 void QMLBattleStationContext::SignalSelectedSerialDeviceChanged() {
-    emit SelectedSerialDeviceChanged();
+    emit SelectedSerialDeviceChanged(m_selected_serial_device);
 }
 
 QStringList QMLBattleStationContext::GetJoystickList() {
@@ -29,9 +29,9 @@ void QMLBattleStationContext::SignalJoystickListChanged() {
 }
 
 void QMLBattleStationContext::SignalSelectedJoystickAChanged() {
-    emit SelectedJoystickAChanged();
+    emit SelectedJoystickAChanged(m_selected_joystick_a);
 }
 
 void QMLBattleStationContext::SignalSelectedJoystickBChanged() {
-    emit SelectedJoystickBChanged();
+    emit SelectedJoystickBChanged(m_selected_joystick_b);
 }

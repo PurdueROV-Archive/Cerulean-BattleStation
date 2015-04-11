@@ -118,10 +118,10 @@ public:
 
 signals:
     void SerialDeviceListChanged();
-    void SelectedSerialDeviceChanged();
+    void SelectedSerialDeviceChanged(QString name);
     void JoystickListChanged();
-    void SelectedJoystickAChanged();
-    void SelectedJoystickBChanged();
+    void SelectedJoystickAChanged(QString name);
+    void SelectedJoystickBChanged(QString name);
 public slots:
 
 };
