@@ -24,7 +24,7 @@ enum Button {
     DPAD_LEFT,
     RIGHT_JOY_PRESS,
     LEFT_JOY_PRESS,
-    INVALID
+    INVALID_BUTTON
 };
 
 /**
@@ -42,7 +42,7 @@ enum Axis {
     RIGHT_TRIGGER,
     /** Trigger values are 0.0-1.0 **/
     LEFT_TRIGGER,
-    INVALID
+    INVALID_AXIS
 };
 
 /**
