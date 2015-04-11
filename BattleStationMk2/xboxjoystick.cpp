@@ -112,7 +112,7 @@ Button XboxIdToButton(int id) {
     case XBOX_BUTTON_RJ:
         return RIGHT_JOY_PRESS;
     default:
-        return A;
+        return INVALID;
     }
 }
 
@@ -130,7 +130,8 @@ Axis XboxIdToAxis(int id) {
         return LEFT_TRIGGER;
     case XBOX_AXIS_RTRIGG:
         return RIGHT_TRIGGER;
-
+    default:
+        return INVALID;
     }
 }
 
