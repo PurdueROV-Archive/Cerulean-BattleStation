@@ -4,6 +4,7 @@
 #include "serial.h"
 #include "genericjoystick.h"
 #include "qmlbattlestationcontext.h"
+#include "inputhandler.h"
 
 #include <QObject>
 

@@ -6,7 +6,8 @@ SOURCES += main.cpp \
     serial.cpp \
     qmlbattlestationcontext.cpp \
     genericjoystick.cpp \
-    xboxjoystick.cpp
+    xboxjoystick.cpp \
+    inputhandler.cpp
 
 RESOURCES += qml.qrc
 
@@ -21,7 +22,8 @@ HEADERS += \
     godheader.h \
     qmlbattlestationcontext.h \
     genericjoystick.h \
-    xboxjoystick.h
+    xboxjoystick.h \
+    inputhandler.h
 
 win32 {
 
