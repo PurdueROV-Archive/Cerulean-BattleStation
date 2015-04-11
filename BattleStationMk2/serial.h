@@ -39,7 +39,14 @@ class Serial : public QObject
         quint8 motorVTR;
         quint8 motorVBR;
         quint8 motorVBL;
-        quint16 toolBits;
+        quint8 footTurner;
+        quint8 toolBits;
+        quint8 laserStepper;
+        quint8 led1;
+        quint8 led2;
+        quint8 led3;
+        quint8 led4;
+        quint8 led5;
         quint8 red;
         quint8 blue;
         quint8 green;
@@ -70,19 +77,6 @@ public:
     QSerialPort::SerialPortError GetError();
 
     /**
-     * Set the current motor values. Value changes are not guaranteed to be sent immediately
-     * and can be overwritten by later calls to this function if the Serial Network Thread has
-     * not yet sent out another SerialControlPacket. Can be called from any thread.
-     * @param values[] An array of 8 bit values encoded as per the packet spec. Len = 8 = num motors
-     */
-    void SetMotorValues(quint8 values[]);
-    /**
-     * Enqueues a change to the tool bits. Assuming the connection does not fail, each change will be
-     * sent independently, but not necessarily immediately. Can be called from any thread.
-     */
-    void EnqueueToolEvent(quint16 value, quint16 mask);
-
-    /**
      * Performs a network update pulse. This should NOT be on the UI thread.
      * If serial is not connected, then search for a connection and update the candidate list.
      * If the candidate list is zero, do nothing; if it has one element, set it as the active
@@ -96,7 +90,28 @@ public:
 
 signals:
 
+    /** Signalled when the serial device is changed, indicating success (true) or failure (false) */
+    void SerialDeviceChanged(bool success);
+
 public slots:
+    /**
+     * Set the current motor values. Value changes are not guaranteed to be sent immediately
+     * and can be overwritten by later calls to this function if the Serial Network Thread has
+     * not yet sent out another SerialControlPacket. Can be called from any thread.
+     * @param values[] An array of 8 bit values encoded as per the packet spec. Len = 8 = num motors
+     */
+    void SetMotorValues(quint8 values[]);
+    /**
+     * Enqueues a change to the tool bits. Assuming the connection does not fail, each change will be
+     * sent independently, but not necessarily immediately. Can be called from any thread.
+     */
+    void EnqueueToolEvent(quint16 value, quint16 mask);
+
+    /**
+     * Sets serial to use the given serial device.
+     */
+    void SetActiveSerialDevice(QString name);
+
 };
 
 #endif // SERIAL_H

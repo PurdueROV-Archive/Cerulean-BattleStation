@@ -69,8 +69,7 @@ quint8 crc8(char bytes[], int size) {
 
 void Serial::NetworkTick() {
     if (m_serial_port == NULL) {
-
-
+        //  TODO
     } else {
         if (m_serial_port->isWritable()) {
             QMutexLocker locker(&m_packet_mutex);
@@ -113,6 +112,7 @@ void Serial::NetworkTick() {
                 int newId = m_motor_mapping[i];
                 bytes[1 + newId] = motors[i];
             }
+            //  TODO Protocol has changed from here on out, need to redo
             bytes[9] = (m_control_packet.toolBits & 0xFF00) >> 8;
             bytes[10] = m_control_packet.toolBits & 0xFF;
             bytes[11] = m_control_packet.red;
@@ -124,6 +124,11 @@ void Serial::NetworkTick() {
             m_serial_port->write(bytes, size);
         }
     }
+}
+
+void Serial::SetActiveSerialDevice(QString name) {
+    bool ok = Open(name);
+    emit SerialDeviceChanged(ok);
 }
 
 
