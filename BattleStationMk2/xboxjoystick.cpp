@@ -81,20 +81,69 @@ ButtonState XboxJoystick::GetButtonState(Button button) {
     }
 }
 
+Button XboxIdToButton(int id) {
+    switch (id) {
+    case XBOX_BUTTON_A:
+        return A;
+    case XBOX_BUTTON_B:
+        return B;
+    case XBOX_BUTTON_X:
+        return X;
+    case XBOX_BUTTON_Y:
+        return Y;
+    case XBOX_BUTTON_BACK:
+        return BACK;
+    case XBOX_BUTTON_SELECT:
+        return SELECT;
+    case XBOX_BUTTON_RB:
+        return RIGHT_BUMPER;
+    case XBOX_BUTTON_LB:
+        return LEFT_BUMPER;
+    case XBOX_BUTTON_LP_UP:
+        return DPAD_UP;
+    case XBOX_BUTTON_LP_DOWN:
+        return DPAD_DOWN;
+    case XBOX_BUTTON_LP_LEFT:
+        return DPAD_LEFT;
+    case XBOX_BUTTON_LP_RIGHT:
+        return DPAD_RIGHT;
+    case XBOX_BUTTON_LJ:
+        return LEFT_JOY_PRESS;
+    case XBOX_BUTTON_RJ:
+        return RIGHT_JOY_PRESS;
+    default:
+        return A;
+    }
+}
+
+Axis XboxIdToAxis(int id) {
+    switch (id) {
+    case XBOX_AXIS_LJ_X:
+        return LEFT_JOY_X;
+    case XBOX_AXIS_LJ_Y:
+        return LEFT_JOY_Y;
+    case XBOX_AXIS_RJ_X:
+        return RIGHT_JOY_X;
+    case XBOX_AXIS_RJ_Y:
+        return RIGHT_JOY_Y;
+    case XBOX_AXIS_LTRIGG:
+        return LEFT_TRIGGER;
+    case XBOX_AXIS_RTRIGG:
+        return RIGHT_TRIGGER;
+
+    }
+}
+
 void XboxJoystick::Tick() {
     for (int i = 0; i < NUM_BUTTONS; ++i) {
         ButtonState state = m_buttons[i];
         state.was_down = state.is_down;
         state.is_down = SDL_JoystickGetButton(m_sdl_joystick, i) != 0;
         if (state.pressed()) {
-            //  TODO: Emit button pressed signal
-            //  I really don't want to switch over IDs
-            //  So we may end up having a more sane way to
-            //  do this. Until we figure out what that way is,
-            //  we just won't emit a signal
+            emit ButtonPressed(XboxIdToButton(i));
         }
         if (state.released()) {
-            //  TODO: Emit button released signal, see previous
+            emit ButtonReleased(XboxIdToButton(i));
         }
     }
     for (int i = 0; i < NUM_AXES; ++i) {
@@ -108,7 +157,11 @@ void XboxJoystick::Tick() {
         }
         m_axes[i] = f;
         if (abs(old - m_axes[i]) > 0.001) {
-            //  TODO: Emit axis changed signal, see previous
+            Axis axis = XboxIdToAxis(i);
+            if (axis == LEFT_TRIGGER || axis == RIGHT_TRIGGER) {
+                axis = TRIGGER_TOTAL;
+            }
+            emit AxisChanged(axis);
         }
     }
 }

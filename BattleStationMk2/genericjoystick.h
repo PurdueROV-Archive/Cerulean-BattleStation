@@ -117,7 +117,7 @@ signals:
     void ButtonReleased(Button button);
 
     /** Signalled when an axis' value has changed */
-    void AxisChanged(Axis axis, float new_val, float delta);
+    void AxisChanged(Axis axis);
 
 public slots:
 
