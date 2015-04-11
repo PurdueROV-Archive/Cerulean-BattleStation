@@ -7,6 +7,11 @@
 
 #include <QObject>
 
+//  LOGGING CONSTS
+#define LOG_OK "[OK  ]"
+#define LOG_WARN "[WARN]"
+#define LOG_ERROR "[ERR ]"
+
 #define MAX_DELTA 25
 
 
