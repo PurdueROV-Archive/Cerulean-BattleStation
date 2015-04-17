@@ -23,9 +23,9 @@ void InputHandler::SetMainJoystick(QString* name) {
         m_main_joystick->deleteLater();
     }
     //  TODO Determine joystick based on name
+    int joystickId = 0;
 
-
-    m_main_joystick = new XboxJoystick();
+    m_main_joystick = new XboxJoystick(joystickId);
     m_main_joystick->InitJoystick();
 }
 
