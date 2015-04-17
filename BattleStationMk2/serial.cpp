@@ -145,6 +145,11 @@ void Serial::NetworkTick() {
             bytes[19] = m_control_packet.footer;
             locker.unlock();    //  Early release so we don't hold while writing
             m_serial_port->write(bytes, size);
+
+            //  Listen for response here?
+            //m_serial_port->read(recvDataBuf, recvPacketLen);
+        } else {
+            //  Error handling/holdoff here?
         }
     }
 }
