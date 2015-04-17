@@ -4,7 +4,9 @@
 
 Serial::Serial(QObject *parent) : QObject(parent)
 {
-
+    memset(&m_control_packet, 0, sizeof(m_control_packet));
+    m_control_packet.header = SERIAL_CTL_HEADER;
+    m_control_packet.footer = SERIAL_CTL_FOOTER;
 }
 
 Serial::~Serial()
@@ -29,7 +31,7 @@ bool Serial::Open(QString deviceName) {
 }
 
 QSerialPort::SerialPortError Serial::GetError() {
-    return QSerialPort::NoError;
+    return m_serial_port->error();
 }
 
 void Serial::SetMotorValues(quint8 values[]) {
@@ -44,9 +46,24 @@ void Serial::SetMotorValues(quint8 values[]) {
     m_control_packet.motorVBL = values[7];
 }
 
-void Serial::EnqueueToolEvent(quint16 value, quint16 mask) {
+void Serial::SetFootTurner(quint8 value) {
+    QMutexLocker locker(&m_packet_mutex);  //  Mutex auto releases when funct returns
+    m_control_packet.footTurner = value;
+}
+
+void Serial::EnqueueToolEvent(quint8 value, quint8 mask) {
     QMutexLocker locker(&m_tool_mutex);   //  Mutex auto releases when funct returns
     m_tool_events.enqueue((mask << 16) | value);
+}
+
+void Serial::SetLedValues(quint8 values[], quint8 color) {
+    QMutexLocker locker(&m_packet_mutex);  //  Mutex auto releases when funct returns
+    m_control_packet.led1 = values[0];
+    m_control_packet.led2 = values[1];
+    m_control_packet.led3 = values[2];
+    m_control_packet.led4 = values[3];
+    m_control_packet.led5 = values[4];
+    m_control_packet.ledColor = color;
 }
 
 quint8 crc8(char bytes[], int size) {
@@ -94,7 +111,7 @@ void Serial::NetworkTick() {
             }
             tool_locker.unlock();
 
-            int size = m_control_packet.size;
+            const int size = 20;
             quint8 motors[8];
             motors[0] = m_control_packet.motorHTL;
             motors[1] = m_control_packet.motorHTR;
@@ -106,20 +123,24 @@ void Serial::NetworkTick() {
             motors[7] = m_control_packet.motorVBL;
             //  Remapping
             //  Some compilers don't realize that size is a const and makes a fuss
-            char bytes[/*control_packet_.size*/ 16];
+            char bytes[size];
             bytes[0] = m_control_packet.header;
             for (int i = 0; i < 8; ++i) {
                 int newId = m_motor_mapping[i];
                 bytes[1 + newId] = motors[i];
             }
             //  TODO Protocol has changed from here on out, need to redo
-            bytes[9] = (m_control_packet.toolBits & 0xFF00) >> 8;
-            bytes[10] = m_control_packet.toolBits & 0xFF;
-            bytes[11] = m_control_packet.red;
-            bytes[12] = m_control_packet.green;
-            bytes[13] = m_control_packet.blue;
-            bytes[14] = crc8(bytes, size);
-            bytes[15] = m_control_packet.footer;
+            bytes[9] = m_control_packet.footTurner;
+            bytes[10] = m_control_packet.toolBits;
+            bytes[11] = m_control_packet.laserStepper;
+            bytes[12] = m_control_packet.led1;
+            bytes[13] = m_control_packet.led2;
+            bytes[14] = m_control_packet.led3;
+            bytes[15] = m_control_packet.led4;
+            bytes[16] = m_control_packet.led5;
+            bytes[17] = m_control_packet.ledColor;
+            bytes[18] = crc8(bytes, size);
+            bytes[19] = m_control_packet.footer;
             locker.unlock();    //  Early release so we don't hold while writing
             m_serial_port->write(bytes, size);
         }

@@ -10,6 +10,8 @@
 #include <QIODevice>
 #include "godheader.h"
 
+#define SERIAL_CTL_HEADER 0x12
+#define SERIAL_CTL_FOOTER 0x13
 
 /**
  * Establishes and maintains the serial connection to the robot.
@@ -29,8 +31,7 @@ class Serial : public QObject
 
     /** The singleton control packet we use. Make a copy to send values */
     struct SerialControlPacket {
-        const int size = 16;
-        const quint8 header = 0x12;
+        quint8 header;
         quint8 motorHTL;
         quint8 motorHTR;
         quint8 motorHBR;
@@ -47,11 +48,9 @@ class Serial : public QObject
         quint8 led3;
         quint8 led4;
         quint8 led5;
-        quint8 red;
-        quint8 blue;
-        quint8 green;
+        quint8 ledColor;
         quint8 crc8;
-        const quint8 footer = 0x13;
+        quint8 footer;
     } m_control_packet;
 
     /** The serial port over which we communicate */
@@ -98,14 +97,29 @@ public slots:
      * Set the current motor values. Value changes are not guaranteed to be sent immediately
      * and can be overwritten by later calls to this function if the Serial Network Thread has
      * not yet sent out another SerialControlPacket. Can be called from any thread.
-     * @param values[] An array of 8 bit values encoded as per the packet spec. Len = 8 = num motors
+     * @param values[] An array of 8 8-bit values encoded as per the packet spec. Len = 8 = num motors
      */
     void SetMotorValues(quint8 values[]);
+    /**
+     * Set the current foot turner value. Value changes are not guaranteed to be sent immediately
+     * and can be overwritten by later calls to this function if the Serial Network Thread has
+     * not yet sent out another SerialControlPacket. Can be called from any thread.
+     */
+    void SetFootTurner(quint8 value);
     /**
      * Enqueues a change to the tool bits. Assuming the connection does not fail, each change will be
      * sent independently, but not necessarily immediately. Can be called from any thread.
      */
-    void EnqueueToolEvent(quint16 value, quint16 mask);
+    void EnqueueToolEvent(quint8 value, quint8 mask);
+
+    /**
+     * Set the current LED values and color. Value changes are not guaranteed to be sent immediately
+     * and can be overwritten by later calls to this function if the Serial Network Thread has
+     * not yet sent out another SerialControlPacket. Can be called from any thread.
+     * @param values[] An array of 5 8-bit values encoded as per the packet spec. Len = 5 = num LEDs
+     * @param color The color for the LEDs, encoded in 3-3-2 bit RGB.
+     */
+    void SetLedValues(quint8 values[], quint8 color);
 
     /**
      * Sets serial to use the given serial device.
