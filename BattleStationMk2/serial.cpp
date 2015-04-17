@@ -110,7 +110,10 @@ void Serial::NetworkTick() {
                 m_control_packet.toolBits |= mask & val;
             }
             tool_locker.unlock();
-
+            //  Keep us from doing an invalid claw state
+            if ((m_control_packet.toolBits & 0xE0) == 0x60) { // & 0b11100000 == 0b01100000
+                m_control_packet.toolBits &= 0x9F; //   Clear the two invalid bits 0b10011111
+            }
             const int size = 20;
             quint8 motors[8];
             motors[0] = m_control_packet.motorHTL;
@@ -129,7 +132,6 @@ void Serial::NetworkTick() {
                 int newId = m_motor_mapping[i];
                 bytes[1 + newId] = motors[i];
             }
-            //  TODO Protocol has changed from here on out, need to redo
             bytes[9] = m_control_packet.footTurner;
             bytes[10] = m_control_packet.toolBits;
             bytes[11] = m_control_packet.laserStepper;
