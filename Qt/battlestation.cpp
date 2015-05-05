@@ -9,7 +9,7 @@
 BattleStation::BattleStation(QGuiApplication* application, QQmlEngine* qmlEngine) {
     m_app = application;
     m_engine = qmlEngine;
-    m_rovName = QString("ROV Incompetence");
+    m_rovName = QString("ROV Cerulean Frost");
 }
 
 bool BattleStation::startUp() {

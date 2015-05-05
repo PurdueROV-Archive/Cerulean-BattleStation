@@ -5,6 +5,7 @@ ROVBox {
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.margins: 10
+    clip: true
 
     height: (parent.height/2) - 10
 
@@ -13,23 +14,61 @@ ROVBox {
         text: "SYSTEM STATUS"
     }
 
-    Text {
-        id: sysStatusDetails
-        width: parent.width - 10
-        color: "white"
-        text: qsTr("SYSTEM DETAILS  (MOTORS, ACTUATORS, ETC) AND TOGGLES/CONTROLS")
-        wrapMode: Text.WordWrap
-        anchors.verticalCenter: parent.verticalCenter
-        font.pixelSize: 12
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-    }
+    Flickable {
+        width: sysStatus.width
+        height: sysStatus.height
+        flickableDirection: Flickable.VerticalFlick
+        contentHeight: thrusterControl.height+80
+        contentWidth: thrusterControl.width
+        boundsBehavior: Flickable.StopAtBounds
+        clip: true
 
-    //                ComboBox {
-    //                    objectName: "serialSelection"
-    //                    width: 200
-    //                    model: c_inputHandler.joysticks
-    //                }
+
+        Column {
+            id: thrusterControl
+            width: sysStatus.width-55
+            spacing: 10
+            y: 20
+            clip: true
+
+            ROVSlider {
+                labeltext: "Thruster 1:"
+                objectName: "t1Control"
+            }
+
+            ROVSlider {
+                labeltext: "Thruster 2:"
+                objectName: "t2Control"
+            }
+
+            ROVSlider {
+                labeltext: "Thruster 3:"
+                objectName: "t3Control"
+            }
+            ROVSlider {
+                labeltext: "Thruster 4:"
+                objectName: "t4Control"
+            }
+
+            ROVSlider {
+                labeltext: "Thruster 5:"
+                objectName: "t5Control"
+            }
+
+            ROVSlider {
+                labeltext: "Thruster 6:"
+                objectName: "t6Control"
+            }
+
+            ROVSlider {
+                labeltext: "Thruster 7:"
+                objectName: "t7Control"
+            }
+            ROVSlider {
+                labeltext: "Thruster 8:"
+                objectName: "t8Control"
+            }
+        }
+    }
 
 }

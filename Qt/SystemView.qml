@@ -28,7 +28,7 @@ ROVBox {
         rows: 2
         spacing: 125
         ROVThruster {
-            objectName: "t1";
+            objectName: "t7";
             orientation: "horizontal";
             rotation: 23;
             value: qsTr("N/A")
@@ -40,7 +40,7 @@ ROVBox {
             value: qsTr("N/A")
         }
         ROVThruster {
-            objectName: "t3";
+            objectName: "t5";
             orientation: "horizontal";
             rotation: 157;
             value: qsTr("N/A")
@@ -65,22 +65,22 @@ ROVBox {
         rows: 2
         spacing: 12
         ROVThruster {
-            objectName: "t5";
-            orientation: "vertical";
-            value: qsTr("N/A")
-        }
-        ROVThruster {
-            objectName: "t6";
-            orientation: "vertical";
-            value: qsTr("N/A")
-        }
-        ROVThruster {
-            objectName: "t7";
-            orientation: "vertical";
-            value: qsTr("N/A")
-        }
-        ROVThruster {
             objectName: "t8";
+            orientation: "vertical";
+            value: qsTr("N/A")
+        }
+        ROVThruster {
+            objectName: "t9";
+            orientation: "vertical";
+            value: qsTr("N/A")
+        }
+        ROVThruster {
+            objectName: "t9";
+            orientation: "vertical";
+            value: qsTr("N/A")
+        }
+        ROVThruster {
+            objectName: "t3";
             orientation: "vertical";
             value: qsTr("N/A")
         }

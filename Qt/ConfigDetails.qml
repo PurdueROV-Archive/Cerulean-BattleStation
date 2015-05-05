@@ -47,7 +47,7 @@ ROVBox {
                 y: 20
 
                 ROVSlider {
-                    labeltext: "Horizontal Speed Control: "
+                    labeltext: "Horizontal Speed Control:"
                     objectName: "horizontalSlider"
                 }
 
@@ -72,42 +72,18 @@ ROVBox {
         Tab {
 
             title: "Serial and Controller"
-
-            Flickable {
-                width: parent.width
-                height: parent.height
-                flickableDirection: Flickable.VerticalFlick
-                contentHeight: configsettings2.height+80
-                contentWidth: configsettings2.width
-                boundsBehavior: Flickable.StopAtBounds
-
-                Column {
-                    id: configsettings2
-                    y: 20
-                    spacing: 20
-                }
+            Column {
+                id: configsettings2
+                y: 20
+                spacing: 20
             }
         }
 
         //Configuration 3
         Tab {
-            title: "Configuration 3"
-
-            Flickable {
-                width: parent.width
-                height: parent.height
-                flickableDirection: Flickable.VerticalFlick
-                contentHeight: configsettings3.height+80
-                contentWidth: configsettings3.width
-                boundsBehavior: Flickable.StopAtBounds
-
-                Column {
-                    id: configsettings3
-                    y: 20
-                    spacing: 20
-
-                }
-            }
+            id: tab3
+            title: "Speed Control"
+            objectName: "thrusterSliders"
         }
     }
 }

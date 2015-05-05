@@ -30,6 +30,7 @@ public:
     static bool send();
     static quint8 crc8(QByteArray data);
     static void print(QByteArray data);
+    static bool ClawSet(quint8 value);
 };
 
 #endif // SERIAL_H

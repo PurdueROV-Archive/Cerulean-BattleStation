@@ -8,7 +8,7 @@ Window {
     property string rovName: c_battlestation.rovName
     property var startTime: 0
     property var delta: 0;
-    property string mainColor: "#e4ae23"
+    property string mainColor: "#6D9BC3"
     visible: true
     width: 1920
     height: 1010
@@ -42,7 +42,7 @@ Window {
                 width: parent.width/3
                 height: titleRow.height
                 color: mainColor
-                text: "PURDUE IEEE"
+                text: "PURDUE IEEE IBBB"
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignLeft
                 font.bold: true

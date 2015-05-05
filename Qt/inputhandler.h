@@ -20,7 +20,7 @@ class InputHandler : public QObject
     bool m_joystickActive;
     QList<JoystickInfo> m_joysticks;
     Interpolator** interpolators;
-    //static bool open = true;
+    quint8 claw = 0;
 
 public:
     InputHandler();
@@ -54,10 +54,22 @@ public:
 
     void setSliders(QObject* root);
 
+    void scale(qint32 thrusters[]);
+
     QObject* horizontalSlider;
     QObject* verticalSlider;
     QObject* pitchRollSlider;
     QObject* strafeSlider;
+
+    QObject* t1MaxSpeed;
+    QObject* t2MaxSpeed;
+    QObject* t3MaxSpeed;
+    QObject* t4MaxSpeed;
+
+    QObject* t5MaxSpeed;
+    QObject* t6MaxSpeed;
+    QObject* t7MaxSpeed;
+    QObject* t8MaxSpeed;
 
 public slots:
 
@@ -70,7 +82,6 @@ signals:
      * Signalled after the active joystick has been changed (or failed to change).
      */
     void joystickActiveChanged(bool newVal);
-
 };
 
 #endif // INPUTHANDLER_H

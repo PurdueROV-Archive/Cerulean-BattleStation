@@ -25,7 +25,7 @@ void serial::initSerial(QObject* root, QString device) {
         qDebug() << info.description();
         if (info.description() == device) {
             serialDevice.setPort(info);
-            serialDevice.setBaudRate(19200);
+            serialDevice.setBaudRate(115200);
         }
     }
 
@@ -72,13 +72,23 @@ bool serial::MotorSet(quint8 thrusters[]) {
         if (worked) {
             qint8 num = (thrusters[i] & 0x80) ? (-101*(0x7F & thrusters[i]))/128 : (101*(0x7F & thrusters[i]))/128;
             text = text.number(num);
-            thrusterVals[i]->setProperty("value", text);
+            if(thrusterVals[i]) {
+                thrusterVals[i]->setProperty("value", text);
+            }
         }
     }
 
 
 
     return worked;
+}
+
+bool serial::ClawSet(quint8 value) {
+    if (value < 0) return false;
+    if (value > 255) return false;
+
+    //qDebug("Claw: %d", value);
+    return set(9, value);
 }
 
 bool serial::send() {
@@ -112,6 +122,8 @@ bool serial::send() {
         //seems to cause issues if we wait, so seems to be best if
         //we don't use this
         //bool worked = serialDevice.waitForBytesWritten(50);
+    } else {
+        //qDebug("Not open");
     }
 
     return false;
