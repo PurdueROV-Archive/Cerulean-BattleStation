@@ -1,28 +1,30 @@
-Packet Spec
-
+#Packet Spec
 
 Byte # | Description | Type
 -------|-------------|------
   00   |    Header   | 0x12 - 18 decimal
-  01   |   Motor 1   | Signed int (1 byte)   
-  02   |   Motor 2   | Signed int (1 byte)   
-  03   |   Motor 3   | Signed int (1 byte)   
-  04   |   Motor 4   | Signed int (1 byte)   
-  05   |   Motor 5   | Signed int (1 byte)   
-  06   |   Motor 6   | Signed int (1 byte)   
-  07   |   Motor 7   | Signed int (1 byte)   
-  08   |   Motor 8   | Signed int (1 byte)   
-  09   | Foot Turner | Signed int (1 byte)  
-  10   |   Tools 1   | 1 bit more each state of tool (check below)  
-  11   |   Stepper   | 1 byte (check below) for laser tool  
-  12   |    LED1     | 1 byte (0 to 255 PWM Val)  
-  13   |    LED2     | 1 byte (0 to 255 PWM Val)  
-  14   |    LED3     | 1 byte (0 to 255 PWM Val)  
-  15   |    LED4     | 1 byte (0 to 255 PWM Val)  
-  16   |    LED5     | 1 byte (0 to 255 PWM Val)  
-  17   |  RGB LED    | 8-bit color representation (RRR GGG BB)  
-  18   | CRC8 Check  | (use 0xD5 as polynomial) 
-  19   | Tail Byte   | 0x13 - 19 decimal  
+  01   |   Command   | 0x01 == Control
+  02   |   Motor 1   | Signed int (1 byte)   
+  03   |   Motor 2   | Signed int (1 byte)   
+  04   |   Motor 3   | Signed int (1 byte)   
+  05   |   Motor 4   | Signed int (1 byte)   
+  06   |   Motor 5   | Signed int (1 byte)   
+  07   |   Motor 6   | Signed int (1 byte)   
+  08   |   Motor 7   | Signed int (1 byte)   
+  09   |   Motor 8   | Signed int (1 byte)   
+  10   | Foot Turner | Signed int (1 byte)  
+  11   |   Tools 1   | 1 bit more each state of tool (check below)  
+  12   |   Stepper   | 1 byte (check below) for laser tool  
+  13   |    LED1     | 1 byte (0 to 255 PWM Val)  
+  14   |    LED2     | 1 byte (0 to 255 PWM Val)  
+  15   |    LED3     | 1 byte (0 to 255 PWM Val)  
+  16   |    LED4     | 1 byte (0 to 255 PWM Val)  
+  17   |    LED5     | 1 byte (0 to 255 PWM Val)  
+  18   |  RGB LED    | 8-bit color representation (RRR GGG BB)  
+  19   | CRC8 Check  | (use 0xD5 as polynomial) 
+  20   | Tail Byte   | 0x13 - 19 decimal  
+  
+Always set command to 0x01. In the future, there will be further options to program options are ask for certain data using this byte, but nothing is set yet.  
 
 
 Motor signed bit representation (and foot turner)  
@@ -82,7 +84,22 @@ Bit # | State (0)  | State (1)
   6   | Step Amnt  | Step Amnt
   7   | Step Amnt  | Step Amnt
   8   | Step Amnt  | Step Amnt
+  
+#Return Packet
 
+Byte # |   Description  | Type
+-------|----------------|------
+  00   |     Header     | 0x12 - 18 decimal
+  01   |   V STP ANGL   | Signed int (1 byte)
+  02   |   H STP ANGL   | Signed int (1 byte)   
+  03   |   Fuse Detect  | Fuses
+  04   |    MC Faults   | 2 bits per motor (4)
+  05   |    MC Faults   | 2 bits per motor (4)
+  06   |     Laser      | TBD 
+  07   |     Laser      | TBD
+  08   |     Misc       | TBD
+  09   |   CRC8 Check   | (use 0xD5 as polynomial) 
+  10   |   Tail Byte    | 0x13 - 19 decimal  
 
 CRC8 Code: this code ignores the first byte (header), and the last byte (Tail).  
 Make sure that the CS values is set to "0xC5" before running the code through.
